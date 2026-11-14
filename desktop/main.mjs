@@ -21,6 +21,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const resources = app.isPackaged ? process.resourcesPath : join(here, 'app');
 const settings = JSON.parse(readFileSync(join(here, 'config.json'), 'utf8'));
 const SHORTCUT = 'CommandOrControl+Shift+L';
+const APP_PORT = 47613; // see createWindow()
 const SMOKE = process.env.LIPSCRIBE_SMOKE === '1'; // headless self-check: load the page, print checks, quit
 
 if (!process.env.OPENROUTER_API_KEY && !process.env.TTS_PROXY_URL && settings.ttsServer) {
@@ -120,12 +121,18 @@ ipcMain.handle('mic:install', async (event) => {
 
 async function createWindow() {
   const { startServer } = await import(pathToFileURL(join(resources, 'web', 'server.mjs')).href);
-  const { port } = await startServer({
-    port: 0,
+  // A fixed port keeps the page's origin the same between launches, so what it
+  // saves in localStorage (your voice sample, settings, history) is still there
+  // next time. Only if that port is taken does it fall back to a random one.
+  const serverOptions = {
     host: '127.0.0.1',
     public: join(resources, 'web', 'public'),
     models: join(resources, 'models'),
     quiet: app.isPackaged,
+  };
+  const { port } = await startServer({ ...serverOptions, port: APP_PORT }).catch((error) => {
+    console.warn(`[lipscribe] Port ${APP_PORT} is busy (${error.code}); saved settings won't be available this time.`);
+    return startServer({ ...serverOptions, port: 0 });
   });
   origin = `http://127.0.0.1:${port}`;
 
@@ -251,6 +258,16 @@ function buildMenu() {
   ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
+
+// One window only: a second launch brings the running one to the front
+// (and two copies would also fight over the port and the shortcut).
+if (!SMOKE && !app.requestSingleInstanceLock()) app.quit();
+app.on('second-instance', () => {
+  if (!win) return;
+  if (win.isMinimized()) win.restore();
+  win.show();
+  win.focus();
+});
 
 app.whenReady().then(async () => {
   // The packaged app gets its icon from the bundle; set it for `npm start` too.
