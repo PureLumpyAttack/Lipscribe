@@ -39,12 +39,10 @@ Seven short lines in total: the bubble, one line in act 2, the typed caption, on
 
 ## Transitions between acts
 
-Each act hands off to the next instead of cutting:
-
-- Noise to silence: fog spreads out in a circle from where the speech bubble was, and swallows the street.
-- Silence to focus: the act arrives in the same fog, then ink opens from the centre, with the noise inside it.
-- Focus to how: paper opens outward from the caption line.
-- How to close: the close slides up over the panels like a sheet while they sink back.
+- Noise to silence: the wobbly noise lines turn fog blue and swell until they cover the screen.
+- Silence to focus: grey wobbly lines drift in over the fog, swell into ink and take over, then thin back out into the noise. The lips fade in with a soft rise and focus pull.
+- Focus to how: a paper wipe up from the bottom.
+- How to close: the page scrolls on into the close.
 
 ## Exits to the demo
 

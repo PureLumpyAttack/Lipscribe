@@ -222,13 +222,13 @@ p {
   color: var(--paper);
 }
 
-/* Transition 1: a hush of fog spreads out from where the words were. */
+/* Settles the last gaps once the noise lines have swollen into fog. */
 .n-fade {
   position: absolute;
   inset: 0;
   z-index: 6;
   background: var(--fog);
-  clip-path: circle(0% at 50% 40%);
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -304,15 +304,12 @@ p {
   height: 440vh;
   background: var(--ink);
 }
-/* Transition 2: the act arrives in the silence's fog, then ink opens from the centre. */
+/* The act arrives in the silence's fog; the grey lines swell into this ink. */
 .f-stage {
   background: var(--fog);
 }
-.f-iris {
+.f-ink {
   background: var(--ink);
-  clip-path: circle(0% at 50% 50%);
-}
-.f-noise {
   opacity: 0;
 }
 .f-noise path {
@@ -334,7 +331,7 @@ p {
   overflow: hidden;
   border-radius: clamp(16px, 2.2vw, 30px);
   background: #e3b195;
-  clip-path: circle(0% at 50% 52%);
+  opacity: 0;
 }
 .f-lens svg {
   display: block;
@@ -371,14 +368,12 @@ p {
   letter-spacing: 0.01em;
   opacity: 0;
 }
-/* Transition 3: paper opens outward from the caption line. */
 .f-wipe {
   position: absolute;
   inset: 0;
   z-index: 4;
   background: var(--paper);
-  clip-path: inset(50% 0% 50% 0%);
-  visibility: hidden;
+  clip-path: inset(100% 0% 0% 0%);
 }
 
 /* ---------- Act 4: how ---------- */
@@ -440,17 +435,6 @@ p {
   place-items: center;
   padding: 14vh 6vw;
   background: var(--paper);
-}
-/* Transition 4: the close slides up over the panels like a sheet. */
-.motion .act-close {
-  z-index: 2;
-  margin-top: -100vh;
-  margin-top: -100svh;
-  border-radius: clamp(24px, 4vw, 48px) clamp(24px, 4vw, 48px) 0 0;
-  box-shadow: 0 -18px 50px rgb(23 22 28 / 0.12);
-}
-.motion .h-stage {
-  transform-origin: 50% 0%;
 }
 .c-inner {
   display: grid;
@@ -571,4 +555,10 @@ p {
   .c-actions {
     width: min(100%, 360px);
   }
+}
+
+/* Scripts failed to load: show the focus act as a still. */
+.no-motion .f-ink,
+.no-motion .f-lens {
+  opacity: 1;
 }
