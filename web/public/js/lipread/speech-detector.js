@@ -4,14 +4,16 @@
 //
 // Input, once per video frame: the mouth opening (inner-lip gap / mouth
 // width, from mouth-tracker.js) or null when the face isn't found. The
-// opening is lightly smoothed first, because webcam landmarks jitter.
+// opening goes through a 3-frame median (drops one-frame landmark
+// glitches) and light smoothing first.
 //
-// Talking needs all three over the last ~600 ms, held for startMs:
+// Talking needs all four over the last ~600 ms, held for startMs:
 //   motion  average change of the opening per 1/30 s     > startLevel
 //   range   biggest minus smallest opening                > startRange
 //   peak    the mouth actually opened at some point       > minPeak
-// Landmark jitter, blinking, a nod or a still open mouth pass one test at
-// most. Measured with MediaPipe on our recordings (ml/data/recordings,
+//   turns   the opening changed direction (open, close, open...) >= minTurns
+// Landmark jitter, a glitch, a yawn, a smile or a still open mouth fail at
+// least one. Measured with MediaPipe on our recordings (ml/data/recordings,
 // 1280x720): talking swings the opening by 0.06-0.25 (the quietest talker
 // ~0.06) with motion 0.008-0.07; a still mouth moves < 0.01.
 //
@@ -21,12 +23,14 @@
 const MOTION_MS = 270;
 const RANGE_MS = 600;
 const SMOOTHING = 0.5; // weight of the new sample
+const MEDIAN_FRAMES = 3;
+const TURN_MIN = 0.004; // smaller wiggles don't count as a change of direction
 
 /**
  * @param {{
  *   onStart: (fromTimestamp: number) => void,  start of the movement (performance.now() clock)
  *   onStop: (timestamp: number) => void,
- *   startLevel?: number, stopLevel?: number, startRange?: number, minPeak?: number,
+ *   startLevel?: number, stopLevel?: number, startRange?: number, minPeak?: number, minTurns?: number,
  *   startMs?: number, stopMs?: number, lostMs?: number,
  * }} options
  */
@@ -37,6 +41,7 @@ export function createSpeechDetector({
   stopLevel = 0.005,
   startRange = 0.05,
   minPeak = 0.08,
+  minTurns = 2,
   startMs = 200,
   stopMs = 900,
   lostMs = 400,
@@ -46,6 +51,9 @@ export function createSpeechDetector({
   let deltas = []; // { d, t } for motion
   let history = []; // { open, t } for range and peak
   let smooth = null;
+  let raw = []; // last MEDIAN_FRAMES openings
+  let turns = 0;
+  let lastStart = null; // measurements when the last recording started (debug)
   let aboveSince = null;
   let belowSince = null;
   let lostSince = null;
@@ -63,9 +71,9 @@ export function createSpeechDetector({
     get speaking() {
       return speaking;
     },
-    /** Current measurements, for tuning: { level, range }. */
+    /** Current measurements, for tuning. */
     get level() {
-      return { level, range };
+      return { level, range, turns, lastStart };
     },
 
     /** One video frame: mouth opening (or null if no face) at time t (ms). */
@@ -73,6 +81,7 @@ export function createSpeechDetector({
       if (open == null) {
         prev = null;
         smooth = null;
+        raw = [];
         deltas = [];
         history = [];
         level = 0;
@@ -82,7 +91,10 @@ export function createSpeechDetector({
         return;
       }
       lostSince = null;
-      smooth = smooth == null ? open : smooth + SMOOTHING * (open - smooth);
+      raw.push(open);
+      if (raw.length > MEDIAN_FRAMES) raw.shift();
+      const median = [...raw].sort((a, b) => a - b)[raw.length >> 1];
+      smooth = smooth == null ? median : smooth + SMOOTHING * (median - smooth);
       if (prev) {
         const dt = t - prev.t;
         if (dt > 200) {
@@ -102,7 +114,19 @@ export function createSpeechDetector({
         hi = Math.max(hi, h.open);
       }
       range = history.length >= 5 ? hi - lo : 0;
-      const talking = level > startLevel && range > startRange && hi > minPeak;
+      // Direction changes: follow the opening with a dead band so jitter isn't counted.
+      turns = 0;
+      let dir = 0;
+      let anchor = history[0]?.open ?? 0;
+      for (const h of history) {
+        const step = h.open - anchor;
+        if (Math.abs(step) < TURN_MIN) continue;
+        const d = Math.sign(step);
+        if (dir && d !== dir) turns++;
+        dir = d;
+        anchor = h.open;
+      }
+      const talking = level > startLevel && range > startRange && hi > minPeak && turns >= minTurns;
       const still = level < stopLevel || range < startRange / 2;
 
       if (!speaking) {
@@ -111,6 +135,7 @@ export function createSpeechDetector({
           if (t - aboveSince >= startMs) {
             speaking = true;
             belowSince = null;
+            lastStart = { level, range, peak: hi, turns };
             onStart(aboveSince - RANGE_MS); // the movement began a little before it was certain
           }
         } else {
@@ -129,6 +154,7 @@ export function createSpeechDetector({
       if (speaking) stop(t);
       prev = null;
       smooth = null;
+      raw = [];
       deltas = [];
       history = [];
       level = 0;

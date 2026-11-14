@@ -12,7 +12,8 @@
 
 import { app, BrowserWindow, globalShortcut, ipcMain, Menu, nativeImage, session, shell, systemPreferences } from 'electron';
 import { execFile } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -76,7 +77,17 @@ const RESTART_AUDIO = '(killall coreaudiod 2>/dev/null || launchctl kickstart -k
 async function installMic() {
   const status = micStatus();
   if (!status.supported) return { ok: false, error: 'The Lipscribe Microphone is only available in the macOS app.' };
-  const src = micSource();
+  // Stage a copy in a temp folder first: the root shell behind the password
+  // prompt isn't allowed into protected folders (Desktop, Documents,
+  // Downloads), which is where the app may be running from.
+  const stage = mkdtempSync(join(tmpdir(), 'lipscribe-mic-'));
+  const src = join(stage, MIC_BUNDLE);
+  try {
+    cpSync(micSource(), src, { recursive: true, verbatimSymlinks: true });
+  } catch (error) {
+    rmSync(stage, { recursive: true, force: true });
+    return { ok: false, error: `Couldn't prepare the driver: ${error.message}`, ...micStatus() };
+  }
   const result = await runAsAdmin(
     [
       'mkdir -p /Library/Audio/Plug-Ins/HAL',
@@ -88,6 +99,7 @@ async function installMic() {
     ].join(' && '),
     'Lipscribe wants to add the Lipscribe Microphone, so call apps can hear its voice.',
   );
+  rmSync(stage, { recursive: true, force: true });
   return { ...result, ...micStatus() };
 }
 

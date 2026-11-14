@@ -30,10 +30,20 @@ test('a short pause between words keeps the same recording', () => {
 });
 
 test('quiet talkers are picked up', () => {
-  assert.equal(run([...still(30), ...talk(60, 0.03)])[0]?.[0], 'start');
+  assert.equal(run([...still(30), ...talk(60, 0.04)])[0]?.[0], 'start');
 });
 
 test('losing the face ends a recording', () => {
   const ev = run([...talk(45), ...Array(20).fill(null)]);
   assert.deepEqual(ev.map((e) => e[0]), ['start', 'stop']);
+});
+
+test('one- or two-frame landmark glitches never start a recording', () => {
+  const track = still(900, 0.03).map((x, i) => x + (i % 60 === 0 ? 0.3 : 0) + (i % 97 < 2 ? 0.25 : 0));
+  assert.deepEqual(run(track), []);
+});
+
+test('opening the mouth once and holding it (a yawn, a smile) does not start a recording', () => {
+  const open = Array.from({ length: 20 }, (_, i) => 0.03 + (0.3 * i) / 20);
+  assert.deepEqual(run([...still(30, 0.03), ...open, ...still(60, 0.33)]), []);
 });

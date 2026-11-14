@@ -365,12 +365,14 @@ function showDetectorDebug(open) {
     debugBox.style.cssText = 'position:absolute;left:12px;bottom:12px;z-index:5;margin:0;padding:6px 8px;border-radius:6px;background:rgb(0 0 0/.65);color:#fff;font:12px/1.4 ui-monospace,monospace;pointer-events:none';
     ui.viewport.append(debugBox);
   }
-  const { level, range } = state.detector.level;
+  const { level, range, turns, lastStart } = state.detector.level;
   const h = config.handsFree;
-  debugBox.textContent = `open   ${open == null ? '--' : open.toFixed(3)}
-motion ${level.toFixed(4)} (start > ${h.startLevel}, still < ${h.stopLevel})
-range  ${range.toFixed(3)} (start > ${h.startRange})
-${state.detector.speaking ? 'TALKING' : 'still'}`;
+  const f = (x, n = 3) => x.toFixed(n);
+  debugBox.textContent = `open   ${open == null ? '--' : f(open)}
+motion ${f(level, 4)} (start > ${h.startLevel}, still < ${h.stopLevel})
+range  ${f(range)} (start > ${h.startRange})
+turns  ${turns} (start >= 2)
+${state.detector.speaking ? 'TALKING' : 'still'}${lastStart ? `   last start: motion ${f(lastStart.level, 4)} range ${f(lastStart.range)} peak ${f(lastStart.peak)} turns ${lastStart.turns}` : ''}`;
 }
 
 function setHandsFree(on) {
