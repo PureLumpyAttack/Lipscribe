@@ -1,6 +1,9 @@
 # Lipscribe web
 
-The Lipscribe webpage: a live webcam view with the mouth highlighted, start/stop recording, transcription, text-to-speech playback, and transcript history.
+The Lipscribe website:
+
+- `/`: the landing page explaining the project, with buttons into the demo.
+- `/demo`: the live demo. It shows a webcam view with everything except the mouth greyed out, plus start/stop recording, transcription, text-to-speech playback and transcript history.
 
 ## Run
 
@@ -10,16 +13,16 @@ Requires Node.js 20 or newer. There are no dependencies to install. Run from thi
 npm run dev
 ```
 
-Open http://localhost:3000 in Chrome, Edge or Safari and allow the camera. Browsers only give camera access on `localhost` or HTTPS. The server restarts itself when `server.mjs` changes. Refresh the browser after editing anything in `public/`.
+Open http://localhost:3000 in Chrome, Edge or Safari. The demo at http://localhost:3000/demo asks for the camera. Browsers only give camera access on `localhost` or HTTPS. The server restarts itself when `server.mjs` changes. Refresh the browser after editing anything in `public/`.
 
 ## How it works
 
 1. `camera.js` opens the webcam (video only) and records clips with `MediaRecorder`.
-2. `mouth-tracker.js` loads MediaPipe Face Landmarker from a CDN, finds the lips, and draws the highlight. If the model can't load, it shows a fixed guide box instead.
+2. `mouth-tracker.js` loads MediaPipe Face Landmarker from a CDN and finds the lips. The highlight is done in CSS: the video is greyed and darkened, and a full-colour copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
 3. On stop, `transcriber.js` POSTs the clip to `/transcribe` as `multipart/form-data` (field `video`, WebM or MP4).
 4. The result is shown, read aloud with the browser's `speechSynthesis` (`speech.js`), and saved to history in `localStorage` (`storage.js`).
 
-`app.js` connects these pieces. `config.js` holds the settings you can change.
+`demo.js` connects these pieces. `config.js` holds the settings you can change.
 
 ## Swapping in the real model
 
@@ -54,10 +57,15 @@ Response (JSON):
 | File | Purpose |
 |---|---|
 | `server.mjs` | Static server, mock `/transcribe`, optional proxy to the real model |
-| `public/index.html` | Page markup |
-| `public/styles.css` | Styles: color tokens at the top, light and dark mode |
+| `public/index.html` | Landing page |
+| `public/demo.html` | Live demo page |
+| `public/css/base.css` | Shared tokens (colors, fonts), top bar, buttons, footer |
+| `public/css/landing.css` | Landing page styles |
+| `public/css/demo.css` | Demo page styles, including the mouth highlight |
+| `public/js/nav.js` | Top bar dropdown |
+| `public/js/landing.js` | Hero animation and "play phrase" button |
 | `public/js/config.js` | Endpoint URL, field name, clip length limits |
-| `public/js/app.js` | UI state and event wiring |
+| `public/js/demo.js` | Demo UI state and event wiring |
 | `public/js/camera.js` | Webcam + recorder |
 | `public/js/mouth-tracker.js` | Face landmarks and the mouth overlay |
 | `public/js/transcriber.js` | The single call to the model |

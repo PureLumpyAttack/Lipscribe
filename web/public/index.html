@@ -3,148 +3,294 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Lipscribe reads silent mouth movements and turns them into text and speech." />
-    <meta name="color-scheme" content="light dark" />
-    <title>Lipscribe</title>
+    <meta name="description" content="Lipscribe reads your lips through a webcam, then writes and speaks the words for you." />
+    <meta name="color-scheme" content="light" />
+    <title>Lipscribe: say it without sound</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
-    />
-    <link rel="stylesheet" href="/styles.css" />
-    <script type="module" src="/js/app.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/landing.css" />
+    <script type="module" src="/js/nav.js"></script>
+    <script type="module" src="/js/landing.js"></script>
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Lipscribe home">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="9" />
-          <path d="M6 16.5c2.6-3.6 5.6-5 8.2-3.4L16 14l1.8-.9c2.6-1.6 5.6-.2 8.2 3.4-2.8 3.9-6.1 5.9-10 5.9s-7.2-2-10-5.9Z" />
-          <path class="seam" d="M7.5 16.6h17" />
-        </svg>
-        <span>lipscribe</span>
-      </a>
-      <p class="tagline">Mouth the words. We'll say them.</p>
-      <span class="backend-pill" id="backend-pill" data-mode="unknown">
-        <span class="dot" aria-hidden="true"></span>
-        <span id="backend-label">Checking model…</span>
-      </span>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="logo" href="/" aria-label="Lipscribe home">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path class="mark-top" d="M2 15.5C5.2 10.6 9 8 12.4 8.6c1.5.3 2.6 1.1 3.6 2.2 1-1.1 2.1-1.9 3.6-2.2C23 8 26.8 10.6 30 15.5Z" />
+            <path class="mark-bottom" d="M2 17.5h28c-3.1 5-8 7.7-14 7.7S5.1 22.5 2 17.5Z" />
+          </svg>
+          lipscribe
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          <div class="menu" data-menu>
+            <button class="nav-link menu-trigger" type="button" aria-expanded="false" aria-controls="product-menu">
+              Product
+              <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+            </button>
+            <div class="menu-panel" id="product-menu" hidden>
+              <a href="/#who">Who it's for<span>Loud rooms, no voice, quiet places</span></a>
+              <a href="/#how">How it works<span>From lip movement to spoken words</span></a>
+              <a href="/demo">Live demo<span>Try it with your own webcam</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="/#faq">Q&amp;A</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="nav-link" href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a>
+          <a class="btn btn-dark btn-sm" href="/demo">Try the demo</a>
+        </div>
+      </div>
     </header>
 
-    <main class="layout">
-      <section class="stage" aria-labelledby="stage-title">
-        <h1 class="visually-hidden" id="stage-title">Lipscribe: lip reading to text and speech</h1>
-
-        <div class="viewport" id="viewport" data-camera="idle" data-recording="false">
-          <video id="video" playsinline muted></video>
-          <canvas id="overlay" aria-hidden="true"></canvas>
-
-          <div class="hud">
-            <span class="chip" id="track-chip" data-state="off">Camera off</span>
-            <span class="chip chip-rec" id="rec-chip" hidden>
-              <span class="rec-dot" aria-hidden="true"></span>
-              <span id="rec-time">0:00</span>
-            </span>
-          </div>
-
-          <div class="camera-gate" id="camera-gate">
-            <svg class="gate-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-              <rect x="5" y="12" width="28" height="24" rx="7" stroke="currentColor" stroke-width="2" />
-              <path d="m33 21 9-5v16l-9-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-            </svg>
-            <p class="gate-title" id="gate-title">Turn on your camera</p>
-            <p class="gate-body" id="gate-body">Lipscribe watches your mouth, not your microphone. Nothing leaves this device until you record.</p>
-            <button class="btn btn-primary" id="camera-btn" type="button">Enable camera</button>
-          </div>
-
-          <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+    <main>
+      <section class="hero">
+        <svg class="hero-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path class="mark-top" d="M2 15.5C5.2 10.6 9 8 12.4 8.6c1.5.3 2.6 1.1 3.6 2.2 1-1.1 2.1-1.9 3.6-2.2C23 8 26.8 10.6 30 15.5Z" />
+          <path class="mark-bottom" d="M2 17.5h28c-3.1 5-8 7.7-14 7.7S5.1 22.5 2 17.5Z" />
+        </svg>
+        <h1>Say it without sound</h1>
+        <p class="lede">
+          Lipscribe reads your lips through a webcam, then writes and speaks the words for you. For loud rooms, silent
+          ones, and anyone who can't use their voice.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-dark btn-lg" href="/demo">
+            Try the live demo
+            <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+          </a>
+          <a class="btn btn-outline btn-lg" href="#how">See how it works</a>
         </div>
 
-        <div class="controls">
-          <button class="record-btn" id="record-btn" type="button" disabled aria-pressed="false">
-            <span class="record-icon" aria-hidden="true"></span>
-            <span id="record-label">Start recording</span>
-          </button>
-          <p class="controls-hint">
-            <span class="hint-key"><kbd>Space</kbd> starts and stops. </span>Clips stop on their own after <span id="max-secs">15</span> seconds.
-          </p>
+        <figure class="hero-visual">
+          <svg
+            class="scene"
+            id="scene"
+            viewBox="0 0 960 540"
+            role="img"
+            aria-label="Close-up of a webcam view: everything is greyed out except a clear window around the mouth."
+          >
+            <defs>
+              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#d9ae93" />
+                <stop offset="1" stop-color="#c1907a" />
+              </linearGradient>
+              <radialGradient id="chin" cx="0.5" cy="1" r="0.6">
+                <stop offset="0" stop-color="#a9765f" stop-opacity="0.55" />
+                <stop offset="1" stop-color="#a9765f" stop-opacity="0" />
+              </radialGradient>
+              <filter id="mute">
+                <feColorMatrix type="saturate" values="0" />
+              </filter>
+              <filter id="feather-edge" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="10" />
+              </filter>
+              <mask id="mouth-window" maskUnits="userSpaceOnUse" x="0" y="0" width="960" height="540">
+                <rect x="244" y="150" width="472" height="262" rx="72" fill="#fff" filter="url(#feather-edge)" />
+              </mask>
+              <g id="face">
+                <rect width="960" height="540" fill="url(#skin)" />
+                <rect y="300" width="960" height="240" fill="url(#chin)" />              </g>
+            </defs>
+
+            <g filter="url(#mute)"><use href="#face" /></g>
+            <rect width="960" height="540" fill="#17181b" opacity="0.5" />
+            <g mask="url(#mouth-window)">
+              <use href="#face" />
+              <g class="lips">
+                <ellipse class="mouth-gap" cx="480" cy="281" rx="166" ry="5" fill="#4a2522" />
+                <path
+                  class="lip-upper"
+                  fill="#9b4c45"
+                  d="M296 278C344 226 396 197 436 201c18 2 32 11 44 22 12-11 26-20 44-22 40-4 92 25 140 77Z"
+                />
+                <g class="lip-lower">
+                  <path fill="#b4605a" d="M296 284h368c-40 60-108 88-184 88s-144-28-184-88Z" />
+                  <ellipse cx="480" cy="328" rx="72" ry="11" fill="#fff" opacity="0.16" />
+                </g>
+              </g>
+            </g>
+          </svg>
+
+          <figcaption class="prompt">
+            <div class="prompt-copy">
+              <span class="prompt-label">Lipscribe heard</span>
+              <span class="prompt-text" id="heard">Can you hear me now?</span>
+            </div>
+            <button class="prompt-play" id="play" type="button" aria-label="Play this phrase out loud">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" fill="currentColor" stroke="none" />
+                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" />
+              </svg>
+            </button>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="who" aria-labelledby="who-title">
+        <div class="container">
+          <h2 class="section-title" id="who-title">For the moments when sound fails</h2>
+          <div class="who-grid">
+            <article class="who-item">
+              <p class="who-quote">“I'm on a train, I'll call you back.”</p>
+              <h3>Loud rooms</h3>
+              <p>Cafés, platforms, concerts. Mouth the words and Lipscribe types and says them, no shouting needed.</p>
+            </article>
+            <article class="who-item">
+              <p class="who-quote">“Could I get some water, please?”</p>
+              <h3>Without a voice</h3>
+              <p>After throat surgery, with ALS, or on vocal rest. If your lips can move, you can still be understood.</p>
+            </article>
+            <article class="who-item">
+              <p class="who-quote">“The baby just fell asleep.”</p>
+              <h3>Quiet places</h3>
+              <p>Libraries, hospital wards, late nights. Talk to someone across the room without making a sound.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <div class="side">
-        <section class="panel latest" id="latest" data-state="empty" data-speaking="false" aria-labelledby="latest-title">
-          <div class="panel-head">
-            <h2 id="latest-title">Transcript</h2>
-            <span class="meta" id="latest-meta"></span>
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="container split">
+          <div>
+            <h2 class="section-title" id="how-title">How it works</h2>
+            <p class="section-sub">No microphone, no app to install. A webcam and a browser are enough.</p>
           </div>
+          <ol class="steps">
+            <li>
+              <span class="step-n">1</span>
+              <div>
+                <h3>Face the camera</h3>
+                <p>Open the demo and allow your webcam. Lipscribe finds your mouth and greys out everything else.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-n">2</span>
+              <div>
+                <h3>Mouth the words</h3>
+                <p>Press Record and speak silently. Only the video is used, so noise around you doesn't matter.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-n">3</span>
+              <div>
+                <h3>Read it, hear it</h3>
+                <p>The words appear as text and are read aloud in the voice you pick. Every line stays in your history.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
 
-          <p class="transcript" id="transcript" aria-live="polite">Record a clip and the words show up here, then get read aloud.</p>
-
-          <div class="skeleton" aria-hidden="true"><span></span><span></span></div>
-          <p class="loading-note" role="status">Reading your lips…</p>
-
-          <div class="error-box" role="alert">
-            <p id="error-text"></p>
-            <button class="btn btn-secondary btn-small" id="retry-btn" type="button">Send clip again</button>
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="container split">
+          <h2 class="section-title" id="faq-title">Q&amp;A</h2>
+          <div class="faq">
+            <details>
+              <summary>
+                What is Lipscribe?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>A web app that turns lip movements into text and speech. It works from video of your mouth, so it needs no sound at all.</p>
+            </details>
+            <details>
+              <summary>
+                Does it use my microphone?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>No. Lipscribe only asks for the camera and only records video. Whether you speak out loud or silently makes no difference.</p>
+            </details>
+            <details>
+              <summary>
+                What do I need to try it?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>A laptop or phone with a camera and a recent Chrome, Edge or Safari. Even light on your face helps the most.</p>
+            </details>
+            <details>
+              <summary>
+                Where does my video go?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>The live camera view stays in your browser. A clip is sent to the Lipscribe model only after you press Stop, and only that clip.</p>
+            </details>
+            <details>
+              <summary>
+                How accurate is it?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>The model we build on, Auto-AVSR, gets about four out of five words right on the LRS3 benchmark. Short, clear phrases facing the camera work best.</p>
+            </details>
+            <details>
+              <summary>
+                Who made it?
+                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+              </summary>
+              <p>A small team at a hackathon in November 2026. The code is open on <a href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a>.</p>
+            </details>
           </div>
+        </div>
+      </section>
 
-          <div class="actions">
-            <button class="btn btn-primary" id="speak-btn" type="button" disabled>
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" /><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" /></svg>
-              <span id="speak-label">Speak</span>
-            </button>
-            <button class="btn btn-secondary" id="copy-btn" type="button" disabled>
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16" /></svg>
-              <span id="copy-label">Copy</span>
-            </button>
+      <section class="cta" aria-labelledby="cta-title">
+        <div class="cta-panel">
+          <span class="cta-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path class="mark-top" d="M2 15.5C5.2 10.6 9 8 12.4 8.6c1.5.3 2.6 1.1 3.6 2.2 1-1.1 2.1-1.9 3.6-2.2C23 8 26.8 10.6 30 15.5Z" />
+              <path class="mark-bottom" d="M2 17.5h28c-3.1 5-8 7.7-14 7.7S5.1 22.5 2 17.5Z" />
+            </svg>
+          </span>
+          <h2 id="cta-title">Your lips already know the words</h2>
+          <div class="hero-actions">
+            <a class="btn btn-dark btn-lg" href="/demo">
+              Open the live demo
+              <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+            </a>
+            <a class="btn btn-outline btn-lg" href="https://github.com/PureLumpyAttack/Lipscribe">View the code</a>
           </div>
-
-          <div class="voice-row">
-            <label class="field">
-              <span class="field-label">Voice</span>
-              <select id="voice-select"></select>
-            </label>
-            <label class="toggle">
-              <input type="checkbox" id="autospeak" checked />
-              <span>Read new transcripts aloud</span>
-            </label>
-          </div>
-        </section>
-
-        <section class="panel history" aria-labelledby="history-title">
-          <div class="panel-head">
-            <h2 id="history-title">History <span class="count" id="history-count">0</span></h2>
-            <button class="btn btn-ghost btn-small" id="clear-btn" type="button" disabled>Clear all</button>
-          </div>
-          <p class="history-empty" id="history-empty">Every transcript lands here, newest first. They stay in this browser only.</p>
-          <ol class="history-list" id="history-list"></ol>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-      <span>Lipscribe · hackathon build</span>
-      <span>Clips go to <code id="endpoint-label">/transcribe</code></span>
-    </footer>
-
-    <template id="history-item">
-      <li class="history-item">
-        <p class="history-text"></p>
-        <div class="history-foot">
-          <span class="history-meta"></span>
-          <span class="history-actions">
-            <button type="button" class="icon-btn" data-action="speak" aria-label="Read this transcript aloud">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" /><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7" /></svg>
-            </button>
-            <button type="button" class="icon-btn" data-action="copy" aria-label="Copy this transcript">
-              <svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16" /></svg>
-              <svg class="i-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
-            </button>
-          </span>
+      <div class="footer-top">
+        <a class="logo" href="/" aria-label="Lipscribe home">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path class="mark-top" d="M2 15.5C5.2 10.6 9 8 12.4 8.6c1.5.3 2.6 1.1 3.6 2.2 1-1.1 2.1-1.9 3.6-2.2C23 8 26.8 10.6 30 15.5Z" />
+            <path class="mark-bottom" d="M2 17.5h28c-3.1 5-8 7.7-14 7.7S5.1 22.5 2 17.5Z" />
+          </svg>
+          lipscribe
+        </a>
+        <div class="footer-cols">
+          <div>
+            <h3>Product</h3>
+            <ul>
+              <li><a href="/demo">Live demo</a></li>
+              <li><a href="/#how">How it works</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Learn</h3>
+            <ul>
+              <li><a href="/#who">Who it's for</a></li>
+              <li><a href="/#faq">Q&amp;A</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Project</h3>
+            <ul>
+              <li><a href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a></li>
+            </ul>
+          </div>
         </div>
-      </li>
-    </template>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Lipscribe</span>
+        <span>Built at a hackathon</span>
+      </div>
+    </footer>
   </body>
 </html>

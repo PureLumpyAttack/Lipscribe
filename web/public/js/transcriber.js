@@ -1,6 +1,6 @@
 // The one place the page talks to the lip-reading model.
 //
-// app.js only calls `transcribe(blob)` and expects `{ text, confidence }` back.
+// demo.js only calls `transcribe(blob)` and expects `{ text, confidence }` back.
 // Today that is an HTTP POST. When the ONNX model runs in the browser
 // (see ../../ml/README.md), replace the body of `transcribe` with local
 // inference and keep the same return shape; nothing else has to change.

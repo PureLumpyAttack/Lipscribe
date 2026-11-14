@@ -104,7 +104,8 @@ async function serveStatic(pathname, request, response) {
   } catch {
     return sendText(response, 400, 'Bad request');
   }
-  const file = resolve(publicDir, relative);
+  // Clean URLs: /demo serves demo.html.
+  const file = resolve(publicDir, extname(relative) ? relative : `${relative}.html`);
   if (!file.startsWith(publicDir)) return sendText(response, 404, 'Not found');
 
   let content;

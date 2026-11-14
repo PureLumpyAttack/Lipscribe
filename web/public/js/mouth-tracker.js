@@ -1,37 +1,44 @@
-// Finds the mouth with MediaPipe Face Landmarker and draws the highlight on a
-// canvas laid over the video. If the model can't load (offline, blocked CDN),
-// it falls back to a fixed guide box so the page still works.
+// Finds the mouth with MediaPipe Face Landmarker and moves the highlight window.
+//
+// The highlight itself is CSS (see .cam-focus in demo.css): the base video is
+// greyed and darkened, and a second, full-colour copy of the video is masked
+// to an ellipse around the mouth. This file only measures where that ellipse
+// goes and writes it to CSS variables on the viewport.
+//
+// If the model can't load (offline, blocked CDN), status becomes 'guide' and
+// the page shows a fixed outline to line your mouth up with instead.
 
 const TASKS_VERSION = '0.10.14';
 const TASKS_URL = `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@${TASKS_VERSION}`;
 const MODEL_URL =
   'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
 
-// Outer lip contour, in drawing order (MediaPipe face mesh indices).
+// Outer lip contour (MediaPipe face mesh indices).
 const OUTER_LIPS = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
-// Where the guide box sits when no face is found (fractions of the frame).
-const GUIDE = { x: 0.36, y: 0.56, w: 0.28, h: 0.2 };
 const SMOOTHING = 0.35;
 const LOST_AFTER_FRAMES = 12;
 
 /**
- * @param {{ video: HTMLVideoElement, canvas: HTMLCanvasElement, onStatus: (s: 'loading'|'tracking'|'search'|'guide') => void }} options
+ * @param {{
+ *   video: HTMLVideoElement,
+ *   viewport: HTMLElement,
+ *   onStatus: (status: 'loading' | 'tracking' | 'search' | 'guide') => void,
+ * }} options
  */
-export function createMouthTracker({ video, canvas, onStatus }) {
-  const ctx = canvas.getContext('2d');
+export function createMouthTracker({ video, viewport, onStatus }) {
   let landmarker = null;
   let status = '';
   let rafId = 0;
   let lastVideoTime = -1;
-  let box = null; // smoothed mouth box in canvas pixels
-  let lips = null;
+  let mouth = null; // smoothed ellipse in video pixels: { cx, cy, rx, ry }
   let missedFrames = 0;
-  let accent = readAccent();
-
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => (accent = readAccent()));
 
   function setStatus(next) {
     if (next !== status) onStatus((status = next));
+  }
+
+  function setFocus(on) {
+    viewport.dataset.focus = String(on);
   }
 
   async function loadModel() {
@@ -51,119 +58,82 @@ export function createMouthTracker({ video, canvas, onStatus }) {
       }
       setStatus('search');
     } catch (error) {
-      console.warn('[lipscribe] Face tracking unavailable, using the guide box.', error);
+      console.warn('[lipscribe] Face tracking unavailable, showing the guide outline.', error);
       setStatus('guide');
     }
   }
 
   function frame() {
     rafId = requestAnimationFrame(frame);
-    if (video.readyState < 2 || video.currentTime === lastVideoTime) return;
+    if (!landmarker || video.readyState < 2 || video.currentTime === lastVideoTime) return;
     lastVideoTime = video.currentTime;
 
-    const W = video.videoWidth;
-    const H = video.videoHeight;
-    if (canvas.width !== W || canvas.height !== H) {
-      canvas.width = W;
-      canvas.height = H;
-    }
-
-    if (landmarker) detect(W, H);
-    draw(W, H);
-  }
-
-  function detect(W, H) {
-    const result = landmarker.detectForVideo(video, performance.now());
-    const face = result.faceLandmarks?.[0];
+    const face = landmarker.detectForVideo(video, performance.now()).faceLandmarks?.[0];
     if (!face) {
       if (++missedFrames > LOST_AFTER_FRAMES) {
-        box = null;
-        lips = null;
+        mouth = null;
+        setFocus(false);
         setStatus('search');
       }
       return;
     }
     missedFrames = 0;
-    lips = OUTER_LIPS.map((i) => [face[i].x * W, face[i].y * H]);
 
-    const xs = lips.map((p) => p[0]);
-    const ys = lips.map((p) => p[1]);
+    const W = video.videoWidth;
+    const H = video.videoHeight;
+    const xs = OUTER_LIPS.map((i) => face[i].x * W);
+    const ys = OUTER_LIPS.map((i) => face[i].y * H);
     const minX = Math.min(...xs);
     const maxX = Math.max(...xs);
     const minY = Math.min(...ys);
     const maxY = Math.max(...ys);
-    const w = (maxX - minX) * 1.6;
-    const h = Math.max((maxY - minY) * 2.1, w * 0.58);
-    const target = { x: (minX + maxX) / 2 - w / 2, y: (minY + maxY) / 2 - h / 2, w, h };
+    const lipWidth = maxX - minX;
+    const target = {
+      cx: (minX + maxX) / 2,
+      cy: (minY + maxY) / 2,
+      rx: lipWidth * 0.95,
+      ry: Math.max((maxY - minY) * 1.5, lipWidth * 0.62),
+    };
+    mouth = mouth ? lerp(mouth, target, SMOOTHING) : target;
 
-    box = box ? lerpBox(box, target, SMOOTHING) : target;
+    placeWindow(W, H);
+    setFocus(true);
     setStatus('tracking');
   }
 
-  function draw(W, H) {
-    const scale = W / 640;
-    ctx.clearRect(0, 0, W, H);
-
-    if (!box) {
-      // Dashed guide: where to put your mouth.
-      const g = { x: GUIDE.x * W, y: GUIDE.y * H, w: GUIDE.w * W, h: GUIDE.h * H };
-      ctx.setLineDash([10 * scale, 8 * scale]);
-      ctx.lineWidth = 2 * scale;
-      ctx.strokeStyle = 'rgba(255,255,255,0.7)';
-      ctx.beginPath();
-      ctx.roundRect(g.x, g.y, g.w, g.h, 18 * scale);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      return;
-    }
-
-    const radius = Math.min(box.w, box.h) * 0.28;
-
-    // Dim everything except the mouth.
-    ctx.fillStyle = 'rgba(8, 9, 11, 0.42)';
-    ctx.beginPath();
-    ctx.rect(0, 0, W, H);
-    ctx.roundRect(box.x, box.y, box.w, box.h, radius);
-    ctx.fill('evenodd');
-
-    ctx.lineWidth = 3 * scale;
-    ctx.strokeStyle = accent;
-    ctx.beginPath();
-    ctx.roundRect(box.x, box.y, box.w, box.h, radius);
-    ctx.stroke();
-
-    if (lips) {
-      ctx.lineWidth = 1.5 * scale;
-      ctx.strokeStyle = 'rgba(255,255,255,0.85)';
-      ctx.beginPath();
-      lips.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
-      ctx.closePath();
-      ctx.stroke();
-    }
+  // Video pixels → viewport pixels, matching `object-fit: cover`.
+  // The mirror transform applies after the mask, so unmirrored coordinates are right.
+  function placeWindow(W, H) {
+    const elW = viewport.clientWidth;
+    const elH = viewport.clientHeight;
+    const scale = Math.max(elW / W, elH / H);
+    const offsetX = (elW - W * scale) / 2;
+    const offsetY = (elH - H * scale) / 2;
+    const style = viewport.style;
+    style.setProperty('--mx', `${offsetX + mouth.cx * scale}px`);
+    style.setProperty('--my', `${offsetY + mouth.cy * scale}px`);
+    style.setProperty('--mw', `${mouth.rx * scale}px`);
+    style.setProperty('--mh', `${mouth.ry * scale}px`);
   }
 
   return {
     start() {
-      if (!landmarker && !status) loadModel();
+      if (!status) loadModel();
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(frame);
     },
     stop() {
       cancelAnimationFrame(rafId);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      setFocus(false);
     },
   };
 }
 
-function lerpBox(a, b, t) {
+function lerp(a, b, t) {
   return {
-    x: a.x + (b.x - a.x) * t,
-    y: a.y + (b.y - a.y) * t,
-    w: a.w + (b.w - a.w) * t,
-    h: a.h + (b.h - a.h) * t,
+    cx: a.cx + (b.cx - a.cx) * t,
+    cy: a.cy + (b.cy - a.cy) * t,
+    rx: a.rx + (b.rx - a.rx) * t,
+    ry: a.ry + (b.ry - a.ry) * t,
   };
-}
-
-function readAccent() {
-  return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#d0215a';
 }

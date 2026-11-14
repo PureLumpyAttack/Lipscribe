@@ -1,4 +1,4 @@
-// Wires the page together: camera → record → transcribe → show, speak, remember.
+// Demo page: camera → record → transcribe → show, speak, remember.
 
 import { config } from './config.js';
 import { transcribe } from './transcriber.js';
@@ -11,7 +11,7 @@ const $ = (id) => document.getElementById(id);
 const ui = {
   viewport: $('viewport'),
   video: $('video'),
-  overlay: $('overlay'),
+  videoFocus: $('video-focus'),
   trackChip: $('track-chip'),
   recChip: $('rec-chip'),
   recTime: $('rec-time'),
@@ -37,8 +37,7 @@ const ui = {
   historyCount: $('history-count'),
   clearBtn: $('clear-btn'),
   itemTemplate: $('history-item'),
-  backendPill: $('backend-pill'),
-  backendLabel: $('backend-label'),
+  modelTag: $('model-tag'),
 };
 
 const state = {
@@ -59,13 +58,13 @@ const state = {
 const TRACK_COPY = {
   off: 'Camera off',
   loading: 'Loading face tracking…',
-  tracking: 'Mouth tracked',
-  search: 'Looking for your face',
-  guide: 'Line up your mouth with the box',
+  tracking: 'Mouth found',
+  search: 'Finding your mouth…',
+  guide: 'Line up your mouth with the outline',
 };
 
 function setTrackStatus(status) {
-  ui.trackChip.dataset.state = status;
+  ui.viewport.dataset.track = status;
   ui.trackChip.textContent = TRACK_COPY[status];
 }
 
@@ -99,10 +98,12 @@ async function enableCamera() {
   showGate('loading', 'Starting camera…', 'Allow camera access when your browser asks.');
   try {
     const stream = await startCamera(ui.video);
+    ui.videoFocus.srcObject = stream;
+    await ui.videoFocus.play();
     state.recorder = createRecorder(stream);
     ui.viewport.dataset.camera = 'on';
     ui.recordBtn.disabled = state.busy;
-    state.tracker ??= createMouthTracker({ video: ui.video, canvas: ui.overlay, onStatus: setTrackStatus });
+    state.tracker ??= createMouthTracker({ video: ui.video, viewport: ui.viewport, onStatus: setTrackStatus });
     state.tracker.start();
   } catch (error) {
     const [title, body] = cameraErrorCopy(error);
@@ -303,22 +304,19 @@ async function copyText(text, onDone) {
   }
 }
 
-async function showBackend() {
-  ui.backendPill.title = `Clips go to ${config.transcribeUrl}`;
+async function showModel() {
+  ui.modelTag.title = `Clips go to ${config.transcribeUrl}`;
   $('endpoint-label').textContent = config.transcribeUrl;
   const target = new URL(config.transcribeUrl, location.href);
   if (target.origin !== location.origin) {
-    ui.backendPill.dataset.mode = 'live';
-    ui.backendLabel.textContent = 'Live model';
+    ui.modelTag.textContent = 'Model: live';
     return;
   }
   try {
     const { mode } = await (await fetch('/api/status')).json();
-    ui.backendPill.dataset.mode = mode === 'proxy' ? 'live' : 'mock';
-    ui.backendLabel.textContent = mode === 'proxy' ? 'Live model' : 'Mock model';
+    ui.modelTag.textContent = mode === 'proxy' ? 'Model: live' : 'Model: mock';
   } catch {
-    ui.backendPill.dataset.mode = 'unknown';
-    ui.backendLabel.textContent = 'Model status unknown';
+    ui.modelTag.textContent = 'Model: unknown';
   }
 }
 
@@ -388,7 +386,7 @@ ui.autospeak.checked = state.prefs.autoSpeak;
 setupVoices();
 renderHistory();
 if (state.history[0]) showEntry(state.history[0]);
-showBackend();
+showModel();
 
 // Skip the button if the camera was already allowed on a previous visit.
 navigator.permissions
