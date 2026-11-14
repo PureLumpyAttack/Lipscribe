@@ -9,8 +9,8 @@
   "scripts": {
     "sync": "node scripts/sync.mjs",
     "start": "npm run sync && electron .",
-    "dist:mac": "npm run sync && electron-builder --mac",
-    "dist:win": "npm run sync && electron-builder --win"
+    "dist:mac": "npm run sync && electron-builder --mac --publish never",
+    "dist:win": "npm run sync && electron-builder --win --publish never"
   },
   "devDependencies": {
     "electron": "45.2.1",
@@ -40,7 +40,13 @@
     },
     "mac": {
       "target": [
-        "dmg"
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
       ],
       "category": "public.app-category.productivity",
       "identity": null,
@@ -52,11 +58,20 @@
     },
     "win": {
       "target": [
-        "nsis"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
       "signAndEditExecutable": false
     },
-    "electronDist": "node_modules/electron/dist"
+    "artifactName": "Lipscribe-${os}-${arch}.${ext}",
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "author": "PureLumpyAttack"
 }

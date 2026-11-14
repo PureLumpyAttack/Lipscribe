@@ -49,9 +49,11 @@ def main():
     wanted = args.only.split(",")
     src_dir = EXPORTS_DIR / "fp32"
 
+    failed = []
     for g in GRAPHS:
         src = src_dir / f"{g}.onnx"
-        print(f"{g}: fp32 {src.stat().st_size / 1e6:.1f} MB")
+        if src.exists():
+            print(f"{g}: fp32 {src.stat().st_size / 1e6:.1f} MB")
         for variant in wanted:
             dst = EXPORTS_DIR / variant / f"{g}.onnx"
             try:
@@ -67,7 +69,10 @@ def main():
                     save(nbits(onnx.load(str(EXPORTS_DIR / "fp16" / f"{g}.onnx")), 4), dst)
             except Exception as e:  # keep going so one bad variant doesn't block the rest
                 print(f"  {variant}/{g}: FAILED: {type(e).__name__}: {e}")
+                failed.append(f"{variant}/{g}")
                 shutil.rmtree(dst.parent, ignore_errors=True) if not any(dst.parent.glob("*.onnx")) else None
+    if failed:
+        sys.exit(f"failed: {', '.join(failed)}")
 
 
 if __name__ == "__main__":

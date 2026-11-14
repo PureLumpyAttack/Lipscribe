@@ -5,9 +5,10 @@
   exports/web/tokens.json                    id -> subword ("▁" marks a word start)
   exports/web/preprocess.json                crop/alignment constants shared with Python
 
-Run from ml/ after export_onnx.py + quantize.py:  uv run python scripts/package_web.py
+Run from ml/ after export_onnx.py + quantize.py:  uv run python scripts/package_web.py [--variants q4f16]
 """
 
+import argparse
 import hashlib
 import json
 import shutil
@@ -31,10 +32,13 @@ def sha256(path):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--variants", default=",".join(VARIANTS), help="comma-separated; the desktop build only needs q4f16")
+    args = ap.parse_args()
     out = EXPORTS_DIR / "web"
     out.mkdir(parents=True, exist_ok=True)
     manifest = {"variants": {}}
-    for v in VARIANTS:
+    for v in args.variants.split(","):
         (out / v).mkdir(exist_ok=True)
         manifest["variants"][v] = {}
         for g in ("encoder", "decoder"):

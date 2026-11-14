@@ -1,0 +1,185 @@
+# Builds the Lipscribe desktop installers.
+#
+#   push a tag v*         -> build macOS (Apple silicon + Intel) and Windows, publish a GitHub release
+#   Run workflow (manual) -> build and keep the installers as workflow artifacts only
+#
+# The lip-reading model isn't in git (too large). The first job downloads the
+# same files the website uses from the public Cloudflare R2 bucket. Run the
+# workflow manually with "Rebuild the model" ticked to rebuild it from the
+# pretrained weights instead (download -> ONNX export -> 4-bit quantization ->
+# package) and upload the result to R2, which also updates the website. That
+# needs the repository secret CLOUDFLARE_R2_API_KEY (token with
+# "Workers R2 Storage: Edit").
+#
+# Optional repository variable LIPSCRIBE_TTS_SERVER (Settings -> Secrets and
+# variables -> Actions -> Variables): URL of the Lipscribe site whose /api/tts
+# the app uses for natural and cloned voices. No API key goes into the app.
+
+name: Desktop release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      rebuild_model:
+        description: Rebuild the model from the pretrained weights and upload it to R2 (also updates the website)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  model:
+    name: ${{ inputs.rebuild_model && 'Rebuild model and upload to R2' || 'Download model from R2' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: ml
+    env:
+      MODEL_URL: https://pub-c53f822c6d244cff9e2513da77916a51.r2.dev
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download model from R2
+        if: ${{ !inputs.rebuild_model }}
+        run: |
+          set -euo pipefail
+          mkdir -p exports/web/q4f16
+          for f in manifest.json tokens.json preprocess.json q4f16/encoder.onnx q4f16/decoder.onnx; do
+            curl -fsSL --retry 3 -o "exports/web/$f" "$MODEL_URL/$f"
+          done
+          # Check each file against the manifest (size + sha256 prefix).
+          for g in encoder decoder; do
+            f="exports/web/q4f16/$g.onnx"
+            want_bytes=$(jq -r ".variants.q4f16.$g.bytes" exports/web/manifest.json)
+            want_sha=$(jq -r ".variants.q4f16.$g.sha256" exports/web/manifest.json)
+            got_bytes=$(wc -c < "$f" | tr -d ' ')
+            got_sha=$(sha256sum "$f" | cut -c1-${#want_sha})
+            echo "$g: $got_bytes bytes, sha256 $got_sha"
+            [ "$got_bytes" = "$want_bytes" ] && [ "$got_sha" = "$want_sha" ] || { echo "::error::$f does not match the manifest"; exit 1; }
+          done
+
+      - uses: astral-sh/setup-uv@v10
+        if: ${{ inputs.rebuild_model }}
+        with:
+          python-version: '3.12'
+
+      # Both variants: the website uses q4 on GPUs without fp16, the app uses q4f16.
+      - name: Rebuild model
+        if: ${{ inputs.rebuild_model }}
+        run: |
+          set -euo pipefail
+          uv sync --frozen
+          bash scripts/download.sh vsr
+          uv run python scripts/export_onnx.py --precision fp32
+          uv run python scripts/export_onnx.py --precision fp16
+          uv run python scripts/quantize.py --only q4,q4f16
+          uv run python scripts/package_web.py --variants q4f16,q4
+
+      - name: Upload model to R2
+        if: ${{ inputs.rebuild_model }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_R2_API_KEY }}
+        run: uv run scripts/upload_r2.py
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: model-web
+          path: |
+            ml/exports/web/*.json
+            ml/exports/web/q4f16
+          retention-days: 7
+
+  build:
+    name: Build ${{ matrix.name }}
+    needs: model
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macOS (Apple silicon + Intel)
+            os: macos-latest
+            args: --mac --arm64 --x64
+          - name: Windows
+            os: windows-latest
+            args: --win --x64
+    defaults:
+      run:
+        shell: bash
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: model-web
+          path: ml/exports/web
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+
+      - name: Set version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version --allow-same-version
+
+      - name: Point voices at the Lipscribe server
+        if: vars.LIPSCRIBE_TTS_SERVER != ''
+        env:
+          TTS_SERVER: ${{ vars.LIPSCRIBE_TTS_SERVER }}
+        run: |
+          printf '{\n  "ttsServer": "%s"\n}\n' "$TTS_SERVER" > config.json
+          cat config.json
+
+      - run: npm ci
+
+      - name: Build installers
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false' # unsigned builds
+        run: npm run sync && npx electron-builder ${{ matrix.args }} --publish never
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: installers-${{ runner.os }}
+          path: |
+            desktop/dist/*.dmg
+            desktop/dist/*.exe
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: installers-*
+          path: installers
+          merge-multiple: true
+
+      - name: Create or update the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          ls -lh installers
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" installers/* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" installers/* --title "Lipscribe $GITHUB_REF_NAME" --generate-notes
+          fi

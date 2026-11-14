@@ -27,9 +27,17 @@ Self-check without a window: `LIPSCRIBE_SMOKE=1 npx electron .` prints WebGPU / 
 
 ## Build
 
+Installers are built by GitHub Actions (`.github/workflows/desktop-release.yml`):
+
+- **Push a tag** such as `v0.1.0`: builds macOS (Apple silicon and Intel) and Windows, then publishes a GitHub release with `Lipscribe-mac-arm64.dmg`, `Lipscribe-mac-x64.dmg` and `Lipscribe-win-x64.exe`. The website's `/download` page links straight to these files in the latest release.
+- **Actions → Desktop release → Run workflow**: same builds, kept as workflow artifacts only. Tick "Rebuild the model" to rebuild it from the pretrained weights and upload it to R2 (needs the `CLOUDFLARE_R2_API_KEY` secret); otherwise the model is downloaded from R2.
+- Set the repository variable `LIPSCRIBE_TTS_SERVER` to the website URL so the app's natural and cloned voices go through it.
+
+Locally:
+
 ```sh
-npm run dist:mac   # dist/Lipscribe-<version>-arm64.dmg (~270 MB, unsigned)
-npm run dist:win   # dist/Lipscribe Setup <version>.exe (build on Windows, or a Mac with Wine)
+npm run dist:mac   # dist/Lipscribe-mac-arm64.dmg and Lipscribe-mac-x64.dmg (~270 MB each, unsigned)
+npm run dist:win   # dist/Lipscribe-win-x64.exe (build on Windows, or a Mac with Wine)
 ```
 
-Builds are unsigned: macOS users right-click → Open the first time; Windows users click More info → Run anyway. Upload the files to a GitHub release; the website's `/download` page links to `releases/latest`.
+Builds are unsigned: macOS users right-click → Open the first time; Windows users click More info → Run anyway.
