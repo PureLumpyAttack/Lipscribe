@@ -1,0 +1,23 @@
+[project]
+name = "lipscribe-ml"
+version = "0.1.0"
+description = "Lipscribe model export, quantization and evaluation"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch>=2.4",
+    "torchvision",
+    "numpy<2.3",
+    "onnx",
+    "onnxruntime",
+    "opencv-python",
+    "scikit-image",
+    "scipy",
+    "six",
+    "av",
+    "mediapipe",
+    "jiwer",
+    "onnx-ir>=1.1.0",
+]
+
+[tool.uv]
+package = false

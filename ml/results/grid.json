@@ -1,0 +1,2346 @@
+{
+ "clips": {
+  "grid_s1_bbaf2n": {
+   "dataset": "grid",
+   "ref": "bin blue at f two now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PEOPLE HAVE TWO NOW",
+    "torch": "BIMBO LEFT TOO NOW",
+    "fp32_b40": "BIMBO LEFT TOO NOW",
+    "fp32_b10": "BIMBO LEFT TOO NOW",
+    "fp32_greedy": "PIMBO HAVE TWO NOW",
+    "fp16_b10": "BIMBO LEFT TOO NOW",
+    "int8_b10": "BIMBO LEFT TOO NOW",
+    "q8_b10": "BIMBO LEFT TOO NOW",
+    "q4_b10": "BIMBO LEFT TOO NOW",
+    "q4f16_b10": "BIMBO LEFT TOO NOW"
+   }
+  },
+  "grid_s1_bbbm1s": {
+   "dataset": "grid",
+   "ref": "bin blue by m one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PEOPLE YOU BUY ONE SOON",
+    "torch": "PEOPLE YOU BUY ONE SOON",
+    "fp32_b40": "PEOPLE YOU BUY ONE SOON",
+    "fp32_b10": "PEOPLE YOU BUY ONE SOON",
+    "fp32_greedy": "PEOPLE PUT YOU BUY HIM ONE SUIT",
+    "fp16_b10": "PEOPLE YOU BUY ONE SOON",
+    "int8_b10": "PEOPLE YOU BUY ONE SOON",
+    "q8_b10": "PEOPLE YOU BUY ONE SOON",
+    "q4_b10": "PEOPLE YOU BUY ONE SOON",
+    "q4f16_b10": "PEOPLE YOU BUY ONE SOON"
+   }
+  },
+  "grid_s1_bbir8p": {
+   "dataset": "grid",
+   "ref": "bin blue in r eight please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BIMBO KARI PLEASE",
+    "torch": "BIMBO KARI PLEASE",
+    "fp32_b40": "BIMBO KARI PLEASE",
+    "fp32_b10": "BIMBO KARI PLEASE",
+    "fp32_greedy": "BINBO R A PLEASE",
+    "fp16_b10": "BIMBO KARI PLEASE",
+    "int8_b10": "BIMBO CAR A PLEASE",
+    "q8_b10": "BIMBO KARI PLEASE",
+    "q4_b10": "BEEN BROKEN ALL RIGHT PLEASE",
+    "q4f16_b10": "BEEN BROKEN ALL RIGHT PLEASE"
+   }
+  },
+  "grid_s1_bgaa8p": {
+   "dataset": "grid",
+   "ref": "bin green at a eight please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BE GREETED A PLEASE",
+    "torch": "BE GREETED I A PLEASE",
+    "fp32_b40": "BE GREETED I A PLEASE",
+    "fp32_b10": "BE GREETED I A PLEASE",
+    "fp32_greedy": "BE GREET I A PLEASE",
+    "fp16_b10": "BE GREETED I A PLEASE",
+    "int8_b10": "BE GREETED I A PLEASE",
+    "q8_b10": "BE GREETED I A PLEASE",
+    "q4_b10": "BE GREETED I A PLEASE",
+    "q4f16_b10": "BE GREETED I A PLEASE"
+   }
+  },
+  "grid_s1_bgbh6p": {
+   "dataset": "grid",
+   "ref": "bin green by h six please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BEING WRITTEN BY SIX BEATS",
+    "torch": "BEING WRITTEN BY SIX BEES",
+    "fp32_b40": "BEING WRITTEN BY SIX BEES",
+    "fp32_b10": "BEING WRITTEN BY SIX BEES",
+    "fp32_greedy": "BE WRITTEN BY SIX BE",
+    "fp16_b10": "BEING WRITTEN BY SIX BEES",
+    "int8_b10": "BEING WRITTEN BY SIX BEES",
+    "q8_b10": "BEING WRITTEN BY SIX BEES",
+    "q4_b10": "BEING WRITTEN BY SIX BEATS",
+    "q4f16_b10": "BEING WRITTEN BY SIX PIECE"
+   }
+  },
+  "grid_s1_bgin3a": {
+   "dataset": "grid",
+   "ref": "bin green in n three again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BE CAREFUL AGAIN",
+    "torch": "BIG GREEN COVERING AGAIN",
+    "fp32_b40": "BIG GREEN COVERING AGAIN",
+    "fp32_b10": "BIG GREEN COVERING AGAIN",
+    "fp32_greedy": "BE QUEEN RECOVERY IT AGAIN",
+    "fp16_b10": "BIG GREEN COVERING AGAIN",
+    "int8_b10": "BEING GREEN EVERY DAY",
+    "q8_b10": "BIG GREEN COVERING AGAIN",
+    "q4_b10": "BE IN RECOVERY AGAIN",
+    "q4f16_b10": "BE IN RECOVERY AGAIN"
+   }
+  },
+  "grid_s1_bgwu8p": {
+   "dataset": "grid",
+   "ref": "bin green with u eight please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BE AGREED WITH YOU A PLEASE",
+    "torch": "BIG GREEN REVIEW A PLEASE",
+    "fp32_b40": "BIG GREEN REVIEW A PLEASE",
+    "fp32_b10": "BIG GREEN REVIEW A PLEASE",
+    "fp32_greedy": "BIG GREEN REVIEW A PLEASE",
+    "fp16_b10": "BIG GREEN REVIEW A PLEASE",
+    "int8_b10": "BIG GREEN REVIEW A PLEASE",
+    "q8_b10": "BIG GREEN REVIEW A PLEASE",
+    "q4_b10": "BIG GREEN REVIEW A PLEASE",
+    "q4f16_b10": "BIG GREEN REVIEW A PLEASE"
+   }
+  },
+  "grid_s1_brbm6n": {
+   "dataset": "grid",
+   "ref": "bin red by m six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BEING READ BY M G C",
+    "torch": "BEING READ BY M G S NOW",
+    "fp32_b40": "BEING READ BY M G S NOW",
+    "fp32_b10": "BEING READ BY M G S NOW",
+    "fp32_greedy": "BEING READ BY M G NOW",
+    "fp16_b10": "BEING READ BY M G S NOW",
+    "int8_b10": "BEING READ BY M G S NOW",
+    "q8_b10": "BEING READ BY M G S NOW",
+    "q4_b10": "BEING READ BY M G S NOW",
+    "q4f16_b10": "BEING READ BY M G S NOW"
+   }
+  },
+  "grid_s1_briz6n": {
+   "dataset": "grid",
+   "ref": "bin red in z six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BIG RED IS TEN SIX NOW",
+    "torch": "BIG RED IS TEN SIX NOW",
+    "fp32_b40": "BIG RED IS TEN SIX NOW",
+    "fp32_b10": "BIG RED IS TEN SIX NOW",
+    "fp32_greedy": "BE RED IS SET SIX NOW",
+    "fp16_b10": "BIG RED IS TEN SIX NOW",
+    "int8_b10": "BIG RED IS TEN SIX NOW",
+    "q8_b10": "BIG RED IS TEN SIX NOW",
+    "q4_b10": "BIG RED IS DEAD SIX NOW",
+    "q4f16_b10": "BIG RED IS DEAD SIX NOW"
+   }
+  },
+  "grid_s1_bwaa1s": {
+   "dataset": "grid",
+   "ref": "bin white at a one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'VE BEEN WRITING A ONE SONG",
+    "torch": "BEAT RADIO A ONE TWO",
+    "fp32_b40": "BEAT RADIO A ONE TWO",
+    "fp32_b10": "BEAT RADIO A ONE TWO",
+    "fp32_greedy": "BI RADIO A ONE TWO",
+    "fp16_b10": "BEAT RADIO A ONE TWO",
+    "int8_b10": "BEAT RADIO A ONE TWO",
+    "q8_b10": "BEAT RADIO A ONE TWO",
+    "q4_b10": "BEAT RADIO A ONE TWO",
+    "q4f16_b10": "BEAT RADIO A ONE TWO"
+   }
+  },
+  "grid_s1_bwbg8n": {
+   "dataset": "grid",
+   "ref": "bin white by g eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BEING RIGHT BY G A NOW",
+    "torch": "BEING RIGHT BY G A NOW",
+    "fp32_b40": "BEING RIGHT BY G A NOW",
+    "fp32_b10": "BEING RIGHT BY G A NOW",
+    "fp32_greedy": "BE RIGHT BY G A NOW",
+    "fp16_b10": "BEING RIGHT BY G A NOW",
+    "int8_b10": "BEING RIGHT BY G A NOW",
+    "q8_b10": "BEING RIGHT BY G A NOW",
+    "q4_b10": "BEEN RIGHT BY G A NOW",
+    "q4f16_b10": "BEEN RIGHT BY G A NOW"
+   }
+  },
+  "grid_s1_bwis8n": {
+   "dataset": "grid",
+   "ref": "bin white in s eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "WHY DID I SAY NOW",
+    "torch": "BEEN WRITING ESSAY NOW",
+    "fp32_b40": "BEEN WRITING ESSAY NOW",
+    "fp32_b10": "BID WHY DID I SAY NOW",
+    "fp32_greedy": "BIN WHY DID I A NOW",
+    "fp16_b10": "BID WHY DID I SAY NOW",
+    "int8_b10": "BID WHY DID I SAY NOW",
+    "q8_b10": "BID WHY DID I SAY NOW",
+    "q4_b10": "BID WHY DID I SAY NOW",
+    "q4f16_b10": "BID WHY DID I SAY NOW"
+   }
+  },
+  "grid_s1_lbad6n": {
+   "dataset": "grid",
+   "ref": "lay blue at d six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LET YOU TEACH THIS NOW",
+    "torch": "LABOR WILL TEACH THIS NOW",
+    "fp32_b40": "LABOR WILL TEACH THIS NOW",
+    "fp32_b10": "LABOR WILL TEACH THIS NOW",
+    "fp32_greedy": "LETW TEACH THIS NOW",
+    "fp16_b10": "LABOR WILL TEACH THIS NOW",
+    "int8_b10": "LABOR WILL TEACH THIS NOW",
+    "q8_b10": "LABOR WILL TEACH THIS NOW",
+    "q4_b10": "LABOR WILL TEACH THIS NOW",
+    "q4f16_b10": "LABOR WILL TEACH THIS NOW"
+   }
+  },
+  "grid_s1_lbbk4n": {
+   "dataset": "grid",
+   "ref": "lay blue by k four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "THEY BLEW MY KNIFE THROUGH NOW",
+    "torch": "LIGHT BLUE BY K FOR NOW",
+    "fp32_b40": "LIGHT BLUE BY K FOR NOW",
+    "fp32_b10": "THEY BLEW MY K FOR NOW",
+    "fp32_greedy": "THEY BLUE BY K PHONE NOW",
+    "fp16_b10": "LIGHT BLUE BY K FOR NOW",
+    "int8_b10": "THEY BLEW MY K FOR NOW",
+    "q8_b10": "THEY BLEW MY K FOR NOW",
+    "q4_b10": "LIGHT BLUE BY AN I PHONE NOW",
+    "q4f16_b10": "LIGHT BLUE BY AN I PHONE NOW"
+   }
+  },
+  "grid_s1_lbiq1s": {
+   "dataset": "grid",
+   "ref": "lay blue in q one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "KEEP WHO DO YOU WANT TO",
+    "torch": "KEEP WHO DO YOU WANT TO",
+    "fp32_b40": "KEEP WHO DO YOU WANT TO",
+    "fp32_b10": "KEEP WHO DO YOU WANT TO",
+    "fp32_greedy": "KEEP WHO YOU WANT TO",
+    "fp16_b10": "KEEP WHO DO YOU WANT TO",
+    "int8_b10": "KEEP WHO DO YOU WANT TO",
+    "q8_b10": "KEEP WHO DO YOU WANT TO",
+    "q4_b10": "KEEP WHO DO YOU WANT TO",
+    "q4f16_b10": "KEEP WHO DO YOU WANT TO"
+   }
+  },
+  "grid_s1_lbwy6n": {
+   "dataset": "grid",
+   "ref": "lay blue with y six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LABOR WITH WAGES",
+    "torch": "LABOR WITH WAGES",
+    "fp32_b40": "LABOR WITH WAGES",
+    "fp32_b10": "LABOR WITH WAGES",
+    "fp32_greedy": "APRIL WITH RAS",
+    "fp16_b10": "LABOR WITH WAGES",
+    "int8_b10": "LABOR WITH WAGES",
+    "q8_b10": "LABOR WITH WAGES",
+    "q4_b10": "LABOR WITH WAGES",
+    "q4f16_b10": "LABOR WITH WAGES"
+   }
+  },
+  "grid_s1_lgbf8n": {
+   "dataset": "grid",
+   "ref": "lay green by f eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 63
+   },
+   "hyp": {
+    "torch_lm": "LIKE WRITTEN BY F A NOW",
+    "torch": "LIKE WRITTEN BY F A NOW",
+    "fp32_b40": "LIKE WRITTEN BY F A NOW",
+    "fp32_b10": "LIKE WRITTEN BY F A NOW",
+    "fp32_greedy": "LIKE WRITTEN BY F A L",
+    "fp16_b10": "LIKE WRITTEN BY F A NOW",
+    "int8_b10": "LIKE WRITTEN BY F A NOW",
+    "q8_b10": "LIKE WRITTEN BY F A NOW",
+    "q4_b10": "LIKE WRITTEN BY F A NOW",
+    "q4f16_b10": "LIKE WRITTEN BY F A NOW"
+   }
+  },
+  "grid_s1_lgir8n": {
+   "dataset": "grid",
+   "ref": "lay green in r eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LATER WE GOT OUR A NOW",
+    "torch": "LATE WE DID OUR A NOW",
+    "fp32_b40": "LATE WE DID OUR A NOW",
+    "fp32_b10": "LATE WE DID OUR A NOW",
+    "fp32_greedy": "LATE WE AT OUR EIGHT NOW",
+    "fp16_b10": "LATE WE DID OUR A NOW",
+    "int8_b10": "LATE WE DID OUR A NOW",
+    "q8_b10": "LATE WE DID OUR A NOW",
+    "q4_b10": "LATER WE GOT OUR A NOW",
+    "q4f16_b10": "LATER WE GOT OUR A NOW"
+   }
+  },
+  "grid_s1_lgwt3a": {
+   "dataset": "grid",
+   "ref": "lay green with t three again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "A DREAM OF SEAFOOD AGAIN",
+    "torch": "LATE DREAM OF SEAFOOD AGAIN",
+    "fp32_b40": "LATE DREAM OF SEAFOOD AGAIN",
+    "fp32_b10": "LATE DREAM OF SEAFOOD AGAIN",
+    "fp32_greedy": "LATE DREAM OF TEA FREE AGAIN",
+    "fp16_b10": "LATE DREAM OF SEAFOOD AGAIN",
+    "int8_b10": "LATE DREAM OF SEAFOOD AGAIN",
+    "q8_b10": "LATE DREAM OF SEAFOOD AGAIN",
+    "q4_b10": "LATE DREAM OF SEAFOOD AGAIN",
+    "q4f16_b10": "LATE DREAM OF SEAFOOD AGAIN"
+   }
+  },
+  "grid_s1_lrbe8p": {
+   "dataset": "grid",
+   "ref": "lay red by e eight please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LIKEWISE BY E S P S",
+    "torch": "LAY WET BY E A SPEED",
+    "fp32_b40": "LAY WET BY E A SPEED",
+    "fp32_b10": "LAY WET BY E A SPEED",
+    "fp32_greedy": "LAY RED BY ICE B",
+    "fp16_b10": "LAY WET BY E A SPEED",
+    "int8_b10": "LAY WET BY E A SPEED",
+    "q8_b10": "LAY WET BY E A SPEED",
+    "q4_b10": "LAY WET BY E A SPEED",
+    "q4f16_b10": "LAY WET BY E A SPEED"
+   }
+  },
+  "grid_s1_lrik4p": {
+   "dataset": "grid",
+   "ref": "lay red in k four please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "A WEDDING A FOUR PIECE",
+    "torch": "LATE WEDDING DAY FOR A PIECE",
+    "fp32_b40": "LATE WEDDING DAY FOR A PIECE",
+    "fp32_b10": "LATE WEDDING DAY FOR A PIECE",
+    "fp32_greedy": "LATE WEDDING NIGHT FOR PIECE",
+    "fp16_b10": "LATE WEDDING DAY FOR A PIECE",
+    "int8_b10": "LATE WEDDING DAY FOR A PIECE",
+    "q8_b10": "LATE WEDDING DAY FOR A PIECE",
+    "q4_b10": "LATE WEDDING NIGHT FOR A PIECE",
+    "q4f16_b10": "LATE WEDDING NIGHT FOR A PIECE"
+   }
+  },
+  "grid_s1_lrws1a": {
+   "dataset": "grid",
+   "ref": "lay red with s one again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "torch": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "fp32_b40": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "fp32_b10": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "fp32_greedy": "LATEWEIGHT WITH H MONITOR",
+    "fp16_b10": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "int8_b10": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "q8_b10": "LIGHTWEIGHT WITH EDGE MONITOR",
+    "q4_b10": "LIGHTWEIGHT WITH EACH MONITOR",
+    "q4f16_b10": "LIGHTWEIGHT WITH EACH MONITOR"
+   }
+  },
+  "grid_s1_lwaz3a": {
+   "dataset": "grid",
+   "ref": "lay white at z three again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "WHY DO YOU SUFFER IT AGAIN",
+    "torch": "LATE WIDER SUFFERING AGAIN",
+    "fp32_b40": "LATE WIDER SUFFERING AGAIN",
+    "fp32_b10": "LATE WIDER SUFFERING AGAIN",
+    "fp32_greedy": "LA WHY DOES SUFFERING AGAIN",
+    "fp16_b10": "LATE WIDER SUFFERING AGAIN",
+    "int8_b10": "LATE WIDER SUFFERING AGAIN",
+    "q8_b10": "LATE WIDER SUFFERING AGAIN",
+    "q4_b10": "LATE WIDER SUFFERING AGAIN",
+    "q4f16_b10": "LATE WIDER SUFFERING AGAIN"
+   }
+  },
+  "grid_s1_lwie6p": {
+   "dataset": "grid",
+   "ref": "lay white in e six please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LIKEWISE IT IS THIS PEACE",
+    "torch": "LATE Y G E SIX B IS",
+    "fp32_b40": "LATE Y G E SIX B IS",
+    "fp32_b10": "LATE Y G E SIX B IS",
+    "fp32_greedy": "LATE WHY SIX PLEASE",
+    "fp16_b10": "LATE Y G E SIX B IS",
+    "int8_b10": "LATE Y G E SIX B S",
+    "q8_b10": "LATE Y G E SIX B IS",
+    "q4_b10": "LATE Y G E SIX PLEASE",
+    "q4f16_b10": "LATE Y G E SIX B IS"
+   }
+  },
+  "grid_s1_lwwm3a": {
+   "dataset": "grid",
+   "ref": "lay white with m three again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "LAY WHITE WITH EMPHASIS",
+    "torch": "LATE WINE WITH MFG",
+    "fp32_b40": "LATE WINE WITH MFG",
+    "fp32_b10": "LATE WINE WITH MFG",
+    "fp32_greedy": "LAY WHITE WITH M FREE",
+    "fp16_b10": "LATE WINE WITH MFG",
+    "int8_b10": "LATE WINE WITH MFG",
+    "q8_b10": "LATE WINE WITH MFG",
+    "q4_b10": "LAY WHITE WITH MFRIKA",
+    "q4f16_b10": "LAY WHITE WITH HIM FREELY GO"
+   }
+  },
+  "grid_s1_pbav2n": {
+   "dataset": "grid",
+   "ref": "place blue at v two now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLAYS BEAUTIFULLY TOO NOW",
+    "torch": "PLACEBO OR V TWO NOW",
+    "fp32_b40": "PLACEBO OR V TWO NOW",
+    "fp32_b10": "PLACEBO OR V TWO NOW",
+    "fp32_greedy": "PLACE BEAUTIFUL V TWO NOW",
+    "fp16_b10": "PLACEBO OR V TWO NOW",
+    "int8_b10": "PLACEBO OR V TWO NOW",
+    "q8_b10": "PLACEBO OR V TWO NOW",
+    "q4_b10": "PLACEBO OR V TWO NOW",
+    "q4f16_b10": "PLACEBO OR V TWO NOW"
+   }
+  },
+  "grid_s1_pbib6n": {
+   "dataset": "grid",
+   "ref": "place blue in b six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLACE BLOOM B SIX NOW",
+    "torch": "PLACE BLUE AND B SIX NOW",
+    "fp32_b40": "PLACE BLUE AND B SIX NOW",
+    "fp32_b10": "PLACE BLUE AND B SIX NOW",
+    "fp32_greedy": "PLACE BLUEW AND B SIX NOW",
+    "fp16_b10": "PLACE BLUE AND B SIX NOW",
+    "int8_b10": "PLACE BLUE AND B SIX NOW",
+    "q8_b10": "PLACE BLUE AND B SIX NOW",
+    "q4_b10": "PLEASE BREW AND B SIX NOW",
+    "q4f16_b10": "PLEASE BREW AND B SIX NOW"
+   }
+  },
+  "grid_s1_pbwj2n": {
+   "dataset": "grid",
+   "ref": "place blue with j two now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLUS BLUNT WITH J TWO NOW",
+    "torch": "BLESS BLOOD WITH J TWO NOW",
+    "fp32_b40": "BLESS BLOOD WITH J TWO NOW",
+    "fp32_b10": "BLESS BLOOD WITH J TWO NOW",
+    "fp32_greedy": "BLESS BLUE WITH J TWO NOW",
+    "fp16_b10": "BLESS BLOOD WITH J TWO NOW",
+    "int8_b10": "BLESS BLOOD WITH J TWO NOW",
+    "q8_b10": "BLESS BLOOD WITH J TWO NOW",
+    "q4_b10": "BLESS BLOOD WITH J TWO NOW",
+    "q4f16_b10": "BLESS BLOOD WITH J TWO NOW"
+   }
+  },
+  "grid_s1_pgaq6n": {
+   "dataset": "grid",
+   "ref": "place green at q six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLACE THREE Q SIX NOW",
+    "torch": "PLACE THREE ON Q SIX NOW",
+    "fp32_b40": "PLACE THREE ON Q SIX NOW",
+    "fp32_b10": "PLACE THREE ON Q SIX NOW",
+    "fp32_greedy": "PLACE THREE Q SIX NOW",
+    "fp16_b10": "PLACE THREE ON Q SIX NOW",
+    "int8_b10": "PLACE THREE ON Q SIX NOW",
+    "q8_b10": "PLACE THREE ON Q SIX NOW",
+    "q4_b10": "PLACE THREE Q SIX NOW",
+    "q4f16_b10": "PLACE THREE Q SIX NOW"
+   }
+  },
+  "grid_s1_pgby4n": {
+   "dataset": "grid",
+   "ref": "place green by y four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLEASE READ MY WIFE PHONE NOW",
+    "torch": "PLEASE READ MY WIFE PHONE NOW",
+    "fp32_b40": "PLEASE READ MY WIFE PHONE NOW",
+    "fp32_b10": "PLEASE READ MY WIFE PHONE NOW",
+    "fp32_greedy": "PLEASE READ MY WIFE PHONE NOW",
+    "fp16_b10": "PLEASE READ MY WIFE PHONE NOW",
+    "int8_b10": "PLEASE READ MY WIFE PHONE NOW",
+    "q8_b10": "PLEASE READ MY WIFE PHONE NOW",
+    "q4_b10": "PLEASE READ MY WIFE PHONE NOW",
+    "q4f16_b10": "PLEASE READ MY WIFE PHONE NOW"
+   }
+  },
+  "grid_s1_pgwe6n": {
+   "dataset": "grid",
+   "ref": "place green with e six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BE SWEET WITH EACH OTHER NOW",
+    "torch": "PLACE TO READ MOVIE SIX NOW",
+    "fp32_b40": "PLACE TO READ MOVIE SIX NOW",
+    "fp32_b10": "PLACE TO READ MOVIE SIX NOW",
+    "fp32_greedy": "PLACE WINNING WITH EACH SIX NOW",
+    "fp16_b10": "PLACE TO READ MOVIE SIX NOW",
+    "int8_b10": "PLACE TO READ MOVIE SIX NOW",
+    "q8_b10": "PLACE TO READ MOVIE SIX NOW",
+    "q4_b10": "PLEASE READ MOVIE SIX NOW",
+    "q4f16_b10": "PLEASE READ MOVIE SIX NOW"
+   }
+  },
+  "grid_s1_praj1s": {
+   "dataset": "grid",
+   "ref": "place red at j one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLEASE WRITE A JASON",
+    "torch": "PLEASE WRITE A J ONE SONG",
+    "fp32_b40": "PLEASE WRITE A J ONE SONG",
+    "fp32_b10": "PLEASE WRITE A J ONE SONG",
+    "fp32_greedy": "PLEASE WHERE THE J ONE SAW",
+    "fp16_b10": "PLEASE WRITE A J ONE SONG",
+    "int8_b10": "PLEASE WRITE A J ONE SONG",
+    "q8_b10": "PLEASE WRITE A J ONE SONG",
+    "q4_b10": "PLACE WHERE DID JAY ONCE TALK",
+    "q4f16_b10": "PLACE WHERE DID JAY ONCE TALK"
+   }
+  },
+  "grid_s1_prbp8n": {
+   "dataset": "grid",
+   "ref": "place red by p eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M PLEASED TO WRITE MY B A NOW",
+    "torch": "PLEASE RIDE MY B A NOW",
+    "fp32_b40": "PLEASE RIDE MY B A NOW",
+    "fp32_b10": "PLEASE RIDE MY B A NOW",
+    "fp32_greedy": "PLEASE WORD MY B NOW",
+    "fp16_b10": "PLEASE RIDE MY B A NOW",
+    "int8_b10": "PLEASE RIDE MY B A NOW",
+    "q8_b10": "PLEASE RIDE MY B A NOW",
+    "q4_b10": "PLEASE RIDE MY B A NOW",
+    "q4f16_b10": "PLEASE RIDE MY B A NOW"
+   }
+  },
+  "grid_s1_priv4n": {
+   "dataset": "grid",
+   "ref": "place red in v four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLUS ONE AND THREE FOUR NOW",
+    "torch": "PLUS ONE AND V FOUR NOW",
+    "fp32_b40": "PLUS ONE AND V FOUR NOW",
+    "fp32_b10": "PLUS ONE AND V FOUR NOW",
+    "fp32_greedy": "PLUS WHITE M V FOUR NOW",
+    "fp16_b10": "PLUS ONE AND V FOUR NOW",
+    "int8_b10": "PLUS ONE AND V FOUR NOW",
+    "q8_b10": "PLUS ONE AND V FOUR NOW",
+    "q4_b10": "PLACE RIGHT IN V FOUR NOW",
+    "q4f16_b10": "PLACE RIGHT IN V FOUR NOW"
+   }
+  },
+  "grid_s1_pwad2n": {
+   "dataset": "grid",
+   "ref": "place white at d two now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "THAT'S WHAT I DO NOW",
+    "torch": "PLEASE WRITE YOUR G TWO NOW",
+    "fp32_b40": "PLEASE WRITE YOUR G TWO NOW",
+    "fp32_b10": "PLEASE WRITE YOUR G TWO NOW",
+    "fp32_greedy": "PLACE WHY G TWO NOW",
+    "fp16_b10": "PLEASE WRITE YOUR G TWO NOW",
+    "int8_b10": "PLEASE WRITE YOUR G TWO NOW",
+    "q8_b10": "PLEASE WRITE YOUR G TWO NOW",
+    "q4_b10": "PLEASE WRITE YOUR G2 NOW",
+    "q4f16_b10": "PLEASE WRITE YOUR G2 NOW"
+   }
+  },
+  "grid_s1_pwbk1s": {
+   "dataset": "grid",
+   "ref": "place white by k one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLACE RIGHT BY DAY ONE SOON",
+    "torch": "PLACE RIGHT BY DAY ONE SOON",
+    "fp32_b40": "PLACE RIGHT BY DAY ONE SOON",
+    "fp32_b10": "PLACE RIGHT BY DAY ONE SOON",
+    "fp32_greedy": "PLACE WHITE BY K ONE SOON",
+    "fp16_b10": "PLACE RIGHT BY DAY ONE SOON",
+    "int8_b10": "PLACE RIGHT BY DAY ONE SOON",
+    "q8_b10": "PLACE RIGHT BY DAY ONE SOON",
+    "q4_b10": "PLACE RIGHT BY DAY ONE SOON",
+    "q4f16_b10": "PLACE RIGHT BY DAY ONE SOON"
+   }
+  },
+  "grid_s1_pwip6n": {
+   "dataset": "grid",
+   "ref": "place white in p six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLACE WISE IN B SIX NOW",
+    "torch": "PLACE WISE IN B SIX NOW",
+    "fp32_b40": "PLACE WISE IN B SIX NOW",
+    "fp32_b10": "PLACE WISE IN B SIX NOW",
+    "fp32_greedy": "PLACE RISE IN B SIX NOW",
+    "fp16_b10": "PLACE WISE IN B SIX NOW",
+    "int8_b10": "PLACE WISE IN B SIX NOW",
+    "q8_b10": "PLACE WISE IN B SIX NOW",
+    "q4_b10": "PLACE WISE IN B SIX NOW",
+    "q4f16_b10": "PLACE WISE IN B SIX NOW"
+   }
+  },
+  "grid_s1_pwwy2n": {
+   "dataset": "grid",
+   "ref": "place white with y two now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLUS ONE WITH WHITE TOO NOW",
+    "torch": "PLUS ONE WITH WHITE TWO NOW",
+    "fp32_b40": "PLUS ONE WITH WHITE TWO NOW",
+    "fp32_b10": "PLUS ONE WITH WHITE TWO NOW",
+    "fp32_greedy": "PLEASE WORK WITH WHITE TWO NOW",
+    "fp16_b10": "PLUS ONE WITH WHITE TWO NOW",
+    "int8_b10": "PLUS ONE WITH WHITE TWO NOW",
+    "q8_b10": "PLUS ONE WITH WHITE TWO NOW",
+    "q4_b10": "PLUS ONE WITH WHITE TWO NOW",
+    "q4f16_b10": "PLUS ONE WITH WHITE TWO NOW"
+   }
+  },
+  "grid_s1_sbba8n": {
+   "dataset": "grid",
+   "ref": "set blue by a eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "DEEP INTO MY HEAD NOW",
+    "torch": "DEEP BLUE BY EIGHT NOW",
+    "fp32_b40": "DEEP BLUE BY EIGHT NOW",
+    "fp32_b10": "DEEP BLUE BY EIGHT NOW",
+    "fp32_greedy": "DEEP BY A HEAD NOW",
+    "fp16_b10": "DEEP BLUE BY EIGHT NOW",
+    "int8_b10": "DEEP BLUE BY EIGHT NOW",
+    "q8_b10": "DEEP BLUE BY EIGHT NOW",
+    "q4_b10": "DEEP YOU BUY A HEAD NOW",
+    "q4f16_b10": "DEEP YOU BUY A HEAD NOW"
+   }
+  },
+  "grid_s1_sbig4n": {
+   "dataset": "grid",
+   "ref": "set blue in g four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "TEMPLE WHEN THE CHIEF ROLLED OUT",
+    "torch": "TEMPLE WITH CHIEF RULE NOW",
+    "fp32_b40": "TEMPLE WITH CHIEF RULE NOW",
+    "fp32_b10": "TEMPLE WITH CHIEF RULE NOW",
+    "fp32_greedy": "TIMO WITH CHIEF WILL OUT",
+    "fp16_b10": "TEMPLE WITH CHIEF RULE NOW",
+    "int8_b10": "TEMPLE WITH CHIEF RULE NOW",
+    "q8_b10": "TEMPLE WITH CHIEF RULE NOW",
+    "q4_b10": "TEMPLE WITH CHIEF RULE NOW",
+    "q4f16_b10": "TEMPLE WITH CHIEF RULE NOW"
+   }
+  },
+  "grid_s1_sbwo1s": {
+   "dataset": "grid",
+   "ref": "set blue with o one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "DEBORAH WHATEVER YOU WANT TO",
+    "torch": "TEMPO ROY WANTS TO",
+    "fp32_b40": "TEMPO ROY WANTS TO",
+    "fp32_b10": "DEBUT OF HER ONE TWO",
+    "fp32_greedy": "J BLUE OFO WANT TO",
+    "fp16_b10": "DEBUT OF HER ONE TWO",
+    "int8_b10": "TEMPO ROY WANTS TO",
+    "q8_b10": "DEEP BLUE OF HER ONE TWO",
+    "q4_b10": "DEEP BLUE OF HER ONE TWO",
+    "q4f16_b10": "DEEP BLUE OF HER ONE TWO"
+   }
+  },
+  "grid_s1_sgav4n": {
+   "dataset": "grid",
+   "ref": "set green at v four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "SAY WE DON'T REALLY FALL DOWN",
+    "torch": "JAKE WE CAN WE FALL DOWN",
+    "fp32_b40": "JAKE WE CAN WE FALL DOWN",
+    "fp32_b10": "JAKE WE CAN WE FALL DOWN",
+    "fp32_greedy": "J WE OFLY FALL DOWN",
+    "fp16_b10": "JAKE WE CAN WE FALL DOWN",
+    "int8_b10": "JAKE WE CAN WE FALL DOWN",
+    "q8_b10": "JAKE WE CAN WE FALL DOWN",
+    "q4_b10": "JAKE WE DON'T WE FALL DOWN",
+    "q4f16_b10": "JAKE WE DON'T WE FALL DOWN"
+   }
+  },
+  "grid_s1_sgib8n": {
+   "dataset": "grid",
+   "ref": "set green in b eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "TAKE A READING B A NOW",
+    "torch": "TAKE READING B A NOW",
+    "fp32_b40": "TAKE READING B A NOW",
+    "fp32_b10": "TAKE READING B A NOW",
+    "fp32_greedy": "TAKE READING B A L",
+    "fp16_b10": "TAKE READING B A NOW",
+    "int8_b10": "TAKE READING B A NOW",
+    "q8_b10": "TAKE READING B A NOW",
+    "q4_b10": "TAKE READING B A NOW",
+    "q4f16_b10": "TAKE READING B A NOW"
+   }
+  },
+  "grid_s1_sgwj4n": {
+   "dataset": "grid",
+   "ref": "set green with j four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "TAKE A WEEK WITH G FOUR NOW",
+    "torch": "TAKE A WEEK WITH J4 NOW",
+    "fp32_b40": "TAKE A WEEK WITH J4 NOW",
+    "fp32_b10": "TAKE A WEEK WITH J4 NOW",
+    "fp32_greedy": "TAKE WE WITH J FOUR NOW",
+    "fp16_b10": "TAKE A WEEK WITH J4 NOW",
+    "int8_b10": "TAKE A WEEK WITH J4 NOW",
+    "q8_b10": "TAKE A WEEK WITH J4 NOW",
+    "q4_b10": "TAKE A WEEK WITH G FOUR NOW",
+    "q4f16_b10": "TAKE A WEEK WITH G FOUR NOW"
+   }
+  },
+  "grid_s1_sran8n": {
+   "dataset": "grid",
+   "ref": "set red at n eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "DON'T WORRY I'M EIGHT NOW",
+    "torch": "JAY ONE EIGHT EIGHT NOW",
+    "fp32_b40": "JAY ONE EIGHT EIGHT NOW",
+    "fp32_b10": "JAY WHAT I HATE NOW",
+    "fp32_greedy": "J ONE AND EIGHT NOW",
+    "fp16_b10": "JAY WHAT I HATE NOW",
+    "int8_b10": "JAY WHAT I HATE NOW",
+    "q8_b10": "JAY WHAT I HATE NOW",
+    "q4_b10": "ZEKE WONDER AND A NOW",
+    "q4f16_b10": "ZEKE WONDER AND A NOW"
+   }
+  },
+  "grid_s1_srbu6n": {
+   "dataset": "grid",
+   "ref": "set red by u six now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "STAY READ BY USE THIS NOW",
+    "torch": "STAY READ BY YOU SIX NOW",
+    "fp32_b40": "STAY READ BY YOU SIX NOW",
+    "fp32_b10": "STAY READ BY YOU SIX NOW",
+    "fp32_greedy": "STAY READ BY USE SIX NOW",
+    "fp16_b10": "STAY READ BY YOU SIX NOW",
+    "int8_b10": "STAY READ BY YOU SIX NOW",
+    "q8_b10": "STAY READ BY YOU SIX NOW",
+    "q4_b10": "STAY READ BY USE THIS NOW",
+    "q4f16_b10": "STAY READ BY USE THIS NOW"
+   }
+  },
+  "grid_s1_srwb8n": {
+   "dataset": "grid",
+   "ref": "set red with b eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "SAME WAY WITH B A NOW",
+    "torch": "SAME WAY WITH B A NOW",
+    "fp32_b40": "SAME WAY WITH B A NOW",
+    "fp32_b10": "SAME WAY WITH B A NOW",
+    "fp32_greedy": "SAME WAY WITH B A NOW",
+    "fp16_b10": "SAME WAY WITH B A NOW",
+    "int8_b10": "SAME WAY WITH B A NOW",
+    "q8_b10": "SAME WAY WITH B A NOW",
+    "q4_b10": "SAME WAY WITH B A NOW",
+    "q4f16_b10": "SAME WAY WITH B A NOW"
+   }
+  },
+  "grid_s1_swai1s": {
+   "dataset": "grid",
+   "ref": "set white at i one soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "SAYING WHY DO I WANT TO",
+    "torch": "SAYING WHY DO I WANT TO",
+    "fp32_b40": "SAYING WHY DO I WANT TO",
+    "fp32_b10": "SAYING WHY DO I WANT TO",
+    "fp32_greedy": "SAYING WHY DO I WANT TO",
+    "fp16_b10": "SAYING WHY DO I WANT TO",
+    "int8_b10": "SAYING WHY DO I WANT TO",
+    "q8_b10": "SAYING WHY DO I WANT TO",
+    "q4_b10": "SAYING WHY DO I WANT TO",
+    "q4f16_b10": "SAYING WHY DO I WANT TO"
+   }
+  },
+  "grid_s1_swbo8n": {
+   "dataset": "grid",
+   "ref": "set white by o eight now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "WHY AM I O K NOW",
+    "torch": "SAY WHY AM I O K NOW",
+    "fp32_b40": "SAY WHY AM I O K NOW",
+    "fp32_b10": "SAY WHY AM I O K NOW",
+    "fp32_greedy": "SAY WHY BY O K NOW",
+    "fp16_b10": "SAY WHY AM I O K NOW",
+    "int8_b10": "SAY WHY AM I O K NOW",
+    "q8_b10": "SAY WHY AM I O K NOW",
+    "q4_b10": "SEE WHY BY O K NOW",
+    "q4f16_b10": "SEE WHY BY O K NOW"
+   }
+  },
+  "grid_s1_swiu4n": {
+   "dataset": "grid",
+   "ref": "set white in u four now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "THEN WHY DID YOU FALL DOWN",
+    "torch": "THEN WHY DID YOU FALL DOWN",
+    "fp32_b40": "THEN WHY DID YOU FALL DOWN",
+    "fp32_b10": "THEN WHY DID YOU FALL DOWN",
+    "fp32_greedy": "THEN WHY DID YOU FALL NOW",
+    "fp16_b10": "THEN WHY DID YOU FALL DOWN",
+    "int8_b10": "THEN WHY DID YOU FALL DOWN",
+    "q8_b10": "THEN WHY DID YOU FALL DOWN",
+    "q4_b10": "THEN WHY DID YOU FALL DOWN",
+    "q4f16_b10": "THEN WHY DID YOU FALL DOWN"
+   }
+  },
+  "grid_s4_bbae9n": {
+   "dataset": "grid",
+   "ref": "bin blue at e nine now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'VE BEEN BOASTING DAY NOW",
+    "torch": "I'VE BEEN BOASTING DAY NOW",
+    "fp32_b40": "I'VE BEEN BOASTING DAY NOW",
+    "fp32_b10": "I'VE BEEN BOASTING DAY NOW I",
+    "fp32_greedy": "I BEEN BOW HE DIED NOW",
+    "fp16_b10": "I'VE BEEN BOASTING DAY NOW I",
+    "int8_b10": "I'VE BEEN BOASTING DAY NOW WELL",
+    "q8_b10": "I'VE BEEN BOASTING DAY NOW WELL",
+    "q4_b10": "I'VE BEEN BOASTING DAY NOW I",
+    "q4f16_b10": "I'VE BEEN BOASTING DAY NOW I"
+   }
+  },
+  "grid_s4_bbbl7n": {
+   "dataset": "grid",
+   "ref": "bin blue by l seven now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'VE BEEN BLUE BACK AT SEVEN NOW",
+    "torch": "PIN BLUE BACK AT SEVEN NOW",
+    "fp32_b40": "PIN BLUE BACK AT SEVEN NOW",
+    "fp32_b10": "PIN BLUE BACK AT SEVEN NOW",
+    "fp32_greedy": "PIN BLUE BACK AT SEVEN DOWN",
+    "fp16_b10": "PIN BLUE BACK AT SEVEN NOW",
+    "int8_b10": "BIG BLUE PENNY SEVEN NOW",
+    "q8_b10": "PIN BLUE BACK AND SEVEN NOW",
+    "q4_b10": "BEEN BLUE BACK IN SEVEN NOW",
+    "q4f16_b10": "BEEN BLUE BACK IN SEVEN NOW"
+   }
+  },
+  "grid_s4_bbir3n": {
+   "dataset": "grid",
+   "ref": "bin blue in r three now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'VE BEEN BLOWING ARTHRITIS",
+    "torch": "I'VE BEEN BLOWING ART THREE NOW",
+    "fp32_b40": "I'VE BEEN BLOWING ART THREE NOW",
+    "fp32_b10": "I'VE BEEN BLOWING ARTHURIE NOW",
+    "fp32_greedy": "I'VE BEEN  BLOWING I THREE NOW",
+    "fp16_b10": "I'VE BEEN BLOWING ARTHURIE NOW",
+    "int8_b10": "I'VE BEEN BLEW IN I THREE NOW",
+    "q8_b10": "I'VE BEEN BLOWING ARTHURIE NOW",
+    "q4_b10": "I'VE BEEN BLOWING ARTHURIE NOW",
+    "q4f16_b10": "I'VE BEEN BLOWING ARTHURIE NOW"
+   }
+  },
+  "grid_s4_bbwz9n": {
+   "dataset": "grid",
+   "ref": "bin blue with z nine now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "OLYMPIAN BLUE IN THE SUNSET NOW",
+    "torch": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "fp32_b40": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "fp32_b10": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "fp32_greedy": "LIMBPING BLUE WITH THE SUN NECK DOWN",
+    "fp16_b10": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "int8_b10": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "q8_b10": "BIG BLUE WITH THE SUN'S NECK DOWN",
+    "q4_b10": "OLYMPIC BLUE IN THE SUN'S NIGHT NOW",
+    "q4f16_b10": "OLYMPIC BLUE IN THE SUN'S NIGHT NOW"
+   }
+  },
+  "grid_s4_bgbbza": {
+   "dataset": "grid",
+   "ref": "bin green by b zero again",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M BID TO READ MY B ZERO AGAIN",
+    "torch": "CLEAR BEAT GREEN BY A B ZERO AGAIN",
+    "fp32_b40": "CLEAR BEAT GREEN BY A B ZERO AGAIN",
+    "fp32_b10": "CLEAR BEAT GREEN BY A B ZERO AGAIN",
+    "fp32_greedy": "BI READ BY BE ZERO AGAIN",
+    "fp16_b10": "CLEAR BEAT GREEN BY A B ZERO AGAIN",
+    "int8_b10": "THE CLEAR BIT GREEN MIGHT BE ZERO AGAIN",
+    "q8_b10": "CLEAR BEAT GREEN BY A B ZERO AGAIN",
+    "q4_b10": "A BIT GREEN MIGHT BE ZERO AGAIN",
+    "q4f16_b10": "A BIT GREEN MIGHT BE ZERO AGAIN"
+   }
+  },
+  "grid_s4_bgim7n": {
+   "dataset": "grid",
+   "ref": "bin green in m seven now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PEDIGREE NUMBER SEVEN NOW",
+    "torch": "PICK GREEN AND M SEVEN NOW",
+    "fp32_b40": "PICK GREEN AND M SEVEN NOW",
+    "fp32_b10": "PICK GREEN AND M SEVEN NOW",
+    "fp32_greedy": "PICK GREET M SEVEN NOW",
+    "fp16_b10": "PICK GREEN AND M SEVEN NOW",
+    "int8_b10": "PICK GREEN AND M SEVEN NOW",
+    "q8_b10": "PICK GREEN AND M SEVEN NOW",
+    "q4_b10": "BIG GREEK M SEVEN NOW",
+    "q4f16_b10": "BIG GREEK M SEVEN NOW"
+   }
+  },
+  "grid_s4_bgwu3n": {
+   "dataset": "grid",
+   "ref": "bin green with u three now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M GOING TO READ WITH YOU THREE NOW",
+    "torch": "BUT AGREE WITH YOU THREE NOW",
+    "fp32_b40": "BUT AGREE WITH YOU THREE NOW",
+    "fp32_b10": "BUT AGREE WITH YOU THREE NOW",
+    "fp32_greedy": "I BUT AGREE WITH YOU OR THREE NOW",
+    "fp16_b10": "BUT AGREE WITH YOU THREE NOW",
+    "int8_b10": "BUT AGREE WITH YOU THREE NOW",
+    "q8_b10": "BUT AGREE WITH YOU THREE NOW",
+    "q4_b10": "BUT AGREE WITH YOU THREE NOW",
+    "q4f16_b10": "BUT AGREE WITH YOU THREE NOW"
+   }
+  },
+  "grid_s4_brbg1p": {
+   "dataset": "grid",
+   "ref": "bin red by g one please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M BEING READ BY G1 PLEASE",
+    "torch": "I'M BEING READ BY G1 PLEASE",
+    "fp32_b40": "I'M BEING READ BY G1 PLEASE",
+    "fp32_b10": "I'M BEING READ BY G1 PLEASE",
+    "fp32_greedy": "BEING RED BY G ONE PLEASE",
+    "fp16_b10": "I'M BEING READ BY G1 PLEASE",
+    "int8_b10": "I'M BEING READ BY G1 PLEASE",
+    "q8_b10": "I'M BEING READ BY G1 PLEASE",
+    "q4_b10": "BEING READ BY G1 PLEASE",
+    "q4f16_b10": "BEING READ BY G1 PLEASE"
+   }
+  },
+  "grid_s4_bris1p": {
+   "dataset": "grid",
+   "ref": "bin red in s one please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BE READY NEXT ONE PLEASE",
+    "torch": "BE READY NEXT ONE PLEASE",
+    "fp32_b40": "BE READY NEXT ONE PLEASE",
+    "fp32_b10": "BE READY NEXT ONE PLEASE",
+    "fp32_greedy": "BEING READY NEXT ONE PLEASE",
+    "fp16_b10": "BE READY NEXT ONE PLEASE",
+    "int8_b10": "BE READY NEXT ONE PLEASE",
+    "q8_b10": "BE READY NEXT ONE PLEASE",
+    "q4_b10": "BE READY NEXT ONE PLEASE",
+    "q4f16_b10": "BE READY NEXT ONE PLEASE"
+   }
+  },
+  "grid_s4_brwt3p": {
+   "dataset": "grid",
+   "ref": "bin red with t three please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'LL BE RIGHT WITH DECREE PLEASE",
+    "torch": "I'LL BE RED WITH T GREENBERG OK",
+    "fp32_b40": "I'LL BE RED WITH T GREENBERG OK",
+    "fp32_b10": "I'LL BE RED WITH T GREENBERG OK",
+    "fp32_greedy": "HAPPY RED WITH DE GREEN PLEASE",
+    "fp16_b10": "I'LL BE RED WITH T GREENBERG OK",
+    "int8_b10": "I'LL BE RED WITH T GREENBERG OK",
+    "q8_b10": "I'LL BE RED WITH T GREENBERG OK",
+    "q4_b10": "I'LL BE RED WITH DEAN GREENBERG OK",
+    "q4f16_b10": "I'LL BE RED WITH DEAN GREENBERG OK"
+   }
+  },
+  "grid_s4_bwbg6s": {
+   "dataset": "grid",
+   "ref": "bin white by g six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'VE BEEN WEARING BADGES NEXT TO YOU",
+    "torch": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "fp32_b40": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "fp32_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "fp32_greedy": "I BEEN WHITE BY G NEXT SOON",
+    "fp16_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "int8_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "q8_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "q4_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU",
+    "q4f16_b10": "I'VE BEEN WEIGHED BY CHEESE NEXT TO YOU"
+   }
+  },
+  "grid_s4_bwis6s": {
+   "dataset": "grid",
+   "ref": "bin white in s six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'D BE WILLING TO GET SICK SOON",
+    "torch": "I'D BE WILLING TO GET SICK SOON",
+    "fp32_b40": "I'D BE WILLING TO GET SICK SOON",
+    "fp32_b10": "I'D BE WILLING TO GET SICK SOON",
+    "fp32_greedy": "I BIT WHITE TO GET THINGS TOO",
+    "fp16_b10": "I'D BE WILLING TO GET SICK SOON",
+    "int8_b10": "I'D BE WILLING TO GET SICK SOON",
+    "q8_b10": "I'D BE WILLING TO GET SICK SOON",
+    "q4_b10": "I'D BE WILLING TO GET SICK SOON",
+    "q4f16_b10": "I'D BE WILLING TO GET SICK SOON"
+   }
+  },
+  "grid_s4_lbad3n": {
+   "dataset": "grid",
+   "ref": "lay blue at d three now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "HE BLEW IT IN THREE NOW",
+    "torch": "THEY BLEW THE T THREE NOW",
+    "fp32_b40": "THEY BLEW THE T THREE NOW",
+    "fp32_b10": "THEY BLEW THE T THREE NOW",
+    "fp32_greedy": "THEYBLEW AT T THREE NOW",
+    "fp16_b10": "THEY BLEW THE T THREE NOW",
+    "int8_b10": "HE BLEW THE D THREE NOW",
+    "q8_b10": "THEY BLEW THE T THREE NOW",
+    "q4_b10": "AND HE BLEW THE D THREE NOW",
+    "q4f16_b10": "AND HE BLEW THE D THREE NOW"
+   }
+  },
+  "grid_s4_lbbk1n": {
+   "dataset": "grid",
+   "ref": "lay blue by k one now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "HE BLEW BACK A ONE NOW",
+    "torch": "HE BLEW BACK A ONE NOW",
+    "fp32_b40": "HE BLEW BACK A ONE NOW",
+    "fp32_b10": "HE BLEW BY KATE ONE NOW",
+    "fp32_greedy": "HEBLE BACK K ONE NOW",
+    "fp16_b10": "HE BLEW BY KATE ONE NOW",
+    "int8_b10": "HE BLEW BY KATE ONE NOW",
+    "q8_b10": "HE BLEW BY KATE ONE NOW",
+    "q4_b10": "KEEP YOU BACK IN ONE NOW",
+    "q4f16_b10": "KEEP YOU BACK IN ONE NOW"
+   }
+  },
+  "grid_s4_lbip7n": {
+   "dataset": "grid",
+   "ref": "lay blue in p seven now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND HE BLEW IN B SEVEN NOW",
+    "torch": "I KEEP DOING B SEVEN NOW",
+    "fp32_b40": "I KEEP DOING B SEVEN NOW",
+    "fp32_b10": "I KEEP DOING B SEVEN NOW",
+    "fp32_greedy": "I HELOING B SEVEN NOW",
+    "fp16_b10": "I KEEP DOING B SEVEN NOW",
+    "int8_b10": "I KEEP DOING B SEVEN NOW",
+    "q8_b10": "I KEEP DOING B SEVEN NOW",
+    "q4_b10": "AND HE BLEW IT B SEVEN NOW",
+    "q4f16_b10": "AND HE BLEW IT B SEVEN NOW"
+   }
+  },
+  "grid_s4_lbwy3n": {
+   "dataset": "grid",
+   "ref": "lay blue with y three now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I KEEP ONLY ONE THREE NOW",
+    "torch": "KEEP ONLY ONE THREE NOW",
+    "fp32_b40": "KEEP ONLY ONE THREE NOW",
+    "fp32_b10": "KEEP ONLY ONE THREE NOW",
+    "fp32_greedy": "NI ONLY ONERE THREE NOW",
+    "fp16_b10": "KEEP ONLY ONE THREE NOW",
+    "int8_b10": "KEEP ONLY ONE THREE NOW",
+    "q8_b10": "KEEP ONLY ONE THREE NOW",
+    "q4_b10": "KEEP ONLY ONE THREE NOW",
+    "q4f16_b10": "KEEP ONLY ONE THREE NOW"
+   }
+  },
+  "grid_s4_lgbf5n": {
+   "dataset": "grid",
+   "ref": "lay green by f five now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I AGREE I HAVE FIVE NOW",
+    "torch": "LITERALLY MIGHT HAVE FIVE NOW",
+    "fp32_b40": "LITERALLY MIGHT HAVE FIVE NOW",
+    "fp32_b10": "LITERALLY MIGHT HAVE FIVE NOW",
+    "fp32_greedy": "LITERALLY MIGHT HAVE FIVE NOW",
+    "fp16_b10": "LITERALLY MIGHT HAVE FIVE NOW",
+    "int8_b10": "LITERALLY MIGHT HAVE FIVE NOW",
+    "q8_b10": "LITERALLY MIGHT HAVE FIVE NOW",
+    "q4_b10": "LITERALLY MIGHT HAVE FIVE NOW",
+    "q4f16_b10": "LITERALLY MIGHT HAVE FIVE NOW"
+   }
+  },
+  "grid_s4_lgil2s": {
+   "dataset": "grid",
+   "ref": "lay green in l two soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "ARE YOU REALLY YOUNG TOO SOON",
+    "torch": "ARE YOU REALLY YOUNG TOO SOON",
+    "fp32_b40": "ARE YOU REALLY YOUNG TOO SOON",
+    "fp32_b10": "ARE YOU REALLY YOUNG TOO SOON",
+    "fp32_greedy": "ARE YOU REALLY YOUNG TOO SUIT",
+    "fp16_b10": "ARE YOU REALLY YOUNG TOO SOON",
+    "int8_b10": "ARE YOU REALLY YOUNG TOO SOON",
+    "q8_b10": "ARE YOU REALLY YOUNG TOO SOON",
+    "q4_b10": "ARE YOU REALLY GETTING TOO SOON",
+    "q4f16_b10": "ARE YOU REALLY GETTING TOO SOON"
+   }
+  },
+  "grid_s4_lgws8s": {
+   "dataset": "grid",
+   "ref": "lay green with s eight soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I AGREE WITH THAT TASTE",
+    "torch": "I AGREE WITH THAT DATE SOON",
+    "fp32_b40": "I AGREE WITH THAT DATE SOON",
+    "fp32_b10": "I AGREE WITH THAT DATE SOON",
+    "fp32_greedy": "HE AGREED WITH THAT DAY SOON",
+    "fp16_b10": "I AGREE WITH THAT DATE SOON",
+    "int8_b10": "I AGREE WITH THAT DATE SOON",
+    "q8_b10": "I AGREE WITH THAT DATE SOON",
+    "q4_b10": "HE AGREED WITH THAT DATE SOON",
+    "q4f16_b10": "HE AGREED WITH THAT DATE SOON"
+   }
+  },
+  "grid_s4_lrbe4s": {
+   "dataset": "grid",
+   "ref": "lay red by e four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND I READ BACK IN PHOTOS",
+    "torch": "AND I READ BACK IN PHOTOS",
+    "fp32_b40": "AND I READ BACK IN PHOTOS",
+    "fp32_b10": "AND I READ BACK IN PHOTOS",
+    "fp32_greedy": "AND I READ BACK IN FOS",
+    "fp16_b10": "AND I READ BACK IN PHOTOS",
+    "int8_b10": "AND I READ BACK IN PHOTOS",
+    "q8_b10": "AND I READ BACK IN PHOTOS",
+    "q4_b10": "AND I READ BACK HIS FORTUNES",
+    "q4f16_b10": "AND I READ BACK HIS PHOTOS"
+   }
+  },
+  "grid_s4_lrik1p": {
+   "dataset": "grid",
+   "ref": "lay red in k one please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "GET READY TO GET ONE COMPLETE",
+    "torch": "GET READY TO GET ONE COMPLETE",
+    "fp32_b40": "GET READY TO GET ONE COMPLETE",
+    "fp32_b10": "GET READY TO GET ONE COMPLETE",
+    "fp32_greedy": "THEY READY THE DAY ONE PLEASE",
+    "fp16_b10": "GET READY TO GET ONE COMPLETE",
+    "int8_b10": "GET READY TO GET ONE COMPLETE",
+    "q8_b10": "GET READY TO GET ONE COMPLETE",
+    "q4_b10": "GET READY TO GET ONE COMPLETE",
+    "q4f16_b10": "GET READY TO GET ONE COMPLETE"
+   }
+  },
+  "grid_s4_lrwr6s": {
+   "dataset": "grid",
+   "ref": "lay red with r six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND HE RAN WITH THE IDEA TOO",
+    "torch": "ER HE RAN WITH IDEAS TOO I",
+    "fp32_b40": "ER HE RAN WITH IDEAS TOO I",
+    "fp32_b10": "ER HE RAN WITH IDEAS TOO I",
+    "fp32_greedy": "HE READ WITH I THINGSS TOO",
+    "fp16_b10": "ER HE RAN WITH IDEAS TOO I",
+    "int8_b10": "ER HE RAN WITH IDEAS TOO I",
+    "q8_b10": "ER HE RAN WITH IDEAS TOO I",
+    "q4_b10": "ER HE RAN WITH IDEAS TOO",
+    "q4f16_b10": "HE RAN WITH IDEAS TOO I"
+   }
+  },
+  "grid_s4_lway8s": {
+   "dataset": "grid",
+   "ref": "lay white at y eight soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND THEN WHY DO YOU WANT TO",
+    "torch": "AND THEN WHY DID WHY GET INTO",
+    "fp32_b40": "AND THEN WHY DID WHY GET INTO",
+    "fp32_b10": "AND THEN WHY DID WHY GET IT TOO",
+    "fp32_greedy": "DID WHITE TOO",
+    "fp16_b10": "AND THEN WHY DID WHY GET IT TOO",
+    "int8_b10": "YEAH WHY DID I GET IT TOO WELL",
+    "q8_b10": "AND THEN WHY DID WHY GET IT TOO",
+    "q4_b10": "AND THEN WHY DID WHY GET IT TOO",
+    "q4f16_b10": "AND THEN WHY DID WHY GET IT TOO"
+   }
+  },
+  "grid_s4_lwie2s": {
+   "dataset": "grid",
+   "ref": "lay white in e two soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND WHY DID HE DO SO",
+    "torch": "AND WHY DID HE DO SO",
+    "fp32_b40": "AND WHY DID HE DO SO",
+    "fp32_b10": "AND WHY DID HE DO SO",
+    "fp32_greedy": "AND WHY DID HE TWO SUITS",
+    "fp16_b10": "AND WHY DID HE DO SO",
+    "int8_b10": "AND WHY DID HE DO SO",
+    "q8_b10": "AND WHY DID HE DO SO",
+    "q4_b10": "AND WHY DID HE DO SO",
+    "q4f16_b10": "AND WHY DID HE DO SO"
+   }
+  },
+  "grid_s4_lwwl8s": {
+   "dataset": "grid",
+   "ref": "lay white with l eight soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND I'M WORKING WITH ALEX SO",
+    "torch": "AND KEEP WORKING WITH OUR LADIES TOO OK",
+    "fp32_b40": "AND KEEP WORKING WITH OUR LADIES TOO OK",
+    "fp32_b10": "AND KEEP WORKING WITH OUR LADIES TOO OK",
+    "fp32_greedy": "KEEP WELL WITH THAT LATE SO",
+    "fp16_b10": "AND KEEP WORKING WITH OUR LADIES TOO OK",
+    "int8_b10": "UH KEEP WORKING WITH OUR LEGS SO",
+    "q8_b10": "AND KEEP WORKING WITH OUR LADIES TOO OK",
+    "q4_b10": "UH KEEP WORKING WITH OUR LADIES TOO",
+    "q4f16_b10": "UH KEEP WORKING WITH OUR LADIES TOO"
+   }
+  },
+  "grid_s4_pbao6s": {
+   "dataset": "grid",
+   "ref": "place blue at o six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLAY THE PROGNOSTIC SOON",
+    "torch": "PLAY THE POET O SINGER SOON",
+    "fp32_b40": "PLAY THE POET O SINGER SOON",
+    "fp32_b10": "PLAY THE POET O SINGER SOON",
+    "fp32_greedy": "PLAY THE POETTOING SOON",
+    "fp16_b10": "PLAY THE POET O SINGER SOON",
+    "int8_b10": "PLACEBO AT HOSTING SOON",
+    "q8_b10": "PLAY THE POET O SINGER SOON",
+    "q4_b10": "PLACEBO AT HOSTING SOON",
+    "q4f16_b10": "PLACEBO AT HOSTING SOON"
+   }
+  },
+  "grid_s4_pbbv4s": {
+   "dataset": "grid",
+   "ref": "place blue by v four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BUT IT'S BLUEBERRY FEVER SO",
+    "torch": "BUT IT'S BLUE BY FEET FOR SO",
+    "fp32_b40": "BUT IT'S BLUE BY FEET FOR SO",
+    "fp32_b10": "BUT IT'S BLUE BY FEET FOR SO",
+    "fp32_greedy": "BUT BLUE BY FEET FOUR SO",
+    "fp16_b10": "BUT IT'S BLUE BY FEET FOR SO",
+    "int8_b10": "BUT IT'S BLUE BY FEET FOR SO",
+    "q8_b10": "BUT IT'S BLUE BY FEET FOR SO",
+    "q4_b10": "BUT IT'S BLUE BY FEET FOR SO",
+    "q4f16_b10": "BUT IT'S BLUE BY FEET FOR SO"
+   }
+  },
+  "grid_s4_pbwc6s": {
+   "dataset": "grid",
+   "ref": "place blue with c six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLEASE BOOK ONE'S DETAILS",
+    "torch": "PLEASE BEAR WITH DETAILS",
+    "fp32_b40": "PLEASE BEAR WITH DETAILS",
+    "fp32_b10": "PLEASE BEAR WITH DETAILS",
+    "fp32_greedy": "PLEASE BE WITH C DETAILS",
+    "fp16_b10": "PLEASE BEAR WITH DETAILS",
+    "int8_b10": "PLEASE BEAR WITH DETAILS",
+    "q8_b10": "PLEASE BEAR WITH DETAILS",
+    "q4_b10": "PLEASE BLOW WITH DETAILS",
+    "q4f16_b10": "PLEASE BLOW WITH DETAILS"
+   }
+  },
+  "grid_s4_pgak1p": {
+   "dataset": "grid",
+   "ref": "place green at k one please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLEASE READ IT AGAIN PLEASE",
+    "torch": "PLEASE GREET HER K ONE PLEASE",
+    "fp32_b40": "PLEASE GREET HER K ONE PLEASE",
+    "fp32_b10": "PLEASE GREET HER K ONE PLEASE",
+    "fp32_greedy": "PLEASE READ K ONE PLEASE",
+    "fp16_b10": "PLEASE GREET HER K ONE PLEASE",
+    "int8_b10": "PLEASE GREET HER K ONE PLEASE",
+    "q8_b10": "PLEASE GREET HER K ONE PLEASE",
+    "q4_b10": "PLEASE AGREE OK ONE PLEASE",
+    "q4f16_b10": "PLEASE AGREE OK ONE PLEASE"
+   }
+  },
+  "grid_s4_pgbq8s": {
+   "dataset": "grid",
+   "ref": "place green by q eight soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "INTEGRATED BY THE U S",
+    "torch": "INTEGRATED BY THE U N STUDENT",
+    "fp32_b40": "INTEGRATED BY THE U N STUDENT",
+    "fp32_b10": "INTEGRATED BY THE U N STUDENT",
+    "fp32_greedy": "AGREED BY THE U S STUDENTS",
+    "fp16_b10": "INTEGRATED BY THE U N STUDENT",
+    "int8_b10": "INTEGRATED BY THE U N STUDENT",
+    "q8_b10": "INTEGRATED BY THE U N STUDENT",
+    "q4_b10": "UM INTEGRATED BY THE U S",
+    "q4f16_b10": "UM INTEGRATED BY THE U S"
+   }
+  },
+  "grid_s4_pgix4s": {
+   "dataset": "grid",
+   "ref": "place green in x four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M PAINTER IN THE X FORTITUDE",
+    "torch": "I'M PAINTER IN THE X FOUR SUIT",
+    "fp32_b40": "I'M PAINTER IN THE X FOUR SUIT",
+    "fp32_b10": "I'M PAINTER IN THE X FOUR SUIT I",
+    "fp32_greedy": "PAINT IN X FOUR SUIT",
+    "fp16_b10": "AND I'M PAINTER IN THE X FORTITUDE",
+    "int8_b10": "I'M PAINTER IN THE X FORTITUDE",
+    "q8_b10": "I'M PAINTER IN THE X FOUR SUIT I",
+    "q4_b10": "I'M PAINTER IN THE ACT OF FOX NEWS",
+    "q4f16_b10": "AND I'M PAINTER IN THE ACT OF FORTUNE YES"
+   }
+  },
+  "grid_s4_prac4s": {
+   "dataset": "grid",
+   "ref": "place red at c four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "PLAYS REGULARLY FOR TWO",
+    "torch": "PLAY THE REGULAR C FOUR TWO",
+    "fp32_b40": "PLAY THE REGULAR C FOUR TWO",
+    "fp32_b10": "PLAY THE REGULAR C FOUR TWO",
+    "fp32_greedy": "PLACE REGULAR FOUR TWO",
+    "fp16_b10": "PLAY THE REGULAR C FOUR TWO",
+    "int8_b10": "PLACE READY TO SEE FOUR SUITS",
+    "q8_b10": "PLAY THE REGULAR C FOUR TWO",
+    "q4_b10": "PLAY YOUR REGULAR C FOUR TWO",
+    "q4f16_b10": "PLAY YOUR REGULAR C FOUR TWO"
+   }
+  },
+  "grid_s4_prbj2s": {
+   "dataset": "grid",
+   "ref": "place red by j two soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'M GOING TO READ BEIJING NEWS",
+    "torch": "I AM GOING TO READ BACK JANE HUGHES",
+    "fp32_b40": "I AM GOING TO READ BACK JANE HUGHES",
+    "fp32_b10": "I AM GOING TO READ BACK JANE HUGHES AND",
+    "fp32_greedy": "PLAY READ BY JANE NEWS SUIT",
+    "fp16_b10": "I AM GOING TO READ BACK JANE HUGHES AND",
+    "int8_b10": "I AM GOING TO READ BACK JANE HUGHES AND",
+    "q8_b10": "I AM GOING TO READ BACK JANE HUGHES AND",
+    "q4_b10": "I'M GOING TO READ BACK JANE NEWTON",
+    "q4f16_b10": "I'M GOING TO READ BACK JANE NEWTON"
+   }
+  },
+  "grid_s4_prio8s": {
+   "dataset": "grid",
+   "ref": "place red in o eight soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "ARE YOU READY TO GO OUT OF SCHOOL",
+    "torch": "I'D ALREADY KNOW HOW TO",
+    "fp32_b40": "I'D ALREADY KNOW HOW TO",
+    "fp32_b10": "UM I'D ALREADY KNOW HOW TO",
+    "fp32_greedy": "I RADIO GO A TO",
+    "fp16_b10": "UM I'D ALREADY KNOW HOW TO",
+    "int8_b10": "I'D ALREADY KNOW ALICE COOPER WELL",
+    "q8_b10": "UM I'D ALREADY KNOW HOW TO",
+    "q4_b10": "UM ARE YOU READY TO GO OUT AT SCHOOL",
+    "q4f16_b10": "UM ARE YOU READY TO GO OUT AT SCHOOL"
+   }
+  },
+  "grid_s4_prwx4s": {
+   "dataset": "grid",
+   "ref": "place red with x four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'LL PLAY THE RING WITHOUT THE FIRST TWO",
+    "torch": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "fp32_b40": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "fp32_b10": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "fp32_greedy": "PLAY YOU RING WITH WITHOUT FIRST TOO",
+    "fp16_b10": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "int8_b10": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "q8_b10": "PLAY THE RING WITHOUT THE FORCE TOO",
+    "q4_b10": "I PLAYED A RING WITHOUT THE FIRST TWO",
+    "q4f16_b10": "PLAY THE RING WITHOUT THE FIRST TWO"
+   }
+  },
+  "grid_s4_pwbd4s": {
+   "dataset": "grid",
+   "ref": "place white by d four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "AND I PAINT ONE PAINTING FIRST",
+    "torch": "AND I PAINT WHITE PAINTING FIRST",
+    "fp32_b40": "AND I PAINT WHITE PAINTING FIRST",
+    "fp32_b10": "AND I PAINT WHITE PAINTING FIRST",
+    "fp32_greedy": "I PAINT WHITE PAINTING FIRST",
+    "fp16_b10": "AND I PAINT WHITE PAINTING FIRST",
+    "int8_b10": "AND I PAINT WHITE PAINTING FIRST",
+    "q8_b10": "AND I PAINT WHITE PAINTING FIRST",
+    "q4_b10": "AND I PAINT WHITE PAINTING FIRST",
+    "q4f16_b10": "AND I PAINT WHITE PAINTING FIRST"
+   }
+  },
+  "grid_s4_pwij1p": {
+   "dataset": "grid",
+   "ref": "place white in j one please",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "BET Y D J ONE PLEASE",
+    "torch": "BET Y DID J ONE PLEASE",
+    "fp32_b40": "BET Y DID J ONE PLEASE",
+    "fp32_b10": "BET Y DID J ONE PLEASE",
+    "fp32_greedy": "BEY DID J ONE PLEASE",
+    "fp16_b10": "BET Y DID J ONE PLEASE",
+    "int8_b10": "BET Y D J ONCE PLEASE",
+    "q8_b10": "BET Y DID J ONE PLEASE",
+    "q4_b10": "BET WHY DID J1 PLEASE",
+    "q4f16_b10": "BET WHY DID J1 PLEASE"
+   }
+  },
+  "grid_s4_pwwq6s": {
+   "dataset": "grid",
+   "ref": "place white with q six soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "HE'S WORKING WITH ACOUSTICS",
+    "torch": "HE'S WELL WITH ACOUSTIC SUIT",
+    "fp32_b40": "HE'S WELL WITH ACOUSTIC SUIT",
+    "fp32_b10": "HE'S WELL WITH ACOUSTIC SUIT I",
+    "fp32_greedy": "IT WAY WITH ACOUSTIC SUIT",
+    "fp16_b10": "HE'S WELL WITH ACOUSTIC SUIT I",
+    "int8_b10": "HE'S WELL WITH ACOUSTIC SUIT",
+    "q8_b10": "HE'S WELL WITH ACOUSTIC SUIT I",
+    "q4_b10": "HE'S AWAY WITH ACOUSTICS",
+    "q4f16_b10": "HE'S AWAY WITH ACOUSTICS"
+   }
+  },
+  "grid_s4_sbat4s": {
+   "dataset": "grid",
+   "ref": "set blue at t four soon",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS AMBIGUITY FOR YOU",
+    "torch": "IS THAT BLOATED FOR SOON",
+    "fp32_b40": "IS THAT BLOATED FOR SOON",
+    "fp32_b10": "IS THAT BLOATED FOR SOON",
+    "fp32_greedy": "IS DELO KEY FOR SOON",
+    "fp16_b10": "IS THAT BLOATED FOR SOON",
+    "int8_b10": "IS THAT BLOATED FOR SOON",
+    "q8_b10": "IS THAT BLOATED FOR SOON",
+    "q4_b10": "IS THAT BLOATED FOR SOON",
+    "q4f16_b10": "IS THAT BLOATED FOR SOON"
+   }
+  },
+  "grid_s4_sbig1n": {
+   "dataset": "grid",
+   "ref": "set blue in g one now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT BREWING SHE WANTS NOW",
+    "torch": "IS THAT BREWING SHE WANTS NOW",
+    "fp32_b40": "IS THAT BREWING SHE WANTS NOW",
+    "fp32_b10": "IS THAT BREWING SHE WANTS NOW",
+    "fp32_greedy": "TEMPING G WANT NOW",
+    "fp16_b10": "IS THAT BREWING SHE WANTS NOW",
+    "int8_b10": "IS THAT BREWING SHE WANTS NOW",
+    "q8_b10": "IS THAT BREWING SHE WANTS NOW",
+    "q4_b10": "IS THAT BREWING SHE WANTS NOW",
+    "q4f16_b10": "IS THAT BREWING SHE WANTS NOW"
+   }
+  },
+  "grid_s4_sbwn7n": {
+   "dataset": "grid",
+   "ref": "set blue with n seven now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I'D SAY BLUE WITH EIGHT SEVEN NOW",
+    "torch": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "fp32_b40": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "fp32_b10": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "fp32_greedy": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "fp16_b10": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "int8_b10": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "q8_b10": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "q4_b10": "I SAY BLUE WITH EIGHT SEVEN NOW",
+    "q4f16_b10": "I SAY BLUE WITH EIGHT SEVEN NOW"
+   }
+  },
+  "grid_s4_sgav1n": {
+   "dataset": "grid",
+   "ref": "set green at v one now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT GREEN FREE ONE NOW",
+    "torch": "IS THAT GREEN V1 NOW",
+    "fp32_b40": "IS THAT GREEN V1 NOW",
+    "fp32_b10": "IS THAT GREEN V1 NOW",
+    "fp32_greedy": "IS THAT GREEN FREE ONE NOW",
+    "fp16_b10": "IS THAT GREEN V1 NOW",
+    "int8_b10": "IS THAT GREEN V1 NOW",
+    "q8_b10": "IS THAT GREEN V1 NOW",
+    "q4_b10": "IS THAT GREEN V1 NOW",
+    "q4f16_b10": "IS THAT GREEN V1 NOW"
+   }
+  },
+  "grid_s4_sgib5n": {
+   "dataset": "grid",
+   "ref": "set green in b five now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT THREE MP FIVE NOW",
+    "torch": "IS THAT THREE MP FIVE NOW",
+    "fp32_b40": "IS THAT THREE MP FIVE NOW",
+    "fp32_b10": "IS THAT THREE MP FIVE NOW",
+    "fp32_greedy": "THAT 3 M P FIVE NOW",
+    "fp16_b10": "IS THAT THREE MP FIVE NOW",
+    "int8_b10": "IS THAT THREE MP FIVE NOW",
+    "q8_b10": "IS THAT THREE MP FIVE NOW",
+    "q4_b10": "IS THAT THREE MP FIVE NOW",
+    "q4f16_b10": "IS THAT THREE MP FIVE NOW"
+   }
+  },
+  "grid_s4_sgwj1n": {
+   "dataset": "grid",
+   "ref": "set green with j one now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "I AGREE WITH J ONE NOW",
+    "torch": "AND I AGREE WITH J ONE NOW",
+    "fp32_b40": "AND I AGREE WITH J ONE NOW",
+    "fp32_b10": "AND I AGREE WITH J ONE NOW",
+    "fp32_greedy": "IS I AGREE WITH J ONE NOW",
+    "fp16_b10": "AND I AGREE WITH J ONE NOW",
+    "int8_b10": "AND I AGREE WITH J ONE NOW",
+    "q8_b10": "AND I AGREE WITH J ONE NOW",
+    "q4_b10": "AND I AGREE WITH J ONE NOW",
+    "q4f16_b10": "AND I AGREE WITH J ONE NOW"
+   }
+  },
+  "grid_s4_sran5n": {
+   "dataset": "grid",
+   "ref": "set red at n five now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT RATHER THAN FIVE NOW",
+    "torch": "SO RATHER TAKE FIVE NOW",
+    "fp32_b40": "SO RATHER TAKE FIVE NOW",
+    "fp32_b10": "SO RATHER TAKE FIVE NOW",
+    "fp32_greedy": "I RATHER 10 FIVE NOW",
+    "fp16_b10": "SO RATHER TAKE FIVE NOW",
+    "int8_b10": "SO RATHER TAKE FIVE NOW",
+    "q8_b10": "SO RATHER TAKE FIVE NOW",
+    "q4_b10": "SO RATHER TAKE FIVE NOW",
+    "q4f16_b10": "SO RATHER TAKE FIVE NOW"
+   }
+  },
+  "grid_s4_srbu3n": {
+   "dataset": "grid",
+   "ref": "set red by u three now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT RIGHT BACK IN YOUR THREE NOW",
+    "torch": "IS THAT RED BLOODED ON THREE NOW",
+    "fp32_b40": "IS THAT RED BLOODED ON THREE NOW",
+    "fp32_b10": "IS THAT RED BLOODED ON THREE NOW",
+    "fp32_greedy": "IS THAT RED BY ON THREE NOW",
+    "fp16_b10": "IS THAT RED BLOODED ON THREE NOW",
+    "int8_b10": "IS THAT RED BLOODED ON THREE NOW",
+    "q8_b10": "IS THAT RED BLOODED ON THREE NOW",
+    "q4_b10": "IS THAT RED PLANET THREE NOW",
+    "q4f16_b10": "IS THAT RED PLANET THREE NOW"
+   }
+  },
+  "grid_s4_srwb5n": {
+   "dataset": "grid",
+   "ref": "set red with b five now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "IS THAT RIGHT WITH B FIVE NOW",
+    "torch": "IS THAT RIGHT WITH B FIVE NOW",
+    "fp32_b40": "IS THAT RIGHT WITH B FIVE NOW",
+    "fp32_b10": "IS THAT RIGHT WITH B FIVE NOW",
+    "fp32_greedy": "THAT RED WITH B FIVE NOW",
+    "fp16_b10": "IS THAT RIGHT WITH B FIVE NOW",
+    "int8_b10": "IS THAT RIGHT WITH B FIVE NOW",
+    "q8_b10": "IS THAT RIGHT WITH B FIVE NOW",
+    "q4_b10": "IS THAT RIGHT WITH B FIVE NOW",
+    "q4f16_b10": "IS THAT RIGHT WITH B FIVE NOW"
+   }
+  },
+  "grid_s4_swah7n": {
+   "dataset": "grid",
+   "ref": "set white at h seven now",
+   "frames": 74,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 74,
+    "max_faces": 1,
+    "tracked_frames": 74
+   },
+   "hyp": {
+    "torch_lm": "I SAID WHY DID AGE SEVENTEEN",
+    "torch": "SO WHY DID AGE SEVENTEEN",
+    "fp32_b40": "SO WHY DID AGE SEVENTEEN",
+    "fp32_b10": "SO WHY DID AGE SEVENTEEN",
+    "fp32_greedy": "SAID WHY DID AGE SEVEN DAY",
+    "fp16_b10": "SO WHY DID AGE SEVENTEEN",
+    "int8_b10": "SO WHY DID AGE SEVENTEEN",
+    "q8_b10": "SO WHY DID AGE SEVENTEEN",
+    "q4_b10": "SO WHY DID EACH SEVEN DAY",
+    "q4f16_b10": "SO WHY DID EACH SEVEN DAY"
+   }
+  },
+  "grid_s4_swbo5n": {
+   "dataset": "grid",
+   "ref": "set white by o five now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "THEN WHY ARE YOU FIVE NOW",
+    "torch": "THEN WHY ABOUT YOU FIVE NOW",
+    "fp32_b40": "THEN WHY ABOUT YOU FIVE NOW",
+    "fp32_b10": "THEN WHY ABOUT YOU FIVE NOW",
+    "fp32_greedy": "THAT WAY ABOUT YOU FIVE NOW",
+    "fp16_b10": "THEN WHY ABOUT YOU FIVE NOW",
+    "int8_b10": "THEN WHY ABOUT YOU FIVE NOW",
+    "q8_b10": "THEN WHY ABOUT YOU FIVE NOW",
+    "q4_b10": "IS THAT WHY ABOUT YOU FIVE NOW",
+    "q4f16_b10": "IS THAT WHY ABOUT YOU FIVE NOW"
+   }
+  },
+  "grid_s4_swiu1n": {
+   "dataset": "grid",
+   "ref": "set white in u one now",
+   "frames": 75,
+   "info": {
+    "fps_in": 25.0,
+    "frames": 75,
+    "max_faces": 1,
+    "tracked_frames": 75
+   },
+   "hyp": {
+    "torch_lm": "WHY DID YOU WANT NOW",
+    "torch": "IS THAT WHERE DID YOU WANT NOW",
+    "fp32_b40": "IS THAT WHERE DID YOU WANT NOW",
+    "fp32_b10": "IS THAT WHERE DID YOU WANT NOW",
+    "fp32_greedy": "THAT WHY DID YOU WANT NOW",
+    "fp16_b10": "IS THAT WHERE DID YOU WANT NOW",
+    "int8_b10": "IS THAT WHERE DID YOU WANT NOW",
+    "q8_b10": "IS THAT WHERE DID YOU WANT NOW",
+    "q4_b10": "IS THAT WHERE DID YOU WANT NOW",
+    "q4f16_b10": "IS THAT WHERE DID YOU WANT NOW"
+   }
+  }
+ },
+ "variants": {
+  "torch_lm": {
+   "size_mb": null,
+   "mean_s": 4.685780769108096
+  },
+  "torch": {
+   "size_mb": null,
+   "mean_s": 1.7992373016721104
+  },
+  "fp32_b40": {
+   "size_mb": 1026.572103,
+   "mean_s": 4.8394920562428885
+  },
+  "fp32_b10": {
+   "size_mb": 1026.572103,
+   "mean_s": 1.5102657633577474
+  },
+  "fp32_greedy": {
+   "size_mb": 1026.572103,
+   "mean_s": 0.47370256873895417
+  },
+  "fp16_b10": {
+   "size_mb": 513.564884,
+   "mean_s": 1.4367266232671683
+  },
+  "int8_b10": {
+   "size_mb": 324.30888,
+   "mean_s": 0.6852852091600653
+  },
+  "q8_b10": {
+   "size_mb": 363.156786,
+   "mean_s": 1.9428682695701718
+  },
+  "q4_b10": {
+   "size_mb": 247.775032,
+   "mean_s": 1.4160499428701587
+  },
+  "q4f16_b10": {
+   "size_mb": 181.871878,
+   "mean_s": 1.698324875420658
+  }
+ }
+}

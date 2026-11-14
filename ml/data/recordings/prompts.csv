@@ -1,0 +1,33 @@
+id,category,text
+r01,short,thank you very much
+r02,short,good morning everyone
+r03,short,see you tomorrow
+r04,short,where are you going
+r05,short,i don't know
+r06,short,can you hear me
+r07,short,that sounds great
+r08,short,please call me back
+r09,command,start recording now
+r10,command,turn off the lights
+r11,command,open the front door
+r12,command,read my lips
+r13,conversation,i think we should get lunch before the meeting
+r14,conversation,the weather has been really nice this week
+r15,conversation,did you finish the homework for tomorrow
+r16,conversation,my phone battery is almost dead
+r17,conversation,we are going to the beach on saturday
+r18,conversation,can you send me the link to that video
+r19,conversation,i was late because the train was delayed
+r20,conversation,let me know when you get home
+r21,talk,today i want to talk about how we learn new things
+r22,talk,most people never think about the way they breathe
+r23,talk,the most important thing is to keep trying
+r24,talk,this idea changed the way i think about the world
+r25,talk,we can solve this problem if we work together
+r26,numbers,my number is five five five one two three four
+r27,numbers,the meeting starts at three thirty
+r28,numbers,there are twenty four hours in a day
+r29,lipshape,peter picked a pair of purple boots
+r30,lipshape,we moved the boxes from the van
+r31,lipshape,the big brown bear ate my muffin
+r32,long,when i was a child i wanted to be an astronaut but now i build websites

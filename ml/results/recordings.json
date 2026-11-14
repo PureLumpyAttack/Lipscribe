@@ -1,0 +1,2254 @@
+{
+ "clips": {
+  "rec_jiacai_r01": {
+   "dataset": "recordings/jiacai",
+   "ref": "thank you very much",
+   "frames": 46,
+   "info": {
+    "fps_in": 29.986,
+    "frames": 46,
+    "max_faces": 1,
+    "tracked_frames": 46
+   },
+   "hyp": {
+    "torch_lm": "THANK YOU VERY MUCH",
+    "torch": "THANK YOU VERY MUCH",
+    "fp32_b40": "THANK YOU VERY MUCH",
+    "fp32_b10": "THANK YOU VERY MUCH",
+    "fp32_greedy": "THANK YOU VERY MUCH",
+    "fp16_b10": "THANK YOU VERY MUCH",
+    "int8_b10": "THANK YOU VERY MUCH",
+    "q8_b10": "THANK YOU VERY MUCH",
+    "q4_b10": "THANK YOU VERY MUCH",
+    "q4f16_b10": "THANK YOU VERY MUCH"
+   }
+  },
+  "rec_jiacai_r02": {
+   "dataset": "recordings/jiacai",
+   "ref": "good morning everyone",
+   "frames": 72,
+   "info": {
+    "fps_in": 29.992,
+    "frames": 72,
+    "max_faces": 1,
+    "tracked_frames": 72
+   },
+   "hyp": {
+    "torch_lm": "I KNOW THAT MORE AND MORE THAN EVERYONE",
+    "torch": "GOOD MORNING EVERYONE",
+    "fp32_b40": "GOOD MORNING EVERYONE",
+    "fp32_b10": "MORE AND MORE THAN EVERYONE",
+    "fp32_greedy": "LIKE MORE MORNING EVERYONE",
+    "fp16_b10": "MORE AND MORE THAN EVERYONE",
+    "int8_b10": "MORE AND MORE THAN EVERYONE",
+    "q8_b10": "MORE AND MORE THAN EVERYONE",
+    "q4_b10": "YOU KNOW LIKE MORE AND MORE THAN EVERYONE",
+    "q4f16_b10": "YOU KNOW LIKE MORE AND MORE THAN EVERYONE"
+   }
+  },
+  "rec_jiacai_r03": {
+   "dataset": "recordings/jiacai",
+   "ref": "see you tomorrow",
+   "frames": 35,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "TO MORROW",
+    "torch": "FIX IT TO MORROW",
+    "fp32_b40": "FIX IT TO MORROW",
+    "fp32_b10": "FIX IT TO MORROW",
+    "fp32_greedy": "THIS MOROW",
+    "fp16_b10": "FIX IT TO MORROW",
+    "int8_b10": "FIX IT TO MORROW",
+    "q8_b10": "FIX IT TO MORROW",
+    "q4_b10": "FIX IT TO MORROW",
+    "q4f16_b10": "FIX IT TO MORROW"
+   }
+  },
+  "rec_jiacai_r04": {
+   "dataset": "recordings/jiacai",
+   "ref": "where are you going",
+   "frames": 37,
+   "info": {
+    "fps_in": 29.993,
+    "frames": 37,
+    "max_faces": 1,
+    "tracked_frames": 37
+   },
+   "hyp": {
+    "torch_lm": "WE ALL KNOW IT",
+    "torch": "WE ALL KNOW IT",
+    "fp32_b40": "WE ALL KNOW IT",
+    "fp32_b10": "WE ALL KNOW IT",
+    "fp32_greedy": "WE KNOW",
+    "fp16_b10": "WE ALL KNOW IT",
+    "int8_b10": "WE ALL KNOW IT",
+    "q8_b10": "WE ALL KNOW IT",
+    "q4_b10": "WE ALL KNOW IT",
+    "q4f16_b10": "WE ALL KNOW IT"
+   }
+  },
+  "rec_jiacai_r05": {
+   "dataset": "recordings/jiacai",
+   "ref": "i don't know",
+   "frames": 30,
+   "info": {
+    "fps_in": 29.993,
+    "frames": 30,
+    "max_faces": 1,
+    "tracked_frames": 30
+   },
+   "hyp": {
+    "torch_lm": "I DON'T KNOW",
+    "torch": "I DON'T KNOW",
+    "fp32_b40": "I DON'T KNOW",
+    "fp32_b10": "I DON'T KNOW",
+    "fp32_greedy": "I DON'T KNOW",
+    "fp16_b10": "I DON'T KNOW",
+    "int8_b10": "I DON'T KNOW",
+    "q8_b10": "I DON'T KNOW",
+    "q4_b10": "I DON'T KNOW",
+    "q4f16_b10": "I DON'T KNOW"
+   }
+  },
+  "rec_jiacai_r06": {
+   "dataset": "recordings/jiacai",
+   "ref": "can you hear me",
+   "frames": 34,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 34,
+    "max_faces": 1,
+    "tracked_frames": 34
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU HEAR ME",
+    "torch": "CAN YOU HEAR ME",
+    "fp32_b40": "CAN YOU HEAR ME",
+    "fp32_b10": "CAN YOU HEAR ME",
+    "fp32_greedy": "CAN YOU AT ME",
+    "fp16_b10": "CAN YOU HEAR ME",
+    "int8_b10": "CAN YOU HEAR ME",
+    "q8_b10": "CAN YOU HEAR ME",
+    "q4_b10": "CAN YOU HEAR ME",
+    "q4f16_b10": "CAN YOU HEAR ME"
+   }
+  },
+  "rec_jiacai_r07": {
+   "dataset": "recordings/jiacai",
+   "ref": "that sounds great",
+   "frames": 36,
+   "info": {
+    "fps_in": 29.992,
+    "frames": 36,
+    "max_faces": 1,
+    "tracked_frames": 36
+   },
+   "hyp": {
+    "torch_lm": "THAT SOUNDS GREAT",
+    "torch": "THAT SOUNDS GREAT",
+    "fp32_b40": "THAT SOUNDS GREAT",
+    "fp32_b10": "THAT SOUNDS GREAT",
+    "fp32_greedy": "THAT SOUNDS GREAT",
+    "fp16_b10": "THAT SOUNDS GREAT",
+    "int8_b10": "THAT SOUNDS GREAT",
+    "q8_b10": "THAT SOUNDS GREAT",
+    "q4_b10": "THAT SOUNDS GREAT",
+    "q4f16_b10": "THAT SOUNDS GREAT"
+   }
+  },
+  "rec_jiacai_r08": {
+   "dataset": "recordings/jiacai",
+   "ref": "please call me back",
+   "frames": 41,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 41,
+    "max_faces": 1,
+    "tracked_frames": 41
+   },
+   "hyp": {
+    "torch_lm": "PLEASE HOLD ME BACK",
+    "torch": "PLEASE HOLD ME BACK",
+    "fp32_b40": "PLEASE HOLD ME BACK",
+    "fp32_b10": "PLEASE HOLD ME BACK",
+    "fp32_greedy": "PLEASE TELL ME BACK",
+    "fp16_b10": "PLEASE HOLD ME BACK",
+    "int8_b10": "PLEASE HELP ME BACK",
+    "q8_b10": "PLEASE HOLD ME BACK",
+    "q4_b10": "PLEASE HELP ME BACK",
+    "q4f16_b10": "PLEASE HELP ME BACK"
+   }
+  },
+  "rec_jiacai_r09": {
+   "dataset": "recordings/jiacai",
+   "ref": "start recording now",
+   "frames": 42,
+   "info": {
+    "fps_in": 29.994,
+    "frames": 42,
+    "max_faces": 1,
+    "tracked_frames": 42
+   },
+   "hyp": {
+    "torch_lm": "IT'S NOT RECORDED NOW",
+    "torch": "IT'S NOT RECORDING NOW",
+    "fp32_b40": "IT'S NOT RECORDING NOW",
+    "fp32_b10": "IT'S NOT RECORDING NOW",
+    "fp32_greedy": "IT NOT RECORD DOWN",
+    "fp16_b10": "IT'S NOT RECORDING NOW",
+    "int8_b10": "IT'S NOT RECORDING NOW",
+    "q8_b10": "IT'S NOT RECORDING NOW",
+    "q4_b10": "IT'S NOT RECORDING NOW",
+    "q4f16_b10": "IT'S NOT RECORDING NOW"
+   }
+  },
+  "rec_jiacai_r10": {
+   "dataset": "recordings/jiacai",
+   "ref": "turn off the lights",
+   "frames": 41,
+   "info": {
+    "fps_in": 29.988,
+    "frames": 41,
+    "max_faces": 1,
+    "tracked_frames": 41
+   },
+   "hyp": {
+    "torch_lm": "DO YOU KNOW IF YOU LIKE IT",
+    "torch": "DO YOU KNOW IF YOU LIKE IT",
+    "fp32_b40": "DO YOU KNOW IF YOU LIKE IT",
+    "fp32_b10": "DO YOU KNOW IF YOU LIKE IT",
+    "fp32_greedy": "DO KNOW THE LIKE",
+    "fp16_b10": "DO YOU KNOW IF YOU LIKE IT",
+    "int8_b10": "DO YOU KNOW IF YOU LIKE IT",
+    "q8_b10": "DO YOU KNOW IF YOU LIKE IT",
+    "q4_b10": "DO YOU KNOW IF YOU LIKE IT",
+    "q4f16_b10": "DO YOU KNOW IF YOU LIKE IT"
+   }
+  },
+  "rec_jiacai_r11": {
+   "dataset": "recordings/jiacai",
+   "ref": "open the front door",
+   "frames": 47,
+   "info": {
+    "fps_in": 29.992,
+    "frames": 47,
+    "max_faces": 1,
+    "tracked_frames": 47
+   },
+   "hyp": {
+    "torch_lm": "HOPE I DON'T ENJOY IT",
+    "torch": "HOPE I DON'T ENJOY IT",
+    "fp32_b40": "HOPE I DON'T ENJOY IT",
+    "fp32_b10": "HOPE I DON'T ENJOY IT",
+    "fp32_greedy": "HOPE I DO",
+    "fp16_b10": "HOPE I DON'T ENJOY IT",
+    "int8_b10": "HOPE I DON'T ENJOY IT",
+    "q8_b10": "HOPE I DON'T ENJOY IT",
+    "q4_b10": "HOPE I DON'T ENJOY IT",
+    "q4f16_b10": "HOPE I DON'T ENJOY IT"
+   }
+  },
+  "rec_jiacai_r12": {
+   "dataset": "recordings/jiacai",
+   "ref": "read my lips",
+   "frames": 38,
+   "info": {
+    "fps_in": 29.984,
+    "frames": 38,
+    "max_faces": 1,
+    "tracked_frames": 38
+   },
+   "hyp": {
+    "torch_lm": "WITH MY LIPS",
+    "torch": "UH WITH MY LIPS",
+    "fp32_b40": "UH WITH MY LIPS",
+    "fp32_b10": "UH WITH MY LIPS",
+    "fp32_greedy": "WITH MY LIPS",
+    "fp16_b10": "UH WITH MY LIPS",
+    "int8_b10": "UH WITH MY LIPS",
+    "q8_b10": "UH WITH MY LIPS",
+    "q4_b10": "UH WHEN MY LIPS",
+    "q4f16_b10": "UH WHEN MY LIPS"
+   }
+  },
+  "rec_jiacai_r13": {
+   "dataset": "recordings/jiacai",
+   "ref": "i think we should get lunch before the meeting",
+   "frames": 62,
+   "info": {
+    "fps_in": 29.96,
+    "frames": 62,
+    "max_faces": 1,
+    "tracked_frames": 62
+   },
+   "hyp": {
+    "torch_lm": "AND THERE WAS TEN YEARS BEFORE THE MEETING",
+    "torch": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "fp32_b40": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "fp32_b10": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "fp32_greedy": "AND THINK WAS KILL YEARS BEFORE THE MEDIA",
+    "fp16_b10": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "int8_b10": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "q8_b10": "AND THERE WAS TEN YEARS BEFORE THE MEDIA",
+    "q4_b10": "I THINK WE STILL GET LUNCH BEFORE THE MEETING",
+    "q4f16_b10": "I THINK WE STILL GET LUNCH BEFORE THE MEETING"
+   }
+  },
+  "rec_jiacai_r14": {
+   "dataset": "recordings/jiacai",
+   "ref": "the weather has been really nice this week",
+   "frames": 52,
+   "info": {
+    "fps_in": 29.965,
+    "frames": 52,
+    "max_faces": 1,
+    "tracked_frames": 52
+   },
+   "hyp": {
+    "torch_lm": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "torch": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b40": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_greedy": "THE WEATHER HAS BEEN WORKING NEXT THIS WEEK",
+    "fp16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "int8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4f16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK"
+   }
+  },
+  "rec_jiacai_r15": {
+   "dataset": "recordings/jiacai",
+   "ref": "did you finish the homework for tomorrow",
+   "frames": 54,
+   "info": {
+    "fps_in": 30.0,
+    "frames": 54,
+    "max_faces": 1,
+    "tracked_frames": 54
+   },
+   "hyp": {
+    "torch_lm": "THEN YOU FINISH THE HOMEWORK FOR TO MORROW",
+    "torch": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "fp32_b40": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "fp32_b10": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "fp32_greedy": "CAN YOU FINISH THE HOME MOVIE TO MOROW",
+    "fp16_b10": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "int8_b10": "CAN YOU FINISH THE HOMEWORK FOR TO MORROW",
+    "q8_b10": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "q4_b10": "CAN YOU FINISH THE HOME REVIEW TO MORROW",
+    "q4f16_b10": "CAN YOU FINISH THE HOME REVIEW TO MORROW"
+   }
+  },
+  "rec_jiacai_r16": {
+   "dataset": "recordings/jiacai",
+   "ref": "my phone battery is almost dead",
+   "frames": 55,
+   "info": {
+    "fps_in": 29.985,
+    "frames": 55,
+    "max_faces": 1,
+    "tracked_frames": 55
+   },
+   "hyp": {
+    "torch_lm": "MY PHONE BATTERY IS ALMOST DEAD",
+    "torch": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b40": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_greedy": "MY PHONE BATTERY IS ALMOST SAID",
+    "fp16_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "int8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4f16_b10": "MY PHONE BATTERY IS ALMOST DEAD"
+   }
+  },
+  "rec_jiacai_r17": {
+   "dataset": "recordings/jiacai",
+   "ref": "we are going to the beach on saturday",
+   "frames": 59,
+   "info": {
+    "fps_in": 30.012,
+    "frames": 59,
+    "max_faces": 1,
+    "tracked_frames": 59
+   },
+   "hyp": {
+    "torch_lm": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "torch": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "fp32_b40": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "fp32_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "fp32_greedy": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "fp16_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "int8_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "q8_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "q4_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY",
+    "q4f16_b10": "WE ARE ALL GOING TO THE BEACH ON SATURDAY"
+   }
+  },
+  "rec_jiacai_r18": {
+   "dataset": "recordings/jiacai",
+   "ref": "can you send me the link to that video",
+   "frames": 51,
+   "info": {
+    "fps_in": 29.946,
+    "frames": 51,
+    "max_faces": 1,
+    "tracked_frames": 51
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "torch": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "fp32_b40": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "fp32_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "fp32_greedy": "CAN DO SOMETHINGLIN ON THAT VIDEO",
+    "fp16_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "int8_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "q8_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "q4_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO",
+    "q4f16_b10": "CAN YOU SEND ME THE LINK ON THAT VIDEO"
+   }
+  },
+  "rec_jiacai_r19": {
+   "dataset": "recordings/jiacai",
+   "ref": "i was late because the train was delayed",
+   "frames": 52,
+   "info": {
+    "fps_in": 30.036,
+    "frames": 52,
+    "max_faces": 1,
+    "tracked_frames": 52
+   },
+   "hyp": {
+    "torch_lm": "THAT WAS IT BECAUSE IT WAS LIKE",
+    "torch": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "fp32_b40": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "fp32_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "fp32_greedy": "THAT WAS IT BECAUSE TRICK WAS LIKE",
+    "fp16_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "int8_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "q8_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "q4_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE",
+    "q4f16_b10": "THAT WAS IT BECAUSE THE TRICK WAS LIKE"
+   }
+  },
+  "rec_jiacai_r20": {
+   "dataset": "recordings/jiacai",
+   "ref": "let me know when you get home",
+   "frames": 45,
+   "info": {
+    "fps_in": 29.993,
+    "frames": 45,
+    "max_faces": 1,
+    "tracked_frames": 45
+   },
+   "hyp": {
+    "torch_lm": "LET ME KNOW WHEN YOU GET HOME",
+    "torch": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "fp32_b40": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "fp32_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "fp32_greedy": "LET ME KNOW WHEN YOU WHEN YOU HELP",
+    "fp16_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "int8_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "q8_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "q4_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME",
+    "q4f16_b10": "LET ME KNOW WHEN YOU WHEN YOU GET HOME"
+   }
+  },
+  "rec_jiacai_r21": {
+   "dataset": "recordings/jiacai",
+   "ref": "today i want to talk about how we learn new things",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.989,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "NOW I WANT TO TALK ABOUT HOW WE DO THIS",
+    "torch": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "fp32_b40": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "fp32_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "fp32_greedy": "NOW I WHAT TO TALK ABOUT HOW WE NEW KIDS",
+    "fp16_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "int8_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "q8_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "q4_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS",
+    "q4f16_b10": "NOW WHAT TO TALK ABOUT WITH NEW KIDS"
+   }
+  },
+  "rec_jiacai_r22": {
+   "dataset": "recordings/jiacai",
+   "ref": "most people never think about the way they breathe",
+   "frames": 65,
+   "info": {
+    "fps_in": 30.003,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "torch": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "fp32_b40": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "fp32_b10": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "fp32_greedy": "MOST PEOPLE NEVER THINK ABOUT THE WIND BREAK",
+    "fp16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "int8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "q8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WEAK BRAIN",
+    "q4_b10": "MOST PEOPLE NEVER THINK ABOUT THE WINNING BRAIN",
+    "q4f16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WINNING BRAIN"
+   }
+  },
+  "rec_jiacai_r23": {
+   "dataset": "recordings/jiacai",
+   "ref": "the most important thing is to keep trying",
+   "frames": 58,
+   "info": {
+    "fps_in": 29.98,
+    "frames": 58,
+    "max_faces": 1,
+    "tracked_frames": 58
+   },
+   "hyp": {
+    "torch_lm": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "torch": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b40": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_greedy": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "int8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4f16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING"
+   }
+  },
+  "rec_jiacai_r24": {
+   "dataset": "recordings/jiacai",
+   "ref": "this idea changed the way i think about the world",
+   "frames": 70,
+   "info": {
+    "fps_in": 29.975,
+    "frames": 70,
+    "max_faces": 1,
+    "tracked_frames": 70
+   },
+   "hyp": {
+    "torch_lm": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "torch": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b40": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "fp32_greedy": "THE IDEA CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "fp16_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "int8_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "q8_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "q4_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD",
+    "q4f16_b10": "THE IDEA CAN CHANGE THE WAY I THINK ABOUT THE WORLD"
+   }
+  },
+  "rec_jiacai_r25": {
+   "dataset": "recordings/jiacai",
+   "ref": "we can solve this problem if we work together",
+   "frames": 56,
+   "info": {
+    "fps_in": 29.903,
+    "frames": 56,
+    "max_faces": 1,
+    "tracked_frames": 56
+   },
+   "hyp": {
+    "torch_lm": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "torch": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "fp32_b40": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "fp32_b10": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "fp32_greedy": "WE CAN SOLVE THIS PROBLEM WORK TOGETHER",
+    "fp16_b10": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "int8_b10": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "q8_b10": "WE CAN SOLVE THIS PROBLEM AND WORK TOGETHER",
+    "q4_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q4f16_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER"
+   }
+  },
+  "rec_jiacai_r26": {
+   "dataset": "recordings/jiacai",
+   "ref": "my number is five five five one two three four",
+   "frames": 86,
+   "info": {
+    "fps_in": 30.014,
+    "frames": 86,
+    "max_faces": 1,
+    "tracked_frames": 86
+   },
+   "hyp": {
+    "torch_lm": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "torch": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b40": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_greedy": "THELO IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp16_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "int8_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q8_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4f16_b10": "THE NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR"
+   }
+  },
+  "rec_jiacai_r27": {
+   "dataset": "recordings/jiacai",
+   "ref": "the meeting starts at three thirty",
+   "frames": 61,
+   "info": {
+    "fps_in": 29.98,
+    "frames": 61,
+    "max_faces": 1,
+    "tracked_frames": 61
+   },
+   "hyp": {
+    "torch_lm": "COMEDIAN STARTS AT THREE THIRTY",
+    "torch": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "fp32_b40": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "fp32_b10": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "fp32_greedy": "SA AT WEATHER HERE",
+    "fp16_b10": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "int8_b10": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "q8_b10": "COMEDIAN SUNSET THROUGH THE WEATHER HERE",
+    "q4_b10": "COMEDIAN STARTS AT THREE THIRTY",
+    "q4f16_b10": "COMEDIAN STARTS AT THREE THIRTY"
+   }
+  },
+  "rec_jiacai_r28": {
+   "dataset": "recordings/jiacai",
+   "ref": "there are twenty four hours in a day",
+   "frames": 59,
+   "info": {
+    "fps_in": 29.994,
+    "frames": 59,
+    "max_faces": 1,
+    "tracked_frames": 59
+   },
+   "hyp": {
+    "torch_lm": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "torch": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "fp32_b40": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "fp32_b10": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "fp32_greedy": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "fp16_b10": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "int8_b10": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "q8_b10": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "q4_b10": "THEY ARE TWENTY FOUR HOURS A DAY",
+    "q4f16_b10": "THEY ARE TWENTY FOUR HOURS A DAY"
+   }
+  },
+  "rec_jiacai_r29": {
+   "dataset": "recordings/jiacai",
+   "ref": "peter picked a pair of purple boots",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.995,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "BUT THEY DON'T PICK UP THEIR PROPOSALS",
+    "torch": "BUT YOU KNOW PICK UP THEIR PROPOSALS",
+    "fp32_b40": "BUT YOU KNOW PICK UP THEIR PROPOSALS",
+    "fp32_b10": "BUT THEY DON'T PICK UP THEIR PROPOSALS",
+    "fp32_greedy": "BUT PICKED UP PAIR PROPOSE",
+    "fp16_b10": "BUT THEY DON'T PICK UP THEIR PROPOSALS",
+    "int8_b10": "BUT YOU KNOW PICK THE PAIR OF PURPLE BOOTS",
+    "q8_b10": "BUT THEY DON'T PICK UP THEIR PROPOSALS",
+    "q4_b10": "BUT YOU KNOW PICK THE PAIR OF PURPLE BOOTS",
+    "q4f16_b10": "BUT YOU KNOW PICK THE PAIR OF PURPLE BOOTS"
+   }
+  },
+  "rec_jiacai_r30": {
+   "dataset": "recordings/jiacai",
+   "ref": "we moved the boxes from the van",
+   "frames": 45,
+   "info": {
+    "fps_in": 29.962,
+    "frames": 45,
+    "max_faces": 1,
+    "tracked_frames": 45
+   },
+   "hyp": {
+    "torch_lm": "REMOVE THE BUTTONS FROM THE FAN",
+    "torch": "REMOVE THE BUTTONS FROM THE FAN",
+    "fp32_b40": "REMOVE THE BUTTONS FROM THE FAN",
+    "fp32_b10": "REMOVE THE BUTTONS FROM THE FAN",
+    "fp32_greedy": "REMOVE THE BUTTONS FROM MY VAN",
+    "fp16_b10": "REMOVE THE BUTTONS FROM THE FAN",
+    "int8_b10": "REMOVE THE BUTTONS FROM THE FAN",
+    "q8_b10": "REMOVE THE BUTTONS FROM THE FAN",
+    "q4_b10": "REMOVE THE BUTTONS FROM THE FAN",
+    "q4f16_b10": "REMOVE THE BUTTONS FROM THE FAN"
+   }
+  },
+  "rec_jiacai_r31": {
+   "dataset": "recordings/jiacai",
+   "ref": "the big brown bear ate my muffin",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.605,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "BIG BROWN BEAR IN MY BUMS",
+    "torch": "BIG BROWN BEAR IN MY BUMS",
+    "fp32_b40": "BIG BROWN BEAR IN MY BUMS",
+    "fp32_b10": "BIG BROWN BEAR IN MY BUMS",
+    "fp32_greedy": "BIT BROWN BEAR IN MY BU",
+    "fp16_b10": "BIG BROWN BEAR IN MY BUMS",
+    "int8_b10": "BIG BROWN BEAR IN MY BUMS",
+    "q8_b10": "BIG BROWN BEAR IN MY BUMS",
+    "q4_b10": "BIG BROWN BEAR IN MY MOM'S",
+    "q4f16_b10": "BIG BROWN BEAR IN MY MOM'S"
+   }
+  },
+  "rec_jiacai_r32": {
+   "dataset": "recordings/jiacai",
+   "ref": "when i was a child i wanted to be an astronaut but now i build websites",
+   "frames": 100,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 100,
+    "max_faces": 1,
+    "tracked_frames": 100
+   },
+   "hyp": {
+    "torch_lm": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT",
+    "torch": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b40": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_greedy": "WHEN I WAS A CHILD I WANTED TO BE AN NATURAL COMPANY BUT NOW I PUT WEBSITES",
+    "fp16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "int8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I PUT WEBSITES",
+    "q8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q4_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I PUT WEBSITES",
+    "q4f16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I PUT WEBSITES"
+   }
+  },
+  "rec_kevin_r01": {
+   "dataset": "recordings/kevin",
+   "ref": "thank you very much",
+   "frames": 41,
+   "info": {
+    "fps_in": 29.983,
+    "frames": 41,
+    "max_faces": 1,
+    "tracked_frames": 41
+   },
+   "hyp": {
+    "torch_lm": "THANK YOU VERY MUCH",
+    "torch": "THANK YOU VERY MUCH",
+    "fp32_b40": "THANK YOU VERY MUCH",
+    "fp32_b10": "THANK YOU VERY MUCH",
+    "fp32_greedy": "THANK YOU VERY MUCH",
+    "fp16_b10": "THANK YOU VERY MUCH",
+    "int8_b10": "THANK YOU VERY MUCH",
+    "q8_b10": "THANK YOU VERY MUCH",
+    "q4_b10": "THANK YOU VERY MUCH",
+    "q4f16_b10": "THANK YOU VERY MUCH"
+   }
+  },
+  "rec_kevin_r02": {
+   "dataset": "recordings/kevin",
+   "ref": "good morning everyone",
+   "frames": 42,
+   "info": {
+    "fps_in": 29.979,
+    "frames": 42,
+    "max_faces": 1,
+    "tracked_frames": 42
+   },
+   "hyp": {
+    "torch_lm": "GOOD MORNING EVERYONE",
+    "torch": "GOOD MORNING EVERYONE",
+    "fp32_b40": "GOOD MORNING EVERYONE",
+    "fp32_b10": "GOOD MORNING EVERYONE",
+    "fp32_greedy": "GOOD MORNING IF YOU EVERYONE",
+    "fp16_b10": "GOOD MORNING EVERYONE",
+    "int8_b10": "GOOD MORNING EVERYONE",
+    "q8_b10": "GOOD MORNING EVERYONE",
+    "q4_b10": "GOOD MORNING EVERYONE",
+    "q4f16_b10": "GOOD MORNING EVERYONE"
+   }
+  },
+  "rec_kevin_r03": {
+   "dataset": "recordings/kevin",
+   "ref": "see you tomorrow",
+   "frames": 40,
+   "info": {
+    "fps_in": 29.987,
+    "frames": 40,
+    "max_faces": 1,
+    "tracked_frames": 40
+   },
+   "hyp": {
+    "torch_lm": "SEE YOU TO MORROW",
+    "torch": "SEE YOU TO MORROW",
+    "fp32_b40": "SEE YOU TO MORROW",
+    "fp32_b10": "SEE YOU TO MORROW",
+    "fp32_greedy": "TILL YOU MORROW",
+    "fp16_b10": "SEE YOU TO MORROW",
+    "int8_b10": "SEE YOU TO MORROW",
+    "q8_b10": "SEE YOU TO MORROW",
+    "q4_b10": "TILL TO MORROW",
+    "q4f16_b10": "TILL TO MORROW"
+   }
+  },
+  "rec_kevin_r04": {
+   "dataset": "recordings/kevin",
+   "ref": "where are you going",
+   "frames": 45,
+   "info": {
+    "fps_in": 29.833,
+    "frames": 45,
+    "max_faces": 1,
+    "tracked_frames": 45
+   },
+   "hyp": {
+    "torch_lm": "WHERE ARE YOU GUYS GOING",
+    "torch": "WHERE ARE YOU GUYS GOING",
+    "fp32_b40": "WHERE ARE YOU GUYS GOING",
+    "fp32_b10": "WHERE ARE YOU GUYS GOING",
+    "fp32_greedy": "WHERE ARE YOU GUYS GOING",
+    "fp16_b10": "WHERE ARE YOU GUYS GOING",
+    "int8_b10": "WHERE ARE YOU GUYS GOING",
+    "q8_b10": "WHERE ARE YOU GUYS GOING",
+    "q4_b10": "WHERE ARE YOU GUYS GOING",
+    "q4f16_b10": "WHERE ARE YOU GUYS GOING"
+   }
+  },
+  "rec_kevin_r05": {
+   "dataset": "recordings/kevin",
+   "ref": "i don't know",
+   "frames": 37,
+   "info": {
+    "fps_in": 29.836,
+    "frames": 37,
+    "max_faces": 1,
+    "tracked_frames": 37
+   },
+   "hyp": {
+    "torch_lm": "I DON'T KNOW",
+    "torch": "I DON'T KNOW",
+    "fp32_b40": "I DON'T KNOW",
+    "fp32_b10": "I DON'T KNOW",
+    "fp32_greedy": "I DON'T KNOW",
+    "fp16_b10": "I DON'T KNOW",
+    "int8_b10": "I DON'T KNOW",
+    "q8_b10": "I DON'T KNOW",
+    "q4_b10": "I DON'T KNOW",
+    "q4f16_b10": "I DON'T KNOW"
+   }
+  },
+  "rec_kevin_r06": {
+   "dataset": "recordings/kevin",
+   "ref": "can you hear me",
+   "frames": 36,
+   "info": {
+    "fps_in": 29.335,
+    "frames": 36,
+    "max_faces": 1,
+    "tracked_frames": 36
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU HEAR ME",
+    "torch": "CAN YOU HEAR ME",
+    "fp32_b40": "CAN YOU HEAR ME",
+    "fp32_b10": "CAN YOU HEAR ME",
+    "fp32_greedy": "CAN YOU HEAR ME",
+    "fp16_b10": "CAN YOU HEAR ME",
+    "int8_b10": "CAN YOU HEAR ME",
+    "q8_b10": "CAN YOU HEAR ME",
+    "q4_b10": "CAN YOU HEAR ME",
+    "q4f16_b10": "CAN YOU HEAR ME"
+   }
+  },
+  "rec_kevin_r07": {
+   "dataset": "recordings/kevin",
+   "ref": "that sounds great",
+   "frames": 33,
+   "info": {
+    "fps_in": 29.763,
+    "frames": 33,
+    "max_faces": 1,
+    "tracked_frames": 33
+   },
+   "hyp": {
+    "torch_lm": "THAT'S INTERESTING",
+    "torch": "YES ENJOY IT",
+    "fp32_b40": "YES ENJOY IT",
+    "fp32_b10": "YES ENJOY IT",
+    "fp32_greedy": "THAT'S ENJOY",
+    "fp16_b10": "YES ENJOY IT",
+    "int8_b10": "YES ENJOY IT",
+    "q8_b10": "YES ENJOY IT",
+    "q4_b10": "LET'S ENJOY IT",
+    "q4f16_b10": "LET'S ENJOY IT"
+   }
+  },
+  "rec_kevin_r08": {
+   "dataset": "recordings/kevin",
+   "ref": "please call me back",
+   "frames": 42,
+   "info": {
+    "fps_in": 29.853,
+    "frames": 42,
+    "max_faces": 1,
+    "tracked_frames": 42
+   },
+   "hyp": {
+    "torch_lm": "PLEASE CALL ME BACK",
+    "torch": "PLEASE CALL ME BACK",
+    "fp32_b40": "PLEASE CALL ME BACK",
+    "fp32_b10": "PLEASE CALL ME BACK",
+    "fp32_greedy": "PLEASE CALL ME BACK",
+    "fp16_b10": "PLEASE CALL ME BACK",
+    "int8_b10": "PLEASE CALL ME BACK",
+    "q8_b10": "PLEASE CALL ME BACK",
+    "q4_b10": "PLEASE CALL ME BACK",
+    "q4f16_b10": "PLEASE CALL ME BACK"
+   }
+  },
+  "rec_kevin_r09": {
+   "dataset": "recordings/kevin",
+   "ref": "start recording now",
+   "frames": 42,
+   "info": {
+    "fps_in": 29.859,
+    "frames": 42,
+    "max_faces": 1,
+    "tracked_frames": 42
+   },
+   "hyp": {
+    "torch_lm": "START RECORDING NOW",
+    "torch": "START RECORDING NOW",
+    "fp32_b40": "START RECORDING NOW",
+    "fp32_b10": "START RECORDING NOW",
+    "fp32_greedy": "START RECORDING NOW",
+    "fp16_b10": "START RECORDING NOW",
+    "int8_b10": "START RECORDING NOW",
+    "q8_b10": "START RECORDING NOW",
+    "q4_b10": "START RECORDING NOW",
+    "q4f16_b10": "START RECORDING NOW"
+   }
+  },
+  "rec_kevin_r10": {
+   "dataset": "recordings/kevin",
+   "ref": "turn off the lights",
+   "frames": 40,
+   "info": {
+    "fps_in": 29.812,
+    "frames": 40,
+    "max_faces": 1,
+    "tracked_frames": 40
+   },
+   "hyp": {
+    "torch_lm": "TURN OFF THE LIGHTS",
+    "torch": "TURN OFF THE LIGHTS",
+    "fp32_b40": "TURN OFF THE LIGHTS",
+    "fp32_b10": "TURN OFF THE LIGHTS",
+    "fp32_greedy": "TURN OFF THE LIGHT",
+    "fp16_b10": "TURN OFF THE LIGHTS",
+    "int8_b10": "TURN OFF THE LIGHT",
+    "q8_b10": "TURN OFF THE LIGHT",
+    "q4_b10": "TURN OFF THE LIGHT",
+    "q4f16_b10": "TURN OFF THE LIGHT"
+   }
+  },
+  "rec_kevin_r11": {
+   "dataset": "recordings/kevin",
+   "ref": "open the front door",
+   "frames": 40,
+   "info": {
+    "fps_in": 29.91,
+    "frames": 40,
+    "max_faces": 1,
+    "tracked_frames": 40
+   },
+   "hyp": {
+    "torch_lm": "OPEN THE FRONT DOOR",
+    "torch": "OPEN THE FRONT DOOR",
+    "fp32_b40": "OPEN THE FRONT DOOR",
+    "fp32_b10": "OPEN THE FRONT DOOR",
+    "fp32_greedy": "OPEN THE FOOT DOOR",
+    "fp16_b10": "OPEN THE FRONT DOOR",
+    "int8_b10": "OPEN THE FRONT DOOR",
+    "q8_b10": "OPEN THE FRONT DOOR",
+    "q4_b10": "OPEN THE FRONT DOOR",
+    "q4f16_b10": "OPEN THE FRONT DOOR"
+   }
+  },
+  "rec_kevin_r12": {
+   "dataset": "recordings/kevin",
+   "ref": "read my lips",
+   "frames": 38,
+   "info": {
+    "fps_in": 29.807,
+    "frames": 38,
+    "max_faces": 1,
+    "tracked_frames": 38
+   },
+   "hyp": {
+    "torch_lm": "WITH MY LIPS",
+    "torch": "WITH MY LIPS",
+    "fp32_b40": "WITH MY LIPS",
+    "fp32_b10": "WITH MY LIPS",
+    "fp32_greedy": "WITH MY LIPS",
+    "fp16_b10": "WITH MY LIPS",
+    "int8_b10": "READ MY LIPS",
+    "q8_b10": "WITH MY LIPS",
+    "q4_b10": "WITH MY LIPS",
+    "q4f16_b10": "WITH MY LIPS"
+   }
+  },
+  "rec_kevin_r13": {
+   "dataset": "recordings/kevin",
+   "ref": "i think we should get lunch before the meeting",
+   "frames": 68,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 68,
+    "max_faces": 1,
+    "tracked_frames": 68
+   },
+   "hyp": {
+    "torch_lm": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "torch": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "fp32_b40": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "fp32_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "fp32_greedy": "I THINK WE JUST GET LUNCH FOR THE MEETING",
+    "fp16_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "int8_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "q8_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "q4_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING",
+    "q4f16_b10": "I THINK WE JUST GET NOTICEABLE FOR THE MEETING"
+   }
+  },
+  "rec_kevin_r14": {
+   "dataset": "recordings/kevin",
+   "ref": "the weather has been really nice this week",
+   "frames": 69,
+   "info": {
+    "fps_in": 29.995,
+    "frames": 69,
+    "max_faces": 1,
+    "tracked_frames": 69
+   },
+   "hyp": {
+    "torch_lm": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "torch": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b40": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_greedy": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "int8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4f16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK"
+   }
+  },
+  "rec_kevin_r15": {
+   "dataset": "recordings/kevin",
+   "ref": "did you finish the homework for tomorrow",
+   "frames": 62,
+   "info": {
+    "fps_in": 29.987,
+    "frames": 62,
+    "max_faces": 1,
+    "tracked_frames": 62
+   },
+   "hyp": {
+    "torch_lm": "THEN YOU FINISH THE HOMEWORK FOR TOMORROW",
+    "torch": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "fp32_b40": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "fp32_b10": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "fp32_greedy": "DID YOU FINISH THE WHOLE BRIEF FOR MORROW",
+    "fp16_b10": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "int8_b10": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "q8_b10": "DID YOU FINISH THE WHOLE BRIEFING TO MORROW",
+    "q4_b10": "DID YOU FINISH THE WHOLE BOOK FOR TOMORROW",
+    "q4f16_b10": "DID YOU FINISH THE WHOLE BOOK FOR TOMORROW"
+   }
+  },
+  "rec_kevin_r16": {
+   "dataset": "recordings/kevin",
+   "ref": "my phone battery is almost dead",
+   "frames": 54,
+   "info": {
+    "fps_in": 29.989,
+    "frames": 54,
+    "max_faces": 1,
+    "tracked_frames": 54
+   },
+   "hyp": {
+    "torch_lm": "MY PHONE BATTERY IS ALMOST DEAD",
+    "torch": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b40": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_greedy": "MY PHONE BATTERY IS ONET",
+    "fp16_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "int8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4f16_b10": "MY PHONE BATTERY IS ALMOST DEAD"
+   }
+  },
+  "rec_kevin_r17": {
+   "dataset": "recordings/kevin",
+   "ref": "we are going to the beach on saturday",
+   "frames": 57,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 57,
+    "max_faces": 1,
+    "tracked_frames": 57
+   },
+   "hyp": {
+    "torch_lm": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "torch": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "fp32_b40": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "fp32_b10": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "fp32_greedy": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "fp16_b10": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "int8_b10": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "q8_b10": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "q4_b10": "WE ARE GOING TO COMPETE ON SATURDAY",
+    "q4f16_b10": "WE ARE GOING TO COMPETE ON SATURDAY"
+   }
+  },
+  "rec_kevin_r18": {
+   "dataset": "recordings/kevin",
+   "ref": "can you send me the link to that video",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.983,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "torch": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "fp32_b40": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "fp32_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "fp32_greedy": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "fp16_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "int8_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "q8_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "q4_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO",
+    "q4f16_b10": "CAN YOU SEE ME THE LINK TO THAT VIDEO"
+   }
+  },
+  "rec_kevin_r19": {
+   "dataset": "recordings/kevin",
+   "ref": "i was late because the train was delayed",
+   "frames": 68,
+   "info": {
+    "fps_in": 29.98,
+    "frames": 68,
+    "max_faces": 1,
+    "tracked_frames": 68
+   },
+   "hyp": {
+    "torch_lm": "I WAS LATE BECAUSE THE TRAIN WAS LATE",
+    "torch": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "fp32_b40": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "fp32_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "fp32_greedy": "I WAS LATE BECAUSE THE TRAIN WAS LETTER",
+    "fp16_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "int8_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "q8_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "q4_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR",
+    "q4f16_b10": "I WAS LATE BECAUSE THE TRAIN WAS CLEAR"
+   }
+  },
+  "rec_kevin_r20": {
+   "dataset": "recordings/kevin",
+   "ref": "let me know when you get home",
+   "frames": 57,
+   "info": {
+    "fps_in": 30.072,
+    "frames": 57,
+    "max_faces": 1,
+    "tracked_frames": 57
+   },
+   "hyp": {
+    "torch_lm": "LET ME KNOW WHEN YOU GET HOME",
+    "torch": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_b40": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_greedy": "THAT ME ALWAYS WHEN YOU GET HOME",
+    "fp16_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "int8_b10": "THAT MEANS ALWAYS YOU GET HOME",
+    "q8_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "q4_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "q4f16_b10": "LET ME KNOW WHEN YOU GET HOME"
+   }
+  },
+  "rec_kevin_r21": {
+   "dataset": "recordings/kevin",
+   "ref": "today i want to talk about how we learn new things",
+   "frames": 99,
+   "info": {
+    "fps_in": 29.928,
+    "frames": 99,
+    "max_faces": 1,
+    "tracked_frames": 99
+   },
+   "hyp": {
+    "torch_lm": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "torch": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_b40": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_greedy": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW ENGLISH",
+    "fp16_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "int8_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q8_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q4_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q4f16_b10": "TO DAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS"
+   }
+  },
+  "rec_kevin_r22": {
+   "dataset": "recordings/kevin",
+   "ref": "most people never think about the way they breathe",
+   "frames": 80,
+   "info": {
+    "fps_in": 29.961,
+    "frames": 80,
+    "max_faces": 1,
+    "tracked_frames": 80
+   },
+   "hyp": {
+    "torch_lm": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "torch": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_b40": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_greedy": "MOST PEOPLE HAVE TO THINK ABOUT THE REST THEY PRINT",
+    "fp16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "int8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q4_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q4f16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE"
+   }
+  },
+  "rec_kevin_r23": {
+   "dataset": "recordings/kevin",
+   "ref": "the most important thing is to keep trying",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.956,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "torch": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b40": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_greedy": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "int8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4f16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING"
+   }
+  },
+  "rec_kevin_r24": {
+   "dataset": "recordings/kevin",
+   "ref": "this idea changed the way i think about the world",
+   "frames": 89,
+   "info": {
+    "fps_in": 30.001,
+    "frames": 89,
+    "max_faces": 1,
+    "tracked_frames": 89
+   },
+   "hyp": {
+    "torch_lm": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "torch": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b40": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "fp32_greedy": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "fp16_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "int8_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "q8_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "q4_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD",
+    "q4f16_b10": "THIS IDEA CHANGED THE WAY I THINK ABOUT THE WORLD"
+   }
+  },
+  "rec_kevin_r25": {
+   "dataset": "recordings/kevin",
+   "ref": "we can solve this problem if we work together",
+   "frames": 72,
+   "info": {
+    "fps_in": 29.893,
+    "frames": 72,
+    "max_faces": 1,
+    "tracked_frames": 72
+   },
+   "hyp": {
+    "torch_lm": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "torch": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_b40": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_greedy": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp16_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "int8_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q8_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q4_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q4f16_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER"
+   }
+  },
+  "rec_kevin_r26": {
+   "dataset": "recordings/kevin",
+   "ref": "my number is five five five one two three four",
+   "frames": 111,
+   "info": {
+    "fps_in": 29.994,
+    "frames": 111,
+    "max_faces": 1,
+    "tracked_frames": 111
+   },
+   "hyp": {
+    "torch_lm": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "torch": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b40": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_greedy": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp16_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "int8_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q8_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4f16_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR"
+   }
+  },
+  "rec_kevin_r27": {
+   "dataset": "recordings/kevin",
+   "ref": "the meeting starts at three thirty",
+   "frames": 66,
+   "info": {
+    "fps_in": 29.992,
+    "frames": 66,
+    "max_faces": 1,
+    "tracked_frames": 66
+   },
+   "hyp": {
+    "torch_lm": "THE MEETING STARTS AT THREE THIRTY",
+    "torch": "THE MEETING STARTS AT THREE THIRTY",
+    "fp32_b40": "THE MEETING STARTS AT THREE THIRTY",
+    "fp32_b10": "THE MEETING STARTS AT THREE THIRTY",
+    "fp32_greedy": "THE MINUTE STARTS AT THREE THIRTY",
+    "fp16_b10": "THE MEETING STARTS AT THREE THIRTY",
+    "int8_b10": "THE MEETING STARTS AT THREE THIRTY",
+    "q8_b10": "THE MEETING STARTS AT THREE THIRTY",
+    "q4_b10": "THE MEETING STARTS AT THREE THIRTY",
+    "q4f16_b10": "THE MEETING STARTS AT THREE THIRTY"
+   }
+  },
+  "rec_kevin_r28": {
+   "dataset": "recordings/kevin",
+   "ref": "there are twenty four hours in a day",
+   "frames": 67,
+   "info": {
+    "fps_in": 29.99,
+    "frames": 67,
+    "max_faces": 1,
+    "tracked_frames": 67
+   },
+   "hyp": {
+    "torch_lm": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "torch": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_b40": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_greedy": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp16_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "int8_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q8_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q4_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q4f16_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY"
+   }
+  },
+  "rec_kevin_r29": {
+   "dataset": "recordings/kevin",
+   "ref": "peter picked a pair of purple boots",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.984,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "A BEER MAKES A PAIR OF PURPLE BOOTS",
+    "torch": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "fp32_b40": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "fp32_b10": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "fp32_greedy": "A BE PICK A PAIR OF PURPLE BRUS",
+    "fp16_b10": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "int8_b10": "A BEER PICKS A PAIR OF PURPLE BRUISES",
+    "q8_b10": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "q4_b10": "A BEER MAKES A PAIR OF PURPLE BRUISES",
+    "q4f16_b10": "A BEER PICKS A PAIR OF PURPLE BRUISES"
+   }
+  },
+  "rec_kevin_r30": {
+   "dataset": "recordings/kevin",
+   "ref": "we moved the boxes from the van",
+   "frames": 56,
+   "info": {
+    "fps_in": 29.987,
+    "frames": 56,
+    "max_faces": 1,
+    "tracked_frames": 56
+   },
+   "hyp": {
+    "torch_lm": "REMOVE THE BOX FROM THE FAN",
+    "torch": "REMOVE THE BOXES FROM THE FAN",
+    "fp32_b40": "REMOVE THE BOXES FROM THE FAN",
+    "fp32_b10": "REMOVE THE BOXES FROM THE FAN",
+    "fp32_greedy": "REMOVE THE BOX FROM THE FAN",
+    "fp16_b10": "REMOVE THE BOXES FROM THE FAN",
+    "int8_b10": "REMOVE THE BOXES FROM THE FAN",
+    "q8_b10": "REMOVE THE BOXES FROM THE FAN",
+    "q4_b10": "REMOVE THE BOXES FROM THE FAN",
+    "q4f16_b10": "REMOVE THE BOXES FROM THE FAN"
+   }
+  },
+  "rec_kevin_r31": {
+   "dataset": "recordings/kevin",
+   "ref": "the big brown bear ate my muffin",
+   "frames": 63,
+   "info": {
+    "fps_in": 29.986,
+    "frames": 63,
+    "max_faces": 1,
+    "tracked_frames": 63
+   },
+   "hyp": {
+    "torch_lm": "IT'S A BIG BROWN BEAR",
+    "torch": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "fp32_b40": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "fp32_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "fp32_greedy": "'S A BIG PROUD BE IN MY MU FEEL",
+    "fp16_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "int8_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "q8_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "q4_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN",
+    "q4f16_b10": "IT'S A BIG BROWN BEAR IN MY MUFFIN"
+   }
+  },
+  "rec_kevin_r32": {
+   "dataset": "recordings/kevin",
+   "ref": "when i was a child i wanted to be an astronaut but now i build websites",
+   "frames": 124,
+   "info": {
+    "fps_in": 29.985,
+    "frames": 124,
+    "max_faces": 1,
+    "tracked_frames": 124
+   },
+   "hyp": {
+    "torch_lm": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "torch": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b40": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_greedy": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT LEARN BUT AND NOW I BUILD WEBSITE",
+    "fp16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "int8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q4_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q4f16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES"
+   }
+  },
+  "rec_nathan_r01": {
+   "dataset": "recordings/nathan",
+   "ref": "thank you very much",
+   "frames": 30,
+   "info": {
+    "fps_in": 29.829,
+    "frames": 30,
+    "max_faces": 1,
+    "tracked_frames": 30
+   },
+   "hyp": {
+    "torch_lm": "THANK YOU VERY MUCH",
+    "torch": "THANK YOU VERY MUCH",
+    "fp32_b40": "THANK YOU VERY MUCH",
+    "fp32_b10": "THANK YOU VERY MUCH",
+    "fp32_greedy": "THANK YOU VERY MUCH",
+    "fp16_b10": "THANK YOU VERY MUCH",
+    "int8_b10": "THANK YOU VERY MUCH",
+    "q8_b10": "THANK YOU VERY MUCH",
+    "q4_b10": "THANK YOU VERY MUCH",
+    "q4f16_b10": "THANK YOU VERY MUCH"
+   }
+  },
+  "rec_nathan_r02": {
+   "dataset": "recordings/nathan",
+   "ref": "good morning everyone",
+   "frames": 35,
+   "info": {
+    "fps_in": 29.924,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "GOOD MORNING EVERYONE",
+    "torch": "GOOD MORNING EVERYONE",
+    "fp32_b40": "GOOD MORNING EVERYONE",
+    "fp32_b10": "GOOD MORNING EVERYONE",
+    "fp32_greedy": "GOOD MORNING EVERYONE",
+    "fp16_b10": "GOOD MORNING EVERYONE",
+    "int8_b10": "GOOD MORNING EVERYONE",
+    "q8_b10": "GOOD MORNING EVERYONE",
+    "q4_b10": "GOOD MORNING EVERYONE",
+    "q4f16_b10": "GOOD MORNING EVERYONE"
+   }
+  },
+  "rec_nathan_r03": {
+   "dataset": "recordings/nathan",
+   "ref": "see you tomorrow",
+   "frames": 35,
+   "info": {
+    "fps_in": 29.955,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "SEE YOU TOMORROW",
+    "torch": "SEE YOU TOMORROW",
+    "fp32_b40": "SEE YOU TOMORROW",
+    "fp32_b10": "SEE YOU TOMORROW",
+    "fp32_greedy": "TELL YOU TOMORROW",
+    "fp16_b10": "SEE YOU TOMORROW",
+    "int8_b10": "SEE YOU TOMORROW",
+    "q8_b10": "SEE YOU TOMORROW",
+    "q4_b10": "SEE YOU TOMORROW",
+    "q4f16_b10": "SEE YOU TOMORROW"
+   }
+  },
+  "rec_nathan_r04": {
+   "dataset": "recordings/nathan",
+   "ref": "where are you going",
+   "frames": 38,
+   "info": {
+    "fps_in": 30.047,
+    "frames": 38,
+    "max_faces": 1,
+    "tracked_frames": 38
+   },
+   "hyp": {
+    "torch_lm": "WHERE ARE YOU GOING",
+    "torch": "WHERE ARE YOU GOING",
+    "fp32_b40": "WHERE ARE YOU GOING",
+    "fp32_b10": "WHERE ARE YOU GOING",
+    "fp32_greedy": "WHERE ARE YOU GOING",
+    "fp16_b10": "WHERE ARE YOU GOING",
+    "int8_b10": "WHERE ARE YOU GOING",
+    "q8_b10": "WHERE ARE YOU GOING",
+    "q4_b10": "WHERE ARE YOU GOING",
+    "q4f16_b10": "WHERE ARE YOU GOING"
+   }
+  },
+  "rec_nathan_r05": {
+   "dataset": "recordings/nathan",
+   "ref": "i don't know",
+   "frames": 35,
+   "info": {
+    "fps_in": 29.892,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "I DON'T KNOW",
+    "torch": "I DON'T KNOW",
+    "fp32_b40": "I DON'T KNOW",
+    "fp32_b10": "I DON'T KNOW",
+    "fp32_greedy": "I DON'T KNOW",
+    "fp16_b10": "I DON'T KNOW",
+    "int8_b10": "I DON'T KNOW",
+    "q8_b10": "I DON'T KNOW",
+    "q4_b10": "I DON'T KNOW",
+    "q4f16_b10": "I DON'T KNOW"
+   }
+  },
+  "rec_nathan_r06": {
+   "dataset": "recordings/nathan",
+   "ref": "can you hear me",
+   "frames": 35,
+   "info": {
+    "fps_in": 29.86,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU HEAR ME",
+    "torch": "CAN YOU HEAR ME",
+    "fp32_b40": "CAN YOU HEAR ME",
+    "fp32_b10": "CAN YOU HEAR ME",
+    "fp32_greedy": "CAN YOU HEAR ME",
+    "fp16_b10": "CAN YOU HEAR ME",
+    "int8_b10": "CAN YOU HEAR ME",
+    "q8_b10": "CAN YOU HEAR ME",
+    "q4_b10": "CAN YOU HEAR ME",
+    "q4f16_b10": "CAN YOU HEAR ME"
+   }
+  },
+  "rec_nathan_r07": {
+   "dataset": "recordings/nathan",
+   "ref": "that sounds great",
+   "frames": 36,
+   "info": {
+    "fps_in": 29.996,
+    "frames": 36,
+    "max_faces": 1,
+    "tracked_frames": 36
+   },
+   "hyp": {
+    "torch_lm": "THAT SOUNDS GREAT",
+    "torch": "THAT SOUNDS GREAT",
+    "fp32_b40": "THAT SOUNDS GREAT",
+    "fp32_b10": "THAT SOUNDS GREAT",
+    "fp32_greedy": "THAT SOUNDS GREAT",
+    "fp16_b10": "THAT SOUNDS GREAT",
+    "int8_b10": "THAT SOUNDS GREAT",
+    "q8_b10": "THAT SOUNDS GREAT",
+    "q4_b10": "THAT SOUNDS GREAT",
+    "q4f16_b10": "THAT SOUNDS GREAT"
+   }
+  },
+  "rec_nathan_r08": {
+   "dataset": "recordings/nathan",
+   "ref": "please call me back",
+   "frames": 37,
+   "info": {
+    "fps_in": 29.897,
+    "frames": 37,
+    "max_faces": 1,
+    "tracked_frames": 37
+   },
+   "hyp": {
+    "torch_lm": "PLEASE CALL ME BACK",
+    "torch": "PLEASE CALL ME BACK",
+    "fp32_b40": "PLEASE CALL ME BACK",
+    "fp32_b10": "PLEASE CALL ME BACK",
+    "fp32_greedy": "PLEASE CALL ME BACK",
+    "fp16_b10": "PLEASE CALL ME BACK",
+    "int8_b10": "PLEASE CALL ME BACK",
+    "q8_b10": "PLEASE CALL ME BACK",
+    "q4_b10": "PLEASE CALL ME BACK",
+    "q4f16_b10": "PLEASE CALL ME BACK"
+   }
+  },
+  "rec_nathan_r09": {
+   "dataset": "recordings/nathan",
+   "ref": "start recording now",
+   "frames": 39,
+   "info": {
+    "fps_in": 30.014,
+    "frames": 39,
+    "max_faces": 1,
+    "tracked_frames": 39
+   },
+   "hyp": {
+    "torch_lm": "START RECORDING NOW",
+    "torch": "START RECORDING NOW",
+    "fp32_b40": "START RECORDING NOW",
+    "fp32_b10": "START RECORDING NOW",
+    "fp32_greedy": "START RECORDING NOW",
+    "fp16_b10": "START RECORDING NOW",
+    "int8_b10": "START RECORDING NOW",
+    "q8_b10": "START RECORDING NOW",
+    "q4_b10": "START RECORDING NOW",
+    "q4f16_b10": "START RECORDING NOW"
+   }
+  },
+  "rec_nathan_r10": {
+   "dataset": "recordings/nathan",
+   "ref": "turn off the lights",
+   "frames": 35,
+   "info": {
+    "fps_in": 30.06,
+    "frames": 35,
+    "max_faces": 1,
+    "tracked_frames": 35
+   },
+   "hyp": {
+    "torch_lm": "TURN OFF THE LIGHTS",
+    "torch": "TURN OFF THE LIGHTS",
+    "fp32_b40": "TURN OFF THE LIGHTS",
+    "fp32_b10": "TURN OFF THE LIGHTS",
+    "fp32_greedy": "TURN OFF THE LIGHT",
+    "fp16_b10": "TURN OFF THE LIGHTS",
+    "int8_b10": "TURN OFF THE LIGHTS",
+    "q8_b10": "TURN OFF THE LIGHTS",
+    "q4_b10": "TURN OFF THE LIGHTS",
+    "q4f16_b10": "TURN OFF THE LIGHTS"
+   }
+  },
+  "rec_nathan_r11": {
+   "dataset": "recordings/nathan",
+   "ref": "open the front door",
+   "frames": 41,
+   "info": {
+    "fps_in": 29.86,
+    "frames": 41,
+    "max_faces": 1,
+    "tracked_frames": 41
+   },
+   "hyp": {
+    "torch_lm": "OPEN THE FRONT DOOR",
+    "torch": "OPEN THE FRONT DOOR",
+    "fp32_b40": "OPEN THE FRONT DOOR",
+    "fp32_b10": "OPEN THE FRONT DOOR",
+    "fp32_greedy": "OPEN THE FRONT DOOR",
+    "fp16_b10": "OPEN THE FRONT DOOR",
+    "int8_b10": "OPEN THE FRONT DOOR",
+    "q8_b10": "OPEN THE FRONT DOOR",
+    "q4_b10": "OPEN THE FRONT DOOR",
+    "q4f16_b10": "OPEN THE FRONT DOOR"
+   }
+  },
+  "rec_nathan_r12": {
+   "dataset": "recordings/nathan",
+   "ref": "read my lips",
+   "frames": 40,
+   "info": {
+    "fps_in": 29.932,
+    "frames": 40,
+    "max_faces": 1,
+    "tracked_frames": 40
+   },
+   "hyp": {
+    "torch_lm": "READ MY LIPS",
+    "torch": "READ MY LIPS",
+    "fp32_b40": "READ MY LIPS",
+    "fp32_b10": "READ MY LIPS",
+    "fp32_greedy": "READ MY LIPS",
+    "fp16_b10": "READ MY LIPS",
+    "int8_b10": "READ MY LIPS",
+    "q8_b10": "READ MY LIPS",
+    "q4_b10": "READ MY LIPS",
+    "q4f16_b10": "READ MY LIPS"
+   }
+  },
+  "rec_nathan_r13": {
+   "dataset": "recordings/nathan",
+   "ref": "i think we should get lunch before the meeting",
+   "frames": 73,
+   "info": {
+    "fps_in": 29.976,
+    "frames": 73,
+    "max_faces": 1,
+    "tracked_frames": 73
+   },
+   "hyp": {
+    "torch_lm": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "torch": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "fp32_b40": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "fp32_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "fp32_greedy": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "fp16_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "int8_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "q8_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "q4_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING",
+    "q4f16_b10": "I THINK WE SHOULD GET LUNCH BEFORE THE MEETING"
+   }
+  },
+  "rec_nathan_r14": {
+   "dataset": "recordings/nathan",
+   "ref": "the weather has been really nice this week",
+   "frames": 58,
+   "info": {
+    "fps_in": 29.984,
+    "frames": 58,
+    "max_faces": 1,
+    "tracked_frames": 58
+   },
+   "hyp": {
+    "torch_lm": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "torch": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b40": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp32_greedy": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "fp16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "int8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q8_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK",
+    "q4f16_b10": "THE WEATHER HAS BEEN REALLY NICE THIS WEEK"
+   }
+  },
+  "rec_nathan_r15": {
+   "dataset": "recordings/nathan",
+   "ref": "did you finish the homework for tomorrow",
+   "frames": 63,
+   "info": {
+    "fps_in": 29.368,
+    "frames": 63,
+    "max_faces": 1,
+    "tracked_frames": 63
+   },
+   "hyp": {
+    "torch_lm": "THAT YOU FINISHED YOUR HOMEWORK FOR TOMORROW",
+    "torch": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "fp32_b40": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "fp32_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "fp32_greedy": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "fp16_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "int8_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "q8_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "q4_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW",
+    "q4f16_b10": "DID YOU FINISH YOUR HOMEWORK FOR TOMORROW"
+   }
+  },
+  "rec_nathan_r16": {
+   "dataset": "recordings/nathan",
+   "ref": "my phone battery is almost dead",
+   "frames": 54,
+   "info": {
+    "fps_in": 29.937,
+    "frames": 54,
+    "max_faces": 1,
+    "tracked_frames": 54
+   },
+   "hyp": {
+    "torch_lm": "MY PHONE BATTERY IS ALMOST DEAD",
+    "torch": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b40": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "fp32_greedy": "MY PHONE BATTERYIES ALMOST TEN",
+    "fp16_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "int8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q8_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4_b10": "MY PHONE BATTERY IS ALMOST DEAD",
+    "q4f16_b10": "MY PHONE BATTERY IS ALMOST DEAD"
+   }
+  },
+  "rec_nathan_r17": {
+   "dataset": "recordings/nathan",
+   "ref": "we are going to the beach on saturday",
+   "frames": 56,
+   "info": {
+    "fps_in": 29.866,
+    "frames": 56,
+    "max_faces": 1,
+    "tracked_frames": 56
+   },
+   "hyp": {
+    "torch_lm": "WE ARE GOING TO MEET ON SATURDAY",
+    "torch": "WE ARE GOING TO BEACH ON SATURDAY",
+    "fp32_b40": "WE ARE GOING TO BEACH ON SATURDAY",
+    "fp32_b10": "WE ARE GOING TO BEACH ON SATURDAY",
+    "fp32_greedy": "WE ARE GOING TO BEACH ON SATURDAY",
+    "fp16_b10": "WE ARE GOING TO BEACH ON SATURDAY",
+    "int8_b10": "WE ARE GOING TO BEACH ON SATURDAY",
+    "q8_b10": "WE ARE GOING TO BEACH ON SATURDAY",
+    "q4_b10": "WE ARE GOING TO BEACH ON SATURDAY",
+    "q4f16_b10": "WE ARE GOING TO BEACH ON SATURDAY"
+   }
+  },
+  "rec_nathan_r18": {
+   "dataset": "recordings/nathan",
+   "ref": "can you send me the link to that video",
+   "frames": 54,
+   "info": {
+    "fps_in": 29.869,
+    "frames": 54,
+    "max_faces": 1,
+    "tracked_frames": 54
+   },
+   "hyp": {
+    "torch_lm": "CAN YOU TELL ME THE LENGTH OF THAT VENUE",
+    "torch": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "fp32_b40": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "fp32_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "fp32_greedy": "CAN YOU SEND ME THE LINK TO THAT VE",
+    "fp16_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "int8_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "q8_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "q4_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR",
+    "q4f16_b10": "CAN YOU SEND ME THE LINK TO THAT VENDOR"
+   }
+  },
+  "rec_nathan_r19": {
+   "dataset": "recordings/nathan",
+   "ref": "i was late because the train was delayed",
+   "frames": 64,
+   "info": {
+    "fps_in": 29.537,
+    "frames": 64,
+    "max_faces": 1,
+    "tracked_frames": 64
+   },
+   "hyp": {
+    "torch_lm": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "torch": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "fp32_b40": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "fp32_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "fp32_greedy": "I WAS LATE BECAUSE THE TRAIN WAS DELAY",
+    "fp16_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "int8_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "q8_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "q4_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED",
+    "q4f16_b10": "I WAS LATE BECAUSE THE TRAIN WAS DELAYED"
+   }
+  },
+  "rec_nathan_r20": {
+   "dataset": "recordings/nathan",
+   "ref": "let me know when you get home",
+   "frames": 43,
+   "info": {
+    "fps_in": 29.984,
+    "frames": 43,
+    "max_faces": 1,
+    "tracked_frames": 43
+   },
+   "hyp": {
+    "torch_lm": "LET ME KNOW WHEN YOU GET HOME",
+    "torch": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_b40": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "fp32_greedy": "LET ME KNOW WHEN YOU GET HOME",
+    "fp16_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "int8_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "q8_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "q4_b10": "LET ME KNOW WHEN YOU GET HOME",
+    "q4f16_b10": "LET ME KNOW WHEN YOU GET HOME"
+   }
+  },
+  "rec_nathan_r21": {
+   "dataset": "recordings/nathan",
+   "ref": "today i want to talk about how we learn new things",
+   "frames": 95,
+   "info": {
+    "fps_in": 29.988,
+    "frames": 95,
+    "max_faces": 1,
+    "tracked_frames": 95
+   },
+   "hyp": {
+    "torch_lm": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "torch": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_b40": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp32_greedy": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "fp16_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "int8_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q8_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q4_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS",
+    "q4f16_b10": "TODAY I WANT TO TALK ABOUT HOW WE LEARN NEW THINGS"
+   }
+  },
+  "rec_nathan_r22": {
+   "dataset": "recordings/nathan",
+   "ref": "most people never think about the way they breathe",
+   "frames": 72,
+   "info": {
+    "fps_in": 29.986,
+    "frames": 72,
+    "max_faces": 1,
+    "tracked_frames": 72
+   },
+   "hyp": {
+    "torch_lm": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "torch": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_b40": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp32_greedy": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "fp16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "int8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q8_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q4_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE",
+    "q4f16_b10": "MOST PEOPLE NEVER THINK ABOUT THE WAY THEY BREATHE"
+   }
+  },
+  "rec_nathan_r23": {
+   "dataset": "recordings/nathan",
+   "ref": "the most important thing is to keep trying",
+   "frames": 61,
+   "info": {
+    "fps_in": 29.985,
+    "frames": 61,
+    "max_faces": 1,
+    "tracked_frames": 61
+   },
+   "hyp": {
+    "torch_lm": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "torch": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b40": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp32_greedy": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "fp16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "int8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q8_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING",
+    "q4f16_b10": "THE MOST IMPORTANT THING IS TO KEEP TRYING"
+   }
+  },
+  "rec_nathan_r24": {
+   "dataset": "recordings/nathan",
+   "ref": "this idea changed the way i think about the world",
+   "frames": 70,
+   "info": {
+    "fps_in": 29.985,
+    "frames": 70,
+    "max_faces": 1,
+    "tracked_frames": 70
+   },
+   "hyp": {
+    "torch_lm": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "torch": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b40": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "fp32_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "fp32_greedy": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "fp16_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "int8_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "q8_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "q4_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD",
+    "q4f16_b10": "THIS IDEA CHANGES THE WAY I THINK ABOUT THE WORLD"
+   }
+  },
+  "rec_nathan_r25": {
+   "dataset": "recordings/nathan",
+   "ref": "we can solve this problem if we work together",
+   "frames": 71,
+   "info": {
+    "fps_in": 29.889,
+    "frames": 71,
+    "max_faces": 1,
+    "tracked_frames": 71
+   },
+   "hyp": {
+    "torch_lm": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "torch": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_b40": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp32_greedy": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "fp16_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "int8_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q8_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q4_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER",
+    "q4f16_b10": "WE CAN SOLVE THIS PROBLEM IF WE WORK TOGETHER"
+   }
+  },
+  "rec_nathan_r26": {
+   "dataset": "recordings/nathan",
+   "ref": "my number is five five five one two three four",
+   "frames": 133,
+   "info": {
+    "fps_in": 30.0,
+    "frames": 133,
+    "max_faces": 1,
+    "tracked_frames": 133
+   },
+   "hyp": {
+    "torch_lm": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "torch": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b40": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp32_greedy": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "fp16_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "int8_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q8_b10": "MY NUMBER IS FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4_b10": "MY NUMBER IS FIVE FIVE FIVE FIVE ONE TWO THREE FOUR",
+    "q4f16_b10": "MY NUMBER IS FIVE FIVE FIVE FIVE ONE TWO THREE FOUR"
+   }
+  },
+  "rec_nathan_r27": {
+   "dataset": "recordings/nathan",
+   "ref": "the meeting starts at three thirty",
+   "frames": 65,
+   "info": {
+    "fps_in": 29.898,
+    "frames": 65,
+    "max_faces": 1,
+    "tracked_frames": 65
+   },
+   "hyp": {
+    "torch_lm": "MEETING STARTS AT THREE THIRTY",
+    "torch": "MEETING STARTS AT THREE THIRTY",
+    "fp32_b40": "MEETING STARTS AT THREE THIRTY",
+    "fp32_b10": "MEETING STARTS AT THREE THIRTY",
+    "fp32_greedy": "MEETING STARTS AT THREE THIRTY",
+    "fp16_b10": "MEETING STARTS AT THREE THIRTY",
+    "int8_b10": "MEETING STARTS AT THREE THIRTY",
+    "q8_b10": "MEETING STARTS AT THREE THIRTY",
+    "q4_b10": "MEETING STARTS AT THREE THIRTY",
+    "q4f16_b10": "MEETING STARTS AT THREE THIRTY"
+   }
+  },
+  "rec_nathan_r28": {
+   "dataset": "recordings/nathan",
+   "ref": "there are twenty four hours in a day",
+   "frames": 72,
+   "info": {
+    "fps_in": 30.007,
+    "frames": 72,
+    "max_faces": 1,
+    "tracked_frames": 72
+   },
+   "hyp": {
+    "torch_lm": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "torch": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_b40": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "fp32_greedy": "THERE ARE TWENTY FOUR HOURS AT A TIME",
+    "fp16_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "int8_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q8_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q4_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY",
+    "q4f16_b10": "THERE ARE TWENTY FOUR HOURS IN A DAY"
+   }
+  },
+  "rec_nathan_r29": {
+   "dataset": "recordings/nathan",
+   "ref": "peter picked a pair of purple boots",
+   "frames": 84,
+   "info": {
+    "fps_in": 29.91,
+    "frames": 84,
+    "max_faces": 1,
+    "tracked_frames": 84
+   },
+   "hyp": {
+    "torch_lm": "PETER MAKES A PAIR OF PURPLE BOOTS",
+    "torch": "METER BENT A PAIR OF PURPLE BOOTS",
+    "fp32_b40": "METER BENT A PAIR OF PURPLE BOOTS",
+    "fp32_b10": "METER BENT A PAIR OF PURPLE BOOTS",
+    "fp32_greedy": "PETER BE A PAIR OF PURPLE BOOTS",
+    "fp16_b10": "METER BENT A PAIR OF PURPLE BOOTS",
+    "int8_b10": "PETER MAKES A PAIR OF PURPLE BOOTS",
+    "q8_b10": "METER BENT A PAIR OF PURPLE BOOTS",
+    "q4_b10": "PETER PICKED A PAIR OF PURPLE BOOTS",
+    "q4f16_b10": "PETER PICKED A PAIR OF PURPLE BOOTS"
+   }
+  },
+  "rec_nathan_r30": {
+   "dataset": "recordings/nathan",
+   "ref": "we moved the boxes from the van",
+   "frames": 72,
+   "info": {
+    "fps_in": 29.856,
+    "frames": 72,
+    "max_faces": 1,
+    "tracked_frames": 72
+   },
+   "hyp": {
+    "torch_lm": "REMOVE THE BOXES FROM THE VAN",
+    "torch": "REMOVE THE BOXES RIP THE VAN",
+    "fp32_b40": "REMOVE THE BOXES RIP THE VAN",
+    "fp32_b10": "REMOVE THE BOXES RIP THE VAN",
+    "fp32_greedy": "REMOVE THE BOXES RI THE VAN",
+    "fp16_b10": "REMOVE THE BOXES RIP THE VAN",
+    "int8_b10": "REMOVE THE BOXES FROM THE VAN",
+    "q8_b10": "REMOVE THE BOXES RIP THE VAN",
+    "q4_b10": "REMOVE THE BOXES RIP THE VAN",
+    "q4f16_b10": "REMOVE THE BOXES RIP THE VAN"
+   }
+  },
+  "rec_nathan_r31": {
+   "dataset": "recordings/nathan",
+   "ref": "the big brown bear ate my muffin",
+   "frames": 73,
+   "info": {
+    "fps_in": 29.94,
+    "frames": 73,
+    "max_faces": 1,
+    "tracked_frames": 73
+   },
+   "hyp": {
+    "torch_lm": "THE PINK BROWN BEAR AND MY MUFFIN",
+    "torch": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "fp32_b40": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "fp32_b10": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "fp32_greedy": "THE PINK BROWN BEAR IS MY MUET",
+    "fp16_b10": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "int8_b10": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "q8_b10": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "q4_b10": "THE PINK BROWN BEAR HAS MY MUFFIN",
+    "q4f16_b10": "THE PINK BROWN BEAR HAS MY MUFFIN"
+   }
+  },
+  "rec_nathan_r32": {
+   "dataset": "recordings/nathan",
+   "ref": "when i was a child i wanted to be an astronaut but now i build websites",
+   "frames": 109,
+   "info": {
+    "fps_in": 29.978,
+    "frames": 109,
+    "max_faces": 1,
+    "tracked_frames": 109
+   },
+   "hyp": {
+    "torch_lm": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "torch": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b40": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp32_greedy": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "fp16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "int8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q8_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q4_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES",
+    "q4f16_b10": "WHEN I WAS A CHILD I WANTED TO BE AN ASTRONAUT BUT NOW I BUILD WEBSITES"
+   }
+  }
+ },
+ "variants": {
+  "torch_lm": {
+   "size_mb": null,
+   "mean_s": 2.0619112664765757
+  },
+  "torch": {
+   "size_mb": null,
+   "mean_s": 1.6320536609843355
+  },
+  "fp32_b40": {
+   "size_mb": 1026.572103,
+   "mean_s": 4.629831841130605
+  },
+  "fp32_b10": {
+   "size_mb": 1026.572103,
+   "mean_s": 1.439061625434988
+  },
+  "fp32_greedy": {
+   "size_mb": 1026.572103,
+   "mean_s": 0.4394733077157677
+  },
+  "fp16_b10": {
+   "size_mb": 513.564884,
+   "mean_s": 1.6141603246918141
+  },
+  "int8_b10": {
+   "size_mb": 324.30888,
+   "mean_s": 0.7028157026640353
+  },
+  "q8_b10": {
+   "size_mb": 363.156786,
+   "mean_s": 2.1048372804070823
+  },
+  "q4_b10": {
+   "size_mb": 247.775032,
+   "mean_s": 1.565345517363312
+  },
+  "q4f16_b10": {
+   "size_mb": 181.871878,
+   "mean_s": 1.869669457458561
+  }
+ }
+}
