@@ -4,9 +4,14 @@ export const config = {
   // 'server': clips are POSTed to transcribeUrl instead (mock or proxy, see README).
   engine: 'browser',
 
-  // Where the browser model files live. server.mjs serves ../ml/exports/web/ here
-  // (build it with ml/scripts/package_web.py). Can be any URL that allows CORS.
-  modelBaseUrl: '/models/',
+  // Where the browser model files live. Locally (and in the desktop app, which
+  // bundles them) server.mjs serves ../ml/exports/web/ at /models/ (build it with
+  // ml/scripts/package_web.py). The deployed site loads them from a public
+  // Cloudflare R2 bucket (upload with ml/scripts/upload_r2.py). Any URL that
+  // allows CORS works.
+  modelBaseUrl: ['localhost', '127.0.0.1'].includes(location.hostname)
+    ? '/models/'
+    : 'https://pub-c53f822c6d244cff9e2513da77916a51.r2.dev/',
 
   // Beam search width. 10 matches the accuracy of 40 within 0.6 WER points
   // (see ml/README.md); 0 = greedy CTC, fastest but ~4 points worse.

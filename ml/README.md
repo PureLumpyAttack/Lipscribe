@@ -17,6 +17,7 @@ The model is the pretrained Auto-AVSR visual speech recognition model (trained o
 | `scripts/prepare_grid.py` | Extract a fixed GRID subset and its transcripts. |
 | `scripts/evaluate.py` | WER of each variant on GRID and our recordings. Writes `results/<name>.{json,md}`. |
 | `scripts/package_web.py` | Copy the q4f16 + q4 models, tokens and crop constants to `exports/web/` (served to the website at `/models/`). |
+| `scripts/upload_r2.py` | Upload `exports/web/` to the public Cloudflare R2 bucket the deployed site loads the model from. |
 | `scripts/dump_parity.py` | Fixtures for the browser parity test (`web/test/`). |
 | `tools/record_prompts.py` | Webcam recorder for labeled test clips (`--speaker NAME`). |
 | `data/recordings/prompts.csv` | Sentences to record; a clip's label is the prompt with the same id. |
@@ -41,6 +42,7 @@ uv run python scripts/export_onnx.py                    # exports/fp32
 uv run python scripts/export_onnx.py --precision fp16   # exports/fp16
 uv run python scripts/quantize.py                       # exports/{int8,q8,q4,q4f16}
 uv run python scripts/package_web.py                    # exports/web, for the website
+CLOUDFLARE_API_TOKEN=... uv run scripts/upload_r2.py   # publish exports/web to R2 (deployed site)
 uv run python scripts/evaluate.py --datasets grid,recordings \
   --variants torch_lm,torch,fp32_b40,fp32_b10,fp32_greedy,fp16_b10,int8_b10,q8_b10,q4_b10,q4f16_b10
 ```

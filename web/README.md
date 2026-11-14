@@ -16,6 +16,8 @@ cd ../ml && uv run python scripts/package_web.py && cd ../web
 npm run dev
 ```
 
+On localhost the page loads the model from `/models/` (served from `../ml/exports/web`). The deployed site loads it from a public Cloudflare R2 bucket instead, since the files (55–165 MB each) are too big for Vercel; after rebuilding the model, publish it with `CLOUDFLARE_API_TOKEN=... uv run scripts/upload_r2.py` in `../ml`. Both are set in `modelBaseUrl` in `public/js/config.js`.
+
 Open http://localhost:3000 in Chrome, Edge or Safari. The demo at http://localhost:3000/demo asks for the camera. Browsers only give camera access on `localhost` or HTTPS. The server restarts itself when `server.mjs` changes. Refresh the browser after editing anything in `public/`.
 
 ## How it works
