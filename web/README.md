@@ -3,7 +3,7 @@
 The Lipscribe website:
 
 - `/`: the landing page explaining the project, with buttons into the demo.
-- `/demo`: the live demo. It shows a webcam view with everything except the mouth greyed out, plus start/stop recording, transcription, text-to-speech playback and transcript history.
+- `/demo`: the live demo. It shows a webcam view with everything except the mouth blurred, plus start/stop recording, transcription, text-to-speech playback and transcript history.
 
 ## Run
 
@@ -18,7 +18,7 @@ Open http://localhost:3000 in Chrome, Edge or Safari. The demo at http://localho
 ## How it works
 
 1. `camera.js` opens the webcam (video only) and records clips with `MediaRecorder`.
-2. `mouth-tracker.js` loads MediaPipe Face Landmarker from a CDN and finds the lips. The highlight is done in CSS: the video is greyed and darkened, and a full-colour copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
+2. `mouth-tracker.js` loads MediaPipe Face Landmarker from a CDN and finds the lips. The highlight is done in CSS: the video is blurred, and a sharp copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
 3. On stop, `transcriber.js` POSTs the clip to `/transcribe` as `multipart/form-data` (field `video`, WebM or MP4).
 4. The result is shown, read aloud with the browser's `speechSynthesis` (`speech.js`), and saved to history in `localStorage` (`storage.js`).
 

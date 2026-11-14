@@ -74,7 +74,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scaleX(-1); /* mirror, like a selfie camera */
+  /* Mirror like a selfie camera. The slight zoom keeps blurred edges inside the frame;
+     both layers share it, so the sharp mouth window still lines up. */
+  transform: scale(-1.06, 1.06);
   opacity: 0;
 }
 .viewport[data-camera='on'] .cam-base {
@@ -84,9 +86,9 @@
     filter 350ms var(--ease);
 }
 
-/* The highlight: everything goes grey and dark, the mouth stays in full colour. */
+/* The highlight: the rest of the face goes soft, the mouth stays sharp. */
 .viewport[data-focus='true'] .cam-base {
-  filter: grayscale(1) brightness(0.45);
+  filter: blur(14px) brightness(0.9);
 }
 .cam-focus {
   transition: opacity 350ms var(--ease);

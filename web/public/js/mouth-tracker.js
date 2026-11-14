@@ -1,7 +1,7 @@
 // Finds the mouth with MediaPipe Face Landmarker and moves the highlight window.
 //
 // The highlight itself is CSS (see .cam-focus in demo.css): the base video is
-// greyed and darkened, and a second, full-colour copy of the video is masked
+// blurred, and a second, sharp copy of the video is masked
 // to an ellipse around the mouth. This file only measures where that ellipse
 // goes and writes it to CSS variables on the viewport.
 //

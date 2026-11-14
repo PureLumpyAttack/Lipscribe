@@ -9,19 +9,19 @@
   margin-bottom: 28px;
 }
 .hero h1 {
-  max-width: 13ch;
+  max-width: 1100px;
   margin: 0 auto;
-  font-size: clamp(2.75rem, 1.5rem + 4.8vw, 5.25rem);
+  font-size: clamp(2.75rem, 1.2rem + 5vw, 5.75rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
   text-wrap: balance;
 }
 .lede {
-  max-width: 54ch;
+  max-width: 820px;
   margin: 24px auto 0;
   color: var(--ink-2);
-  font-size: 1.1875rem;
+  font-size: 1.25rem;
   line-height: 1.55;
   text-wrap: pretty;
 }
@@ -35,7 +35,7 @@
 
 /* Webcam illustration + transcript bar */
 .hero-visual {
-  max-width: 840px;
+  max-width: 960px;
   margin: 64px auto 0;
 }
 .scene {
@@ -43,28 +43,7 @@
   width: 100%;
   height: auto;
   border-radius: 20px;
-  background: #b9b4ad;
-}
-.scene .mouth-gap,
-.scene .lip-lower {
-  transform-box: fill-box;
-  transform-origin: center top;
-}
-.scene.talking .lip-lower {
-  animation: lip-lower 260ms ease-in-out infinite alternate;
-}
-.scene.talking .mouth-gap {
-  animation: mouth-open 260ms ease-in-out infinite alternate;
-}
-@keyframes lip-lower {
-  to {
-    transform: translateY(20px);
-  }
-}
-@keyframes mouth-open {
-  to {
-    transform: scaleY(5.5);
-  }
+  background: #c9997f; /* matches the skin tone so the blurred edges blend */
 }
 
 .prompt {
