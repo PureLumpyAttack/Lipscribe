@@ -14,6 +14,8 @@
 //   TTS_PROXY_URL=https://site   forward /api/tts* to another Lipscribe server
 //                                (the desktop app uses this so no key ships with it)
 
+import { checkTtsLimits } from './ratelimit.mjs';
+
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/audio/speech';
 
 const PRESET_MODEL = process.env.TTS_MODEL_PRESET || 'heygen/heygen-voice-1-turbo';
@@ -26,13 +28,13 @@ const MAX_TEXT_CHARS = 600;
 const MAX_SAMPLE_BYTES = 4 * 1024 * 1024; // base64 data URI of the voice sample
 const MAX_BODY_BYTES = MAX_SAMPLE_BYTES + 64 * 1024;
 
-// Abuse limits for a public site (in memory, per server process).
-const PER_IP_REQUESTS = Number(process.env.TTS_PER_IP_PER_10MIN || 40);
-const DAILY_CHARS = Number(process.env.TTS_DAILY_CHAR_LIMIT || 200_000); // ~$3/day at Fish Audio prices
-
-const recent = new Map(); // ip -> request timestamps
-let day = new Date().toDateString();
-let charsToday = 0;
+// Abuse limits for a public site, shared across instances via Upstash Redis
+// (lib/ratelimit.mjs; in memory when Redis isn't configured).
+const LIMITS = {
+  perIpRequests: Number(process.env.TTS_PER_IP_PER_10MIN || 40),
+  perIpDailyChars: Number(process.env.TTS_PER_IP_DAILY_CHARS || 20_000),
+  dailyChars: Number(process.env.TTS_DAILY_CHAR_LIMIT || 200_000), // ~$3/day at Fish Audio prices
+};
 
 function config() {
   const key = process.env.OPENROUTER_API_KEY || '';
@@ -42,21 +44,6 @@ function config() {
 
 export function ttsStatus() {
   return config().enabled;
-}
-
-function allow(ip, chars) {
-  const now = Date.now();
-  const times = (recent.get(ip) || []).filter((t) => now - t < 10 * 60_000);
-  if (times.length >= PER_IP_REQUESTS) return 'Too many voice requests. Wait a few minutes and try again.';
-  if (new Date().toDateString() !== day) {
-    day = new Date().toDateString();
-    charsToday = 0;
-  }
-  if (charsToday + chars > DAILY_CHARS) return 'The natural voice is out of quota for today. Using the browser voice instead works offline.';
-  times.push(now);
-  recent.set(ip, times);
-  charsToday += chars;
-  return null;
 }
 
 async function readJson(request) {
@@ -155,8 +142,9 @@ export async function handleTts(pathname, request, response) {
     return true;
   }
 
+  // Vercel sets x-forwarded-for itself (clients can't spoof it there).
   const ip = (request.headers['x-forwarded-for']?.split(',')[0] || request.socket.remoteAddress || '?').trim();
-  const refused = allow(ip, text.length);
+  const refused = await checkTtsLimits(ip, text.length, LIMITS);
   if (refused) return send(response, 429, { error: refused }), true;
 
   const payload = clone

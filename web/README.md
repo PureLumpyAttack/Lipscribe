@@ -48,7 +48,7 @@ Natural and cloned voices go through `POST /api/tts` on this server (`lib/tts.mj
 | Your voice | `fish-audio/s2.1-pro` (reference clip + transcript) | ~1.5–3.5 s | $15 / 1M characters |
 | Natural voices | `heygen/heygen-voice-1-turbo` | ~0.6–2.5 s | $4 / 1M characters |
 
-Override with `TTS_MODEL_CLONE`, `TTS_MODEL_PRESET`, `TTS_PRESET_VOICES`. Abuse limits for a public site: 600 characters per request, `TTS_PER_IP_PER_10MIN` (default 40) requests per IP, `TTS_DAILY_CHAR_LIMIT` (default 200,000 characters, about $3 a day) per server process. `TTS_PROXY_URL` forwards `/api/tts` to another Lipscribe server instead (used by the desktop app).
+Override with `TTS_MODEL_CLONE`, `TTS_MODEL_PRESET`, `TTS_PRESET_VOICES`. Abuse limits for a public site: 600 characters per request, `TTS_PER_IP_PER_10MIN` (default 40) requests per IP, `TTS_PER_IP_DAILY_CHARS` (default 20,000) characters per IP per day, and `TTS_DAILY_CHAR_LIMIT` (default 200,000 characters, about $3 a day) for everyone together. The counters live in Upstash Redis (`KV_REST_API_URL` + `KV_REST_API_TOKEN`, or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`) so they hold across Vercel's instances; without Redis, or if it can't be reached, they are kept in memory (`lib/ratelimit.mjs`). `TTS_PROXY_URL` forwards `/api/tts` to another Lipscribe server instead (used by the desktop app).
 
 **Play through** picks the audio output for natural and cloned voices (Chrome and Edge, via `setSinkId`). Choose a virtual audio cable ([BlackHole](https://existential.audio/blackhole/) on macOS, [VB-CABLE](https://vb-audio.com/Cable/) on Windows) and select the same cable as the microphone in Zoom, Meet or Discord, so call participants hear Lipscribe. Browser voices can't be routed this way. The [desktop app](../desktop/) does the same with the model built in and a global shortcut.
 
@@ -106,7 +106,8 @@ Response (JSON):
 | `test/lipread.test.mjs` | Parity tests against the Python pipeline |
 | `public/js/speech.js` | Speaking: browser, natural and cloned voices; output device |
 | `public/js/voice-clone.js` | Recording and storing the user's own voice sample |
-| `lib/tts.mjs` | `/api/tts`: OpenRouter speech, rate limits, proxy mode |
+| `lib/tts.mjs` | `/api/tts`: OpenRouter speech, proxy mode |
+| `lib/ratelimit.mjs` | Voice rate limits (Upstash Redis, in-memory fallback) |
 | `lib/env.mjs` | Loads `web/.env` |
 | `public/download.html` | Desktop app download page |
 | `public/js/storage.js` | History and preferences in `localStorage` |
