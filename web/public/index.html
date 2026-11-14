@@ -3,43 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Lipscribe turns silent mouth movements into text and speech." />
+    <meta name="description" content="Lipscribe reads silent mouth movements and turns them into text and speech." />
+    <meta name="color-scheme" content="light dark" />
     <title>Lipscribe</title>
-    <link rel="icon" href="data:," />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
+    />
     <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/js/app.js"></script>
   </head>
   <body>
-    <header class="header">
+    <header class="topbar">
       <a class="brand" href="/" aria-label="Lipscribe home">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-          <rect width="30" height="30" rx="9" fill="currentColor" />
-          <path d="M8 15h2m3-5v10m4-13v16m4-11v6" stroke="white" stroke-width="2" stroke-linecap="round" />
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" />
+          <path d="M6 16.5c2.6-3.6 5.6-5 8.2-3.4L16 14l1.8-.9c2.6-1.6 5.6-.2 8.2 3.4-2.8 3.9-6.1 5.9-10 5.9s-7.2-2-10-5.9Z" />
+          <path class="seam" d="M7.5 16.6h17" />
         </svg>
-        lipscribe<span class="brand-dot">.</span>
+        <span>lipscribe</span>
       </a>
-      <span class="badge"><span></span> Local development</span>
+      <p class="tagline">Mouth the words. We'll say them.</p>
+      <span class="backend-pill" id="backend-pill" data-mode="unknown">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="backend-label">Checking model…</span>
+      </span>
     </header>
 
-    <main>
-      <div class="eyebrow">A LITTLE LESS NOISE. A LOT MORE CONNECTION.</div>
-      <h1>Every word deserves<br />to be <span>heard.</span></h1>
-      <p class="intro">Turn silent mouth movements into text and speech.<br class="desktop-break" /> A voice for the moments when sound isn't enough.</p>
+    <main class="layout">
+      <section class="stage" aria-labelledby="stage-title">
+        <h1 class="visually-hidden" id="stage-title">Lipscribe: lip reading to text and speech</h1>
 
-      <section class="workspace" aria-labelledby="workspace-title">
-        <div class="workspace-top">
-          <span class="workspace-label" id="workspace-title">Your workspace</span>
-          <span class="version">STARTER / 01</span>
+        <div class="viewport" id="viewport" data-camera="idle" data-recording="false">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay" aria-hidden="true"></canvas>
+
+          <div class="hud">
+            <span class="chip" id="track-chip" data-state="off">Camera off</span>
+            <span class="chip chip-rec" id="rec-chip" hidden>
+              <span class="rec-dot" aria-hidden="true"></span>
+              <span id="rec-time">0:00</span>
+            </span>
+          </div>
+
+          <div class="camera-gate" id="camera-gate">
+            <svg class="gate-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect x="5" y="12" width="28" height="24" rx="7" stroke="currentColor" stroke-width="2" />
+              <path d="m33 21 9-5v16l-9-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+            <p class="gate-title" id="gate-title">Turn on your camera</p>
+            <p class="gate-body" id="gate-body">Lipscribe watches your mouth, not your microphone. Nothing leaves this device until you record.</p>
+            <button class="btn btn-primary" id="camera-btn" type="button">Enable camera</button>
+          </div>
+
+          <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
         </div>
-        <div class="workspace-body">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="5" y="9" width="29" height="30" rx="9" stroke="currentColor" stroke-width="1.5" />
-            <path d="m34 20 9-5v18l-9-5M16 24h7m-3.5-3.5v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <h2>Ready to build.</h2>
-          <p>The foundation is here. Your lip-reading experience comes next.</p>
+
+        <div class="controls">
+          <button class="record-btn" id="record-btn" type="button" disabled aria-pressed="false">
+            <span class="record-icon" aria-hidden="true"></span>
+            <span id="record-label">Start recording</span>
+          </button>
+          <p class="controls-hint">
+            <span class="hint-key"><kbd>Space</kbd> starts and stops. </span>Clips stop on their own after <span id="max-secs">15</span> seconds.
+          </p>
         </div>
       </section>
-      <footer>Built for understanding.<span>Lipscribe · Hackathon prototype</span></footer>
+
+      <div class="side">
+        <section class="panel latest" id="latest" data-state="empty" data-speaking="false" aria-labelledby="latest-title">
+          <div class="panel-head">
+            <h2 id="latest-title">Transcript</h2>
+            <span class="meta" id="latest-meta"></span>
+          </div>
+
+          <p class="transcript" id="transcript" aria-live="polite">Record a clip and the words show up here, then get read aloud.</p>
+
+          <div class="skeleton" aria-hidden="true"><span></span><span></span></div>
+          <p class="loading-note" role="status">Reading your lips…</p>
+
+          <div class="error-box" role="alert">
+            <p id="error-text"></p>
+            <button class="btn btn-secondary btn-small" id="retry-btn" type="button">Send clip again</button>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="speak-btn" type="button" disabled>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" /><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" /></svg>
+              <span id="speak-label">Speak</span>
+            </button>
+            <button class="btn btn-secondary" id="copy-btn" type="button" disabled>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16" /></svg>
+              <span id="copy-label">Copy</span>
+            </button>
+          </div>
+
+          <div class="voice-row">
+            <label class="field">
+              <span class="field-label">Voice</span>
+              <select id="voice-select"></select>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="autospeak" checked />
+              <span>Read new transcripts aloud</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel history" aria-labelledby="history-title">
+          <div class="panel-head">
+            <h2 id="history-title">History <span class="count" id="history-count">0</span></h2>
+            <button class="btn btn-ghost btn-small" id="clear-btn" type="button" disabled>Clear all</button>
+          </div>
+          <p class="history-empty" id="history-empty">Every transcript lands here, newest first. They stay in this browser only.</p>
+          <ol class="history-list" id="history-list"></ol>
+        </section>
+      </div>
     </main>
+
+    <footer class="footer">
+      <span>Lipscribe · hackathon build</span>
+      <span>Clips go to <code id="endpoint-label">/transcribe</code></span>
+    </footer>
+
+    <template id="history-item">
+      <li class="history-item">
+        <p class="history-text"></p>
+        <div class="history-foot">
+          <span class="history-meta"></span>
+          <span class="history-actions">
+            <button type="button" class="icon-btn" data-action="speak" aria-label="Read this transcript aloud">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" /><path class="wave" d="M15.5 8.5a5 5 0 0 1 0 7" /></svg>
+            </button>
+            <button type="button" class="icon-btn" data-action="copy" aria-label="Copy this transcript">
+              <svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16" /></svg>
+              <svg class="i-check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+            </button>
+          </span>
+        </div>
+      </li>
+    </template>
   </body>
 </html>
