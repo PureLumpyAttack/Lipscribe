@@ -4,12 +4,7 @@ Lipscribe reads your lips through the webcam and turns them into text, then spee
 
 It uses the pretrained Auto-AVSR lip-reading model, exported to ONNX and cut to 182 MB with 4-bit weights. On our own recordings it gets 18.6% word error rate.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="ml/results/charts/dark/3_size_vs_accuracy.png">
-  <img alt="Word accuracy vs model size: q4f16 is the smallest (182 MB) and most accurate (81.4%)" src="ml/results/charts/light/3_size_vs_accuracy.png">
-</picture>
-
-More results in [`ml/README.md`](ml/README.md#results).
+Results and charts are in [`ml/README.md`](ml/README.md#results).
 
 ## Quick start
 
