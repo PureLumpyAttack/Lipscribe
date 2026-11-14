@@ -12,7 +12,8 @@
 //
 // Settings come from the environment or web/.env (OPENROUTER_API_KEY, PORT,
 // HOST, MODELS_DIR, TRANSCRIBE_URL, TTS_*). The desktop app imports
-// startServer() instead of running this file.
+// startServer() instead of running this file; Vercel imports the default
+// export (the request handler).
 
 import './lib/env.mjs';
 import { handleTts, ttsStatus } from './lib/tts.mjs';
@@ -53,7 +54,8 @@ const MOCK_PHRASES = [
   'Thank you so much for your help.',
 ];
 
-async function handle(request, response) {
+// Vercel (and other hosts that import this file) call the default export per request.
+export default async function handle(request, response) {
   const { pathname } = new URL(request.url, 'http://localhost');
   try {
     if (await handleTts(pathname, request, response)) return;
