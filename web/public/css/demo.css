@@ -437,6 +437,112 @@ kbd {
   cursor: pointer;
 }
 
+.voice-note {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+.voice-note[data-tone='error'] {
+  color: var(--error);
+}
+.mic-help {
+  flex-basis: 100%;
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+}
+.mic-help summary {
+  cursor: pointer;
+  color: var(--ink-3);
+}
+.mic-help ol {
+  margin: 8px 0 4px;
+  padding-left: 20px;
+}
+.mic-help li + li {
+  margin-top: 4px;
+}
+.mic-help p {
+  margin: 6px 0 0;
+}
+
+/* ---------- Voice clone dialog ---------- */
+.clone-dialog {
+  width: min(560px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.18);
+}
+.clone-dialog::backdrop {
+  background: rgb(20 21 24 / 0.45);
+}
+.clone-inner {
+  padding: 24px;
+}
+.clone-inner h2 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+.clone-inner p {
+  margin: 0 0 10px;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+.clone-inner .clone-small {
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+.clone-script {
+  margin: 14px 0;
+  padding: 14px 16px;
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-muted);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+.clone-consent {
+  align-items: flex-start;
+}
+.clone-consent input {
+  flex: none;
+  margin-top: 1px;
+}
+.clone-meter {
+  height: 6px;
+  margin: 14px 0 8px;
+  border-radius: 3px;
+  background: var(--bg-muted);
+  overflow: hidden;
+}
+.clone-meter span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 60ms linear;
+}
+.clone-status {
+  min-height: 1.4em;
+}
+.clone-status[data-tone='error'] {
+  color: var(--error);
+}
+.clone-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.clone-close {
+  margin-left: auto;
+}
+
 /* ---------- History ---------- */
 .count {
   min-width: 24px;

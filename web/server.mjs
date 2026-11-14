@@ -3,22 +3,28 @@
 //   GET  /*            static files from ./public
 //   GET  /models/*     browser model files from ../ml/exports/web (ml/scripts/package_web.py),
 //                      or from MODELS_DIR if set
-//   GET  /api/status   { mode: 'mock' | 'proxy' }
+//   GET  /api/status   { mode: 'mock' | 'proxy', tts: bool }
+//   GET  /api/tts/voices, POST /api/tts   natural / cloned voices (lib/tts.mjs)
 //   POST /transcribe   multipart video in, { text, confidence } out
 //
 // /transcribe returns fake text unless TRANSCRIBE_URL is set, in which case
 // the request is forwarded untouched to the real model (no CORS setup needed).
+//
+// Settings come from the environment or web/.env (OPENROUTER_API_KEY, PORT,
+// HOST, MODELS_DIR, TRANSCRIBE_URL, TTS_*). The desktop app imports
+// startServer() instead of running this file.
 
+import './lib/env.mjs';
+import { handleTts, ttsStatus } from './lib/tts.mjs';
 import { createServer } from 'node:http';
 import { createReadStream } from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const port = Number(process.env.PORT || 3000);
 const modelUrl = process.env.TRANSCRIBE_URL || '';
-const publicDir = fileURLToPath(new URL('./public/', import.meta.url));
-const modelsDir = resolve(process.env.MODELS_DIR || fileURLToPath(new URL('../ml/exports/web/', import.meta.url))) + '/';
+let publicDir = fileURLToPath(new URL('./public/', import.meta.url));
+let modelsDir = resolve(process.env.MODELS_DIR || fileURLToPath(new URL('../ml/exports/web/', import.meta.url))) + '/';
 
 const CONTENT_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -47,14 +53,15 @@ const MOCK_PHRASES = [
   'Thank you so much for your help.',
 ];
 
-createServer(async (request, response) => {
+async function handle(request, response) {
   const { pathname } = new URL(request.url, 'http://localhost');
   try {
+    if (await handleTts(pathname, request, response)) return;
     if (pathname === '/transcribe' && request.method === 'POST') {
       return modelUrl ? await proxyTranscribe(request, response) : await mockTranscribe(request, response);
     }
     if (pathname === '/api/status' && request.method === 'GET') {
-      return sendJson(response, 200, { mode: modelUrl ? 'proxy' : 'mock' });
+      return sendJson(response, 200, { mode: modelUrl ? 'proxy' : 'mock', tts: ttsStatus() });
     }
     if ((request.method === 'GET' || request.method === 'HEAD') && pathname.startsWith('/models/')) {
       return await serveModel(pathname, request, response);
@@ -68,10 +75,33 @@ createServer(async (request, response) => {
     if (!response.headersSent) sendJson(response, 500, { error: 'Server error' });
     else response.end();
   }
-}).listen(port, '127.0.0.1', () => {
-  console.log(`Lipscribe is running at http://localhost:${port}`);
-  console.log(modelUrl ? `/transcribe → ${modelUrl}` : '/transcribe → mock responses');
-});
+}
+
+/**
+ * Start the server. Options override the environment (used by the desktop app).
+ * Resolves with the bound port (pass port 0 for any free port).
+ */
+export function startServer({ port = Number(process.env.PORT || 3000), host = process.env.HOST || '127.0.0.1', public: pub, models, quiet = false } = {}) {
+  if (pub) publicDir = resolve(pub) + '/';
+  if (models) modelsDir = resolve(models) + '/';
+  return new Promise((done, fail) => {
+    const server = createServer(handle);
+    server.on('error', fail);
+    server.listen(port, host, () => {
+      const bound = server.address().port;
+      if (!quiet) {
+        console.log(`Lipscribe is running at http://localhost:${bound}`);
+        console.log(modelUrl ? `/transcribe → ${modelUrl}` : '/transcribe → mock responses');
+        console.log(ttsStatus() ? 'natural voices → OpenRouter' : 'natural voices off (set OPENROUTER_API_KEY in web/.env)');
+      }
+      done({ server, port: bound });
+    });
+  });
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  startServer();
+}
 
 async function mockTranscribe(request, response) {
   let bytes = 0;

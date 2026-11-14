@@ -35,6 +35,7 @@
               <a href="/about#who">Who it's for<span>Loud rooms, no voice, quiet places</span></a>
               <a href="/about#how">How it works<span>From lip movement to spoken words</span></a>
               <a href="/demo" aria-current="page">Live demo<span>Try it with your own webcam</span></a>
+              <a href="/download">Desktop app<span>Speak into Zoom, Meet and Discord</span></a>
             </div>
           </div>
           <a class="nav-link" href="/about#faq">Q&amp;A</a>
@@ -131,10 +132,29 @@
                 <span class="field-label">Voice</span>
                 <select id="voice-select"></select>
               </label>
+              <button class="btn btn-outline btn-sm" id="clone-open" type="button">Use my voice</button>
+              <label class="field" id="output-field" hidden>
+                <span class="field-label">Play through</span>
+                <select id="output-select"></select>
+              </label>
+              <label class="toggle" id="also-local-field" hidden>
+                <input type="checkbox" id="also-local" checked />
+                <span>Also play on this computer</span>
+              </label>
               <label class="toggle">
                 <input type="checkbox" id="autospeak" checked />
                 <span>Read new transcripts aloud</span>
               </label>
+              <p class="voice-note" id="voice-note" hidden></p>
+              <details class="mic-help">
+                <summary>Speak into Zoom, Meet or Discord</summary>
+                <ol>
+                  <li>Install a free virtual audio cable: <a href="https://existential.audio/blackhole/" target="_blank" rel="noopener">BlackHole 2ch</a> on macOS, <a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener">VB-CABLE</a> on Windows.</li>
+                  <li>Pick a natural voice or your own voice above, then set <b>Play through</b> to the cable (BlackHole 2ch / CABLE Input).</li>
+                  <li>In the call app, choose the cable as your microphone (BlackHole 2ch / CABLE Output).</li>
+                </ol>
+                <p>Works in Chrome and Edge. The <a href="/download">desktop app</a> does the same without a browser tab and adds a global shortcut.</p>
+              </details>
             </div>
           </section>
 
@@ -149,6 +169,27 @@
         </aside>
       </div>
     </main>
+
+    <dialog class="clone-dialog" id="clone-dialog" aria-labelledby="clone-title">
+      <form method="dialog" class="clone-inner">
+        <h2 id="clone-title">Use your own voice</h2>
+        <p>Lipscribe can read your words in your own voice. Record yourself reading the text below, about 20 seconds at a normal pace.</p>
+        <p class="clone-small">The recording stays in this browser. It is sent to the voice service (OpenRouter, Fish Audio) each time Lipscribe speaks in your voice, and is not stored there. Only record your own voice.</p>
+        <blockquote class="clone-script" id="clone-script"></blockquote>
+        <label class="toggle clone-consent">
+          <input type="checkbox" id="clone-consent" />
+          <span>This is my own voice, and I agree to it being used to generate speech for me.</span>
+        </label>
+        <div class="clone-meter" aria-hidden="true"><span id="clone-level"></span></div>
+        <p class="clone-status" id="clone-status" role="status"></p>
+        <div class="clone-actions">
+          <button class="btn btn-dark" id="clone-record" type="button" disabled>Start recording</button>
+          <button class="btn btn-outline" id="clone-test" type="button" hidden>Hear my voice</button>
+          <button class="btn btn-outline" id="clone-delete" type="button" hidden>Delete my voice</button>
+          <button class="btn btn-sm clone-close" value="close">Close</button>
+        </div>
+      </form>
+    </dialog>
 
     <footer class="footer">
       <div class="footer-bottom">

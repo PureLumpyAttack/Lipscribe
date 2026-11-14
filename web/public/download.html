@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Download the Lipscribe desktop app: lip reading on your computer, spoken into your calls through a virtual microphone." />
+    <meta name="color-scheme" content="light" />
+    <title>Desktop app · Lipscribe</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/demo.css" />
+    <script type="module" src="/js/nav.js"></script>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="logo" href="/about" aria-label="Lipscribe home">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path class="mark-top" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
+            <path class="mark-bottom" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
+          </svg>
+          lipscribe
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          <div class="menu" data-menu>
+            <button class="nav-link menu-trigger" type="button" aria-expanded="false" aria-controls="product-menu">
+              Product
+              <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+            </button>
+            <div class="menu-panel" id="product-menu" hidden>
+              <a href="/about#who">Who it's for<span>Loud rooms, no voice, quiet places</span></a>
+              <a href="/about#how">How it works<span>From lip movement to spoken words</span></a>
+              <a href="/demo">Live demo<span>Try it with your own webcam</span></a>
+              <a href="/download" aria-current="page">Desktop app<span>Speak into Zoom, Meet and Discord</span></a>
+            </div>
+          </div>
+          <a class="nav-link" href="/about#faq">Q&amp;A</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="nav-link" href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a>
+          <a class="btn btn-outline btn-sm" href="/about">About Lipscribe</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="download">
+      <h1>Lipscribe for your computer</h1>
+      <p class="download-lead">The desktop app reads your lips on your own computer and speaks for you, in a natural voice or your own, straight into Zoom, Google Meet, Teams or Discord as if it were your microphone.</p>
+
+      <div class="download-buttons">
+        <a class="btn btn-dark" href="https://github.com/PureLumpyAttack/Lipscribe/releases/latest">Download for macOS (Apple silicon)</a>
+        <a class="btn btn-outline" href="https://github.com/PureLumpyAttack/Lipscribe/releases/latest">Download for Windows</a>
+      </div>
+      <p class="download-small">The model is built in (about 270 MB download), so lip reading works offline and the video never leaves your computer. Natural and cloned voices use the Lipscribe voice service.</p>
+
+      <section class="download-steps">
+        <h2>Use it as a microphone in calls</h2>
+        <ol>
+          <li><b>Install a virtual audio cable</b> (free): <a href="https://existential.audio/blackhole/" target="_blank" rel="noopener">BlackHole 2ch</a> on macOS, <a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener">VB-CABLE</a> on Windows. It adds a pretend speaker and microphone that are wired together.</li>
+          <li><b>In Lipscribe</b>, pick a natural voice or set up your own voice, then set <b>Play through</b> to the cable (BlackHole 2ch or CABLE Input). Keep <b>Also play on this computer</b> on to hear yourself.</li>
+          <li><b>In your call app</b>, choose the cable as the microphone (BlackHole 2ch or CABLE Output).</li>
+          <li>Press <kbd>⌘⇧L</kbd> (macOS) or <kbd>Ctrl+Shift+L</kbd> (Windows) to start and stop reading your lips, even while the call app is in front. Turn on <b>View → Keep on top</b> to keep the camera view visible.</li>
+        </ol>
+        <p>The same works in the <a href="/demo">browser demo</a> in Chrome or Edge, as long as the tab stays open.</p>
+      </section>
+
+      <section class="download-steps">
+        <h2>First launch</h2>
+        <p>The app isn't signed yet. On macOS, right-click Lipscribe in Applications and choose <b>Open</b> the first time. On Windows, choose <b>More info → Run anyway</b>. Allow camera access when asked.</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-bottom">
+        <span>© 2026 Lipscribe</span>
+        <span>Video never leaves your computer.</span>
+      </div>
+    </footer>
+  </body>
+</html>

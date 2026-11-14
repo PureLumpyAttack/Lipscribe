@@ -7,6 +7,7 @@ import { createMouthTracker } from './mouth-tracker.js';
 import { createFaceTarget } from './lipread/face-target.js';
 import { createFrameRecorder } from './lipread/frame-recorder.js';
 import * as speech from './speech.js';
+import * as voiceClone from './voice-clone.js';
 import { loadHistory, saveHistory, loadPrefs, savePrefs, MAX_HISTORY } from './storage.js';
 
 const $ = (id) => document.getElementById(id);
@@ -43,6 +44,20 @@ const ui = {
   facesOverlay: $('faces-overlay'),
   peopleHint: $('people-hint'),
   loadingNote: document.querySelector('#latest .loading-note'),
+  outputField: $('output-field'),
+  outputSelect: $('output-select'),
+  alsoLocalField: $('also-local-field'),
+  alsoLocal: $('also-local'),
+  voiceNote: $('voice-note'),
+  cloneOpen: $('clone-open'),
+  cloneDialog: $('clone-dialog'),
+  cloneScript: $('clone-script'),
+  cloneConsent: $('clone-consent'),
+  cloneLevel: $('clone-level'),
+  cloneStatus: $('clone-status'),
+  cloneRecord: $('clone-record'),
+  cloneTest: $('clone-test'),
+  cloneDelete: $('clone-delete'),
 };
 
 const inBrowser = config.engine === 'browser';
@@ -61,7 +76,13 @@ const state = {
   speakingId: null,
   history: loadHistory(),
   prefs: loadPrefs(),
+  serverVoices: { enabled: false, presets: [], clone: false },
+  systemVoices: [],
+  cloneRec: null, // active voice-sample recording
 };
+
+// Older prefs stored a bare speechSynthesis voice name.
+if (state.prefs.voice && !/^(system:|preset:|clone$)/.test(state.prefs.voice)) state.prefs.voice = `system:${state.prefs.voice}`;
 
 /* ---------- Camera ---------- */
 
@@ -123,6 +144,7 @@ async function enableCamera() {
     }
     ui.viewport.dataset.camera = 'on';
     ui.recordBtn.disabled = state.busy;
+    renderOutputOptions(); // device names are only visible after a media permission
     state.tracker ??= createMouthTracker({
       video: ui.video,
       viewport: ui.viewport,
@@ -343,10 +365,14 @@ function showError(message, canRetry) {
 /* ---------- Speech ---------- */
 
 function speakEntry(entry) {
+  showVoiceNote('');
   speech.speak(entry.text, {
-    voiceName: state.prefs.voice,
+    voice: state.prefs.voice,
+    sinkId: state.prefs.outputDevice || '',
+    alsoLocal: state.prefs.alsoLocal !== false,
     onStart: () => setSpeaking(entry.id),
     onEnd: () => setSpeaking(null),
+    onError: (error) => showVoiceNote(error.message, 'error'),
   });
 }
 
@@ -369,24 +395,143 @@ function setSpeaking(id) {
   }
 }
 
-function setupVoices() {
-  if (!speech.supported) {
-    ui.voiceSelect.innerHTML = '<option>Not supported in this browser</option>';
-    ui.voiceSelect.disabled = true;
-    ui.autospeak.checked = false;
-    ui.autospeak.disabled = true;
-    return;
-  }
-  speech.onVoices((voices) => {
-    const english = voices.filter((v) => v.lang.startsWith('en'));
-    const others = voices.filter((v) => !v.lang.startsWith('en'));
-    const option = (v) => new Option(`${v.name} (${v.lang})`, v.name);
-    ui.voiceSelect.replaceChildren(new Option('System default', ''), ...english.map(option), ...others.map(option));
-    ui.voiceSelect.value = voices.some((v) => v.name === state.prefs.voice) ? state.prefs.voice : '';
-  });
+function showVoiceNote(text, tone = '') {
+  ui.voiceNote.hidden = !text;
+  ui.voiceNote.textContent = text;
+  ui.voiceNote.dataset.tone = tone;
 }
 
-/* ---------- History ---------- */
+const titleCase = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Rebuild the Voice list: own voice, natural (server) voices, browser voices. */
+function renderVoiceOptions() {
+  const groups = [];
+  const { enabled, presets } = state.serverVoices;
+  if (enabled) {
+    const own = new Option(voiceClone.loadSample() ? 'My voice' : 'My voice (set up first)', 'clone');
+    own.disabled = !voiceClone.loadSample();
+    const g = document.createElement('optgroup');
+    g.label = 'Your voice';
+    g.append(own);
+    groups.push(g);
+    const n = document.createElement('optgroup');
+    n.label = 'Natural voices';
+    n.append(...presets.map((v) => new Option(titleCase(v), `preset:${v}`)));
+    groups.push(n);
+  }
+  if (state.systemVoices.length) {
+    const english = state.systemVoices.filter((v) => v.lang.startsWith('en'));
+    const others = state.systemVoices.filter((v) => !v.lang.startsWith('en'));
+    const b = document.createElement('optgroup');
+    b.label = 'Browser voices (offline)';
+    b.append(new Option('System default', 'system:'), ...[...english, ...others].map((v) => new Option(`${v.name} (${v.lang})`, `system:${v.name}`)));
+    groups.push(b);
+  }
+  ui.voiceSelect.replaceChildren(...groups);
+  ui.voiceSelect.disabled = groups.length === 0;
+
+  const values = [...ui.voiceSelect.querySelectorAll('option:not(:disabled)')].map((o) => o.value);
+  if (!values.includes(state.prefs.voice)) {
+    // Default: a natural voice when the server has them, else the browser default.
+    state.prefs.voice = enabled && presets.length ? `preset:${presets[0]}` : 'system:';
+  }
+  ui.voiceSelect.value = state.prefs.voice;
+  ui.cloneOpen.hidden = !enabled;
+  updateOutputUI();
+}
+
+/** Output device picker: only for server voices, only where setSinkId exists. */
+async function renderOutputOptions() {
+  if (!speech.canPickOutput) return;
+  const devices = await speech.outputDevices().catch(() => []);
+  const options = devices.map((d, i) => {
+    const label = d.label || (d.deviceId === 'default' ? 'System default' : `Output ${i + 1}`);
+    return new Option(speech.isVirtualDevice(label) ? `${label} (virtual mic)` : label, d.deviceId === 'default' ? '' : d.deviceId);
+  });
+  if (!options.some((o) => o.value === '')) options.unshift(new Option('System default', ''));
+  ui.outputSelect.replaceChildren(...options);
+  if (![...ui.outputSelect.options].some((o) => o.value === state.prefs.outputDevice)) state.prefs.outputDevice = '';
+  ui.outputSelect.value = state.prefs.outputDevice || '';
+  updateOutputUI();
+}
+
+function updateOutputUI() {
+  const serverVoice = state.prefs.voice === 'clone' || state.prefs.voice.startsWith('preset:');
+  ui.outputField.hidden = !speech.canPickOutput || !serverVoice || ui.outputSelect.options.length < 2;
+  ui.alsoLocalField.hidden = ui.outputField.hidden || !state.prefs.outputDevice;
+  ui.alsoLocal.checked = state.prefs.alsoLocal !== false;
+}
+
+async function setupVoices() {
+  speech.onVoices((voices) => {
+    state.systemVoices = voices;
+    renderVoiceOptions();
+  });
+  state.serverVoices = await speech.serverVoices();
+  renderVoiceOptions();
+  renderOutputOptions();
+  navigator.mediaDevices?.addEventListener?.('devicechange', renderOutputOptions);
+}
+
+/* ---------- Your own voice ---------- */
+
+function setCloneStatus(text, tone = '') {
+  ui.cloneStatus.textContent = text;
+  ui.cloneStatus.dataset.tone = tone;
+}
+
+function refreshCloneDialog() {
+  const sample = voiceClone.loadSample();
+  ui.cloneTest.hidden = !sample;
+  ui.cloneDelete.hidden = !sample;
+  ui.cloneRecord.disabled = !ui.cloneConsent.checked && !state.cloneRec;
+  ui.cloneRecord.textContent = state.cloneRec ? 'Stop and save' : sample ? 'Record again' : 'Start recording';
+  if (!state.cloneRec && !ui.cloneStatus.textContent) {
+    setCloneStatus(sample ? `Your voice is saved (${new Date(sample.createdAt).toLocaleDateString()}).` : '');
+  }
+}
+
+function openCloneDialog() {
+  ui.cloneScript.textContent = voiceClone.SCRIPT;
+  ui.cloneConsent.checked = Boolean(voiceClone.loadSample());
+  setCloneStatus('');
+  refreshCloneDialog();
+  ui.cloneDialog.showModal();
+}
+
+async function toggleCloneRecording() {
+  if (!state.cloneRec) {
+    setCloneStatus('');
+    try {
+      state.cloneRec = await voiceClone.startSampleRecording({
+        onLevel: (v) => (ui.cloneLevel.style.transform = `scaleX(${v})`),
+        onLimit: () => state.cloneRec && toggleCloneRecording(),
+      });
+      setCloneStatus('Recording… read the text above, then press Stop and save.');
+    } catch (error) {
+      setCloneStatus(error.name === 'NotAllowedError' ? 'Microphone access is blocked. Allow it from the address bar.' : error.message, 'error');
+    }
+    refreshCloneDialog();
+    return;
+  }
+  const rec = state.cloneRec;
+  state.cloneRec = null;
+  setCloneStatus('Processing…');
+  refreshCloneDialog();
+  try {
+    const sample = await rec.stop();
+    if (!voiceClone.saveSample(sample)) throw new Error("Couldn't save the recording in this browser (storage is full or blocked).");
+    state.prefs.voice = 'clone';
+    savePrefs(state.prefs);
+    setCloneStatus(`Saved ${Math.round(sample.seconds)} seconds. Lipscribe will now speak in your voice.`);
+    renderVoiceOptions();
+  } catch (error) {
+    setCloneStatus(error.message, 'error');
+  }
+  refreshCloneDialog();
+}
+
+/* ---------- History ---------- *//* ---------- History ---------- */
 
 function renderHistory() {
   const items = state.history;
@@ -472,6 +617,49 @@ ui.copyBtn.addEventListener('click', () => {
 ui.voiceSelect.addEventListener('change', () => {
   state.prefs.voice = ui.voiceSelect.value;
   savePrefs(state.prefs);
+  updateOutputUI();
+});
+
+ui.outputSelect.addEventListener('change', () => {
+  state.prefs.outputDevice = ui.outputSelect.value;
+  savePrefs(state.prefs);
+  updateOutputUI();
+  const label = ui.outputSelect.selectedOptions[0]?.textContent ?? '';
+  showVoiceNote(speech.isVirtualDevice(label) ? 'Now choose the same cable as the microphone in your call app.' : '');
+});
+
+ui.alsoLocal.addEventListener('change', () => {
+  state.prefs.alsoLocal = ui.alsoLocal.checked;
+  savePrefs(state.prefs);
+});
+
+ui.cloneOpen.addEventListener('click', openCloneDialog);
+ui.cloneConsent.addEventListener('change', refreshCloneDialog);
+ui.cloneRecord.addEventListener('click', toggleCloneRecording);
+ui.cloneTest.addEventListener('click', () => {
+  speech.speak('Hi, this is how I sound in Lipscribe.', {
+    voice: 'clone',
+    sinkId: '',
+    onStart: () => setCloneStatus('Generating…'),
+    onEnd: () => {
+      if (ui.cloneStatus.textContent === 'Generating…') setCloneStatus('');
+      refreshCloneDialog();
+    },
+    onError: (error) => setCloneStatus(error.message, 'error'),
+  });
+});
+ui.cloneDelete.addEventListener('click', () => {
+  voiceClone.deleteSample();
+  if (state.prefs.voice === 'clone') state.prefs.voice = '';
+  savePrefs(state.prefs);
+  setCloneStatus('Your voice recording was deleted from this browser.');
+  renderVoiceOptions();
+  refreshCloneDialog();
+});
+ui.cloneDialog.addEventListener('close', () => {
+  state.cloneRec?.cancel();
+  state.cloneRec = null;
+  ui.cloneStatus.dataset.tone = '';
 });
 
 ui.autospeak.addEventListener('change', () => {
@@ -501,6 +689,9 @@ ui.clearBtn.addEventListener('click', () => {
   saveHistory(state.history);
   renderHistory();
 });
+
+// Desktop app: global shortcut (works while a call app is in front).
+window.lipscribeApp?.onToggleRecording(() => toggleRecording());
 
 document.addEventListener('keydown', (event) => {
   if (event.code !== 'Space' || event.repeat) return;

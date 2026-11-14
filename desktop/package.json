@@ -1,0 +1,62 @@
+{
+  "name": "lipscribe-desktop",
+  "productName": "Lipscribe",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lipscribe desktop app: reads your lips and speaks for you, into a virtual microphone for calls.",
+  "type": "module",
+  "main": "main.mjs",
+  "scripts": {
+    "sync": "node scripts/sync.mjs",
+    "start": "npm run sync && electron .",
+    "dist:mac": "npm run sync && electron-builder --mac",
+    "dist:win": "npm run sync && electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "45.2.1",
+    "electron-builder": "26.18.1"
+  },
+  "build": {
+    "appId": "com.purelumpyattack.lipscribe",
+    "productName": "Lipscribe",
+    "files": [
+      "main.mjs",
+      "preload.cjs",
+      "config.json",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "app/web",
+        "to": "web"
+      },
+      {
+        "from": "app/models",
+        "to": "models"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.productivity",
+      "identity": null,
+      "hardenedRuntime": false,
+      "extendInfo": {
+        "NSCameraUsageDescription": "Lipscribe watches your lips to work out what you are saying. Video stays on this computer.",
+        "NSMicrophoneUsageDescription": "Lipscribe records a short sample of your voice when you set up your own voice."
+      }
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "signAndEditExecutable": false
+    },
+    "electronDist": "node_modules/electron/dist"
+  },
+  "author": "PureLumpyAttack"
+}

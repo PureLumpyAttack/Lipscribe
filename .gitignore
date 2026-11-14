@@ -15,3 +15,6 @@ ml/data/grid/
 ml/data/recordings/clips/
 ml/results/cache/
 ml/results/parity/
+desktop/app/
+desktop/dist/
+desktop/.cache/

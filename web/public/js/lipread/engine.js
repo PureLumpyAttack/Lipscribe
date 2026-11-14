@@ -94,6 +94,8 @@ export function createEngine({ baseUrl, beam = 10, onProgress = () => {} }) {
         return r.json();
       })),
     );
+    // Use the preferred model if this server has it (the desktop app ships q4f16 only).
+    if (!manifest.variants[backend.variant]) backend.variant = Object.keys(manifest.variants)[0];
     const files = manifest.variants[backend.variant];
     const total = files.encoder.bytes + files.decoder.bytes;
     const got = { encoder: 0, decoder: 0 };
