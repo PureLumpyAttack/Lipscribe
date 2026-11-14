@@ -43,4 +43,4 @@ npm run dist:mac   # dist/Lipscribe-mac-arm64.dmg and Lipscribe-mac-x64.dmg (~27
 npm run dist:win   # dist/Lipscribe-win-x64.exe (build on Windows, or a Mac with Wine)
 ```
 
-Builds are unsigned: macOS users right-click → Open the first time; Windows users click More info → Run anyway.
+Builds have no Apple or Microsoft signature (that needs paid developer accounts). On macOS the app is ad-hoc signed after packaging (`scripts/after-pack.cjs`), so macOS reports an unverified developer instead of a "damaged" app: open it once, then System Settings → Privacy & Security → Open Anyway. A copy that still says "damaged" (0.1.0) is fixed with `xattr -cr /Applications/Lipscribe.app`. On Windows, click More info → Run anyway.
