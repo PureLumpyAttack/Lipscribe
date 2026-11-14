@@ -349,7 +349,7 @@ async function stopRecording() {
 }
 
 function toggleRecording() {
-  if (!state.recorder) return;
+  if (!state.recorder || ui.cloneDialog.open) return; // reading the voice script aloud isn't a transcript
   if (state.recorder.recording) stopRecording();
   else startRecording();
 }
@@ -649,6 +649,14 @@ function refreshCloneDialog() {
 }
 
 function openCloneDialog() {
+  // Reading the script moves your lips: pause hands-free and drop a clip in progress.
+  setHandsFree(false);
+  if (state.recorder?.recording) {
+    clearInterval(state.timer);
+    state.autoRecording = false;
+    state.recorder.stop().catch(() => {});
+    setRecordingUI(false);
+  }
   ui.cloneScript.textContent = voiceClone.SCRIPT;
   ui.cloneConsent.checked = Boolean(voiceClone.loadSample());
   setCloneStatus('');
@@ -832,6 +840,7 @@ ui.cloneDialog.addEventListener('close', () => {
   state.cloneRec?.cancel();
   state.cloneRec = null;
   ui.cloneStatus.dataset.tone = '';
+  setHandsFree(ui.handsFree.checked);
 });
 
 ui.autospeak.addEventListener('change', () => {
