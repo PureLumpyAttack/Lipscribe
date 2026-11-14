@@ -12,3 +12,4 @@ Lip reading in the browser: read words from a speaker's lips through the webcam.
 
 Keep website code inside `web/` and all AI/model work inside `ml/`. Large files (model weights, datasets, exported ONNX models) are not committed; the scripts in `ml/` download or generate them.
  
+ 
