@@ -157,7 +157,8 @@ async function createWindow() {
       shell.openExternal(url);
     }
   });
-  await win.loadURL(`${origin}/demo`);
+  // LIPSCRIBE_DEBUG=1 shows the hands-free detector's numbers on the video.
+  await win.loadURL(`${origin}/demo${process.env.LIPSCRIBE_DEBUG === '1' ? '?debug' : ''}`);
   if (SMOKE) await smokeTest();
 }
 

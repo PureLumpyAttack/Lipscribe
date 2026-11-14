@@ -167,7 +167,10 @@ async function enableCamera() {
       onStatus: setTrackStatus,
       // Keep the highlight on the person being read.
       getTargetBox: () => (state.faceTargetReady ? (state.faceTarget.target?.box ?? null) : undefined),
-      onMouth: (open, t) => state.detector?.push(open, t),
+      onMouth: (open, t) => {
+        state.detector?.push(open, t);
+        if (DEBUG && state.detector) showDetectorDebug(open);
+      },
     });
     state.tracker.start();
     setHandsFree(ui.handsFree.checked);
@@ -352,6 +355,23 @@ function toggleRecording() {
 }
 
 /* ---------- Hands-free (browser engine) ---------- */
+
+// /demo?debug shows the detector's numbers on the video, for tuning config.handsFree.
+const DEBUG = new URLSearchParams(location.search).has('debug');
+let debugBox = null;
+function showDetectorDebug(open) {
+  if (!debugBox) {
+    debugBox = document.createElement('pre');
+    debugBox.style.cssText = 'position:absolute;left:12px;bottom:12px;z-index:5;margin:0;padding:6px 8px;border-radius:6px;background:rgb(0 0 0/.65);color:#fff;font:12px/1.4 ui-monospace,monospace;pointer-events:none';
+    ui.viewport.append(debugBox);
+  }
+  const { level, range } = state.detector.level;
+  const h = config.handsFree;
+  debugBox.textContent = `open   ${open == null ? '--' : open.toFixed(3)}
+motion ${level.toFixed(4)} (start > ${h.startLevel}, still < ${h.stopLevel})
+range  ${range.toFixed(3)} (start > ${h.startRange})
+${state.detector.speaking ? 'TALKING' : 'still'}`;
+}
 
 function setHandsFree(on) {
   const available = inBrowser && Boolean(state.recorder);
