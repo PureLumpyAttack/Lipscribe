@@ -37,7 +37,17 @@ Type: Archivo (wide cut) for the few display words, Geist for small text and but
 
 Seven short lines in total: the bubble, one line in act 2, the typed caption, one claim, three one-word panels, and the closing line plus buttons.
 
-## Exits to the product page
+## Transitions between acts
 
-- Hero: a small "Skip the story" link, top right, gone once you scroll.
-- Close: "Try the live demo" (primary) and "Meet Lipscribe" (to `/about`).
+Each act hands off to the next instead of cutting:
+
+- Noise to silence: fog spreads out in a circle from where the speech bubble was, and swallows the street.
+- Silence to focus: the act arrives in the same fog, then ink opens from the centre, with the noise inside it.
+- Focus to how: paper opens outward from the caption line.
+- How to close: the close slides up over the panels like a sheet while they sink back.
+
+## Exits to the demo
+
+- Hero: a small "Skip to the demo" link, top right, gone once you scroll.
+- Close: "Try the live demo".
+- The demo's top bar has "Back to the story".

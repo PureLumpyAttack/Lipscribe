@@ -1,4 +1,4 @@
-// The illustrated mouth used on the story page and the about page.
+// The illustrated mouth used on the story page.
 // One connected shape: the upper lip, lower lip, opening and teeth all share
 // the same corners, so it opens like a real mouth instead of splitting apart.
 //

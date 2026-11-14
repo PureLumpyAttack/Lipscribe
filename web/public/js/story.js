@@ -25,6 +25,7 @@ if (!gsap || !ScrollTrigger) {
 
 function main() {
   gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add('motion');
 
   if (!reduce && Lenis) {
     const lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
@@ -235,8 +236,23 @@ function actNoise() {
 
   const tl = gsap.timeline({
     defaults: { ease: 'none' },
-    scrollTrigger: { trigger: '#noise', start: 'top top', end: 'bottom bottom', scrub: reduce ? true : 0.7 },
+    scrollTrigger: {
+      trigger: '#noise',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: reduce ? true : 0.7,
+      invalidateOnRefresh: true,
+    },
   });
+
+  // Where the speech bubble sits, as a point on the stage (for the hush).
+  const hushAt = () => {
+    const stage = qs('.n-stage').getBoundingClientRect();
+    const spot = qs('.n-bubble-pos').getBoundingClientRect();
+    const x = ((spot.left + spot.width / 2 - stage.left) / stage.width) * 100;
+    const y = ((spot.top + spot.height / 2 - stage.top) / stage.height) * 100;
+    return `${x.toFixed(1)}% ${y.toFixed(1)}%`;
+  };
 
   tl.to('.n-chrome', { autoAlpha: 0, y: -16, duration: 0.06 }, 0.01)
     .fromTo('.n-noise', { opacity: 0.22 }, { opacity: 1, duration: 0.3 }, 0.02)
@@ -268,7 +284,12 @@ function actNoise() {
     .to(['.n-figure', '.n-crowd-back', '.n-skyline'], { opacity: 0, y: 80, duration: 0.14, stagger: 0.03, ease: 'power1.in' }, 0.78)
     .to('.n-crowd-front', { yPercent: 50, duration: 0.15 }, 0.8)
     .to('.n-noise', { yPercent: 40, opacity: 0, duration: 0.15, ease: 'power1.in' }, 0.8)
-    .to('.n-fade', { opacity: 1, duration: 0.12 }, 0.87);
+    .fromTo(
+      '.n-fade',
+      { clipPath: () => `circle(0% at ${hushAt()})` },
+      { clipPath: () => `circle(150% at ${hushAt()})`, duration: 0.2, ease: 'power2.in' },
+      0.74,
+    );
 }
 
 /* ---------- Act 2: silence ---------- */
@@ -322,11 +343,14 @@ function actFocus() {
   noise.state.level = 1;
 
   // The noise lines settle exactly onto the caption line.
+  // linePct() is also where the paper opens from at the end of the act.
   const measure = () => {
     const s = stage.getBoundingClientRect();
     const l = line.getBoundingClientRect();
     noise.state.targetY = ((l.top + l.height / 2 - s.top) / s.height) * 900;
+    return noise.state.targetY;
   };
+  const linePct = () => (measure() / 900) * 100;
   measure();
   ScrollTrigger.addEventListener('refresh', measure);
 
@@ -355,26 +379,41 @@ function actFocus() {
   gsap
     .timeline({
       defaults: { ease: 'none' },
-      scrollTrigger: { trigger: '#focus', start: 'top top', end: 'bottom bottom', scrub: reduce ? true : 0.7 },
+      scrollTrigger: {
+        trigger: '#focus',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: reduce ? true : 0.7,
+        invalidateOnRefresh: true,
+      },
     })
+    // Ink opens out of the fog, and the noise comes back inside it.
+    .fromTo(['.f-iris', '.f-noise'], { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 0.1, ease: 'power2.in' }, 0)
+    .fromTo('.f-noise', { opacity: 0 }, { opacity: 0.55, duration: 0.06 }, 0.04)
     .fromTo(
       '.f-lens',
       { clipPath: 'circle(0% at 50% 52%)', scale: 1.14 },
-      { clipPath: 'circle(75% at 50% 52%)', scale: 1, duration: 0.24, ease: 'power2.inOut' },
-      0.05,
+      { clipPath: 'circle(75% at 50% 52%)', scale: 1, duration: 0.22, ease: 'power2.inOut' },
+      0.08,
     )
     .fromTo(
       '.f-brackets',
       { scale: 1.3, opacity: 0, transformOrigin: '50% 50%' },
-      { scale: 1, opacity: 1, duration: 0.16, ease: 'power3.out' },
-      0.14,
+      { scale: 1, opacity: 1, duration: 0.14, ease: 'power3.out' },
+      0.17,
     )
     .to(noise.state, { converge: 1, duration: 0.24, ease: 'power2.inOut' }, 0.28)
     .fromTo('.f-line', { scaleX: 0.1, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.06 }, 0.49)
     .to('.f-noise', { opacity: 0, duration: 0.05 }, 0.53)
     .to(typing, { n: caption.length, duration: 0.28, onUpdate: renderTyping }, 0.57)
     .fromTo('.f-claim', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.06 }, 0.87)
-    .fromTo('.f-wipe', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.07, ease: 'power2.in' }, 0.93);
+    // The caption line opens up into the next act.
+    .fromTo(
+      '.f-wipe',
+      { autoAlpha: 1, clipPath: () => `inset(${linePct()}% 0% ${100 - linePct()}% 0%)` },
+      { autoAlpha: 1, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.07, ease: 'power2.in' },
+      0.93,
+    );
 }
 
 /* ---------- Act 4: how (horizontal pan) ---------- */
@@ -383,8 +422,10 @@ function actHow() {
   const section = qs('#how');
   const rail = qs('.h-rail');
   const travel = () => Math.max(0, rail.scrollWidth - innerWidth);
+  // The pan, then one more screen held in place while the close slides over it.
+  const panLength = () => travel() * 1.15;
   const sizeSection = () => {
-    section.style.height = `${travel() * 1.15 + innerHeight}px`;
+    section.style.height = `${panLength() + 2 * innerHeight}px`;
   };
   sizeSection();
   ScrollTrigger.addEventListener('refreshInit', sizeSection);
@@ -395,11 +436,16 @@ function actHow() {
     scrollTrigger: {
       trigger: section,
       start: 'top top',
-      end: 'bottom bottom',
+      end: () => `+=${panLength()}`,
       scrub: reduce ? true : 0.6,
       invalidateOnRefresh: true,
     },
   });
+
+  // Transition 4: the panels sink back as the close covers them.
+  const cover = { trigger: '#start', start: 'top bottom', end: 'top top', scrub: true };
+  gsap.to('.h-stage', { scale: reduce ? 1 : 0.92, opacity: 0.35, ease: 'none', scrollTrigger: cover });
+  gsap.to('#start', { borderRadius: 0, ease: 'power1.in', scrollTrigger: { ...cover, start: 'top 35%' } });
 
   // Inside each panel the word and the drawing travel at different speeds.
   gsap.utils.toArray('.h-panel').forEach((panel) => {
