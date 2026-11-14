@@ -99,6 +99,36 @@
   opacity: 1;
 }
 
+/* Face boxes when several people are in view (drawn by demo.js, unmirrored coords;
+   the .cam transform mirrors it to line up with the video). */
+.faces-overlay {
+  pointer-events: none;
+  z-index: 2;
+}
+.viewport[data-camera='on'] .faces-overlay {
+  opacity: 1;
+}
+.viewport[data-camera='on'][data-people='many'] {
+  cursor: pointer;
+}
+.people-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 3;
+  transform: translateX(-50%);
+  max-width: calc(100% - 28px);
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.62);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: center;
+  pointer-events: none;
+}
+
 /* Where to put your mouth, until one is found */
 .guide {
   position: absolute;

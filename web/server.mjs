@@ -1,6 +1,8 @@
 // Localhost server for the Lipscribe web app.
 //
 //   GET  /*            static files from ./public
+//   GET  /models/*     browser model files from ../ml/exports/web (ml/scripts/package_web.py),
+//                      or from MODELS_DIR if set
 //   GET  /api/status   { mode: 'mock' | 'proxy' }
 //   POST /transcribe   multipart video in, { text, confidence } out
 //
@@ -8,13 +10,15 @@
 // the request is forwarded untouched to the real model (no CORS setup needed).
 
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
+import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const port = Number(process.env.PORT || 3000);
 const modelUrl = process.env.TRANSCRIBE_URL || '';
 const publicDir = fileURLToPath(new URL('./public/', import.meta.url));
+const modelsDir = resolve(process.env.MODELS_DIR || fileURLToPath(new URL('../ml/exports/web/', import.meta.url))) + '/';
 
 const CONTENT_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -51,6 +55,9 @@ createServer(async (request, response) => {
     }
     if (pathname === '/api/status' && request.method === 'GET') {
       return sendJson(response, 200, { mode: modelUrl ? 'proxy' : 'mock' });
+    }
+    if ((request.method === 'GET' || request.method === 'HEAD') && pathname.startsWith('/models/')) {
+      return await serveModel(pathname, request, response);
     }
     if (request.method === 'GET' || request.method === 'HEAD') {
       return await serveStatic(pathname, request, response);
@@ -119,6 +126,32 @@ async function serveStatic(pathname, request, response) {
     'Cache-Control': 'no-store',
   });
   response.end(request.method === 'HEAD' ? undefined : content);
+}
+
+// Model files are large (100+ MB), so stream them. The page keeps its own copy
+// in the Cache API keyed by manifest version, so no HTTP caching is needed.
+async function serveModel(pathname, request, response) {
+  let file;
+  try {
+    file = resolve(modelsDir, decodeURIComponent(pathname.slice('/models/'.length)));
+  } catch {
+    return sendText(response, 400, 'Bad request');
+  }
+  if (!file.startsWith(modelsDir)) return sendText(response, 404, 'Not found');
+  let info;
+  try {
+    info = await stat(file);
+  } catch {
+    return sendJson(response, 404, { error: 'Model file not found. Build it with: cd ml && uv run python scripts/package_web.py' });
+  }
+  if (!info.isFile()) return sendText(response, 404, 'Not found');
+  response.writeHead(200, {
+    'Content-Type': CONTENT_TYPES[extname(file)] ?? 'application/octet-stream',
+    'Content-Length': info.size,
+    'Cache-Control': 'no-store',
+  });
+  if (request.method === 'HEAD') return response.end();
+  createReadStream(file).pipe(response);
 }
 
 function sendJson(response, status, data) {

@@ -1,9 +1,11 @@
 // Demo page: camera → record → transcribe → show, speak, remember.
 
 import { config } from './config.js';
-import { transcribe } from './transcriber.js';
+import { transcribe, getEngine, onModelProgress } from './transcriber.js';
 import { startCamera, createRecorder } from './camera.js';
 import { createMouthTracker } from './mouth-tracker.js';
+import { createFaceTarget } from './lipread/face-target.js';
+import { createFrameRecorder } from './lipread/frame-recorder.js';
 import * as speech from './speech.js';
 import { loadHistory, saveHistory, loadPrefs, savePrefs, MAX_HISTORY } from './storage.js';
 
@@ -38,11 +40,19 @@ const ui = {
   clearBtn: $('clear-btn'),
   itemTemplate: $('history-item'),
   modelTag: $('model-tag'),
+  facesOverlay: $('faces-overlay'),
+  peopleHint: $('people-hint'),
+  loadingNote: document.querySelector('#latest .loading-note'),
 };
+
+const inBrowser = config.engine === 'browser';
 
 const state = {
   recorder: null,
   tracker: null,
+  faceTarget: null, // lipread/face-target.js, browser engine only
+  faceTargetReady: false,
+  model: { phase: 'idle' },
   timer: 0,
   startedAt: 0,
   busy: false,
@@ -100,16 +110,128 @@ async function enableCamera() {
     const stream = await startCamera(ui.video);
     ui.videoFocus.srcObject = stream;
     await ui.videoFocus.play();
-    state.recorder = createRecorder(stream);
+    if (inBrowser) {
+      state.faceTarget ??= createFaceTarget({ video: ui.video, onChange: renderFaces });
+      state.faceTarget
+        .start()
+        .then(() => (state.faceTargetReady = true))
+        .catch((error) => console.warn('[lipscribe] Face detector unavailable', error));
+      state.recorder = createFrameRecorder({ video: ui.video, faceTarget: state.faceTarget });
+      loadModel();
+    } else {
+      state.recorder = createRecorder(stream);
+    }
     ui.viewport.dataset.camera = 'on';
     ui.recordBtn.disabled = state.busy;
-    state.tracker ??= createMouthTracker({ video: ui.video, viewport: ui.viewport, onStatus: setTrackStatus });
+    state.tracker ??= createMouthTracker({
+      video: ui.video,
+      viewport: ui.viewport,
+      onStatus: setTrackStatus,
+      // Keep the highlight on the person being read.
+      getTargetBox: () => (state.faceTargetReady ? (state.faceTarget.target?.box ?? null) : undefined),
+    });
     state.tracker.start();
   } catch (error) {
     const [title, body] = cameraErrorCopy(error);
     showGate('error', title, body);
   }
 }
+
+/* ---------- Choosing who to read (browser engine) ---------- */
+
+// The video layers are mirrored and zoomed (transform: scale(-1.06, 1.06), object-fit: cover).
+const ZOOM = 1.06;
+
+function coverMapping() {
+  const W = ui.video.videoWidth;
+  const H = ui.video.videoHeight;
+  const elW = ui.viewport.clientWidth;
+  const elH = ui.viewport.clientHeight;
+  const scale = Math.max(elW / W, elH / H);
+  return { scale, offsetX: (elW - W * scale) / 2, offsetY: (elH - H * scale) / 2, elW, elH };
+}
+
+/** Click position on the viewport -> video pixels (undoing mirror + zoom + cover). */
+function viewportToVideo(clientX, clientY) {
+  const rect = ui.viewport.getBoundingClientRect();
+  const { scale, offsetX, offsetY, elW, elH } = coverMapping();
+  const x = elW / 2 - (clientX - rect.left - elW / 2) / ZOOM; // un-mirror
+  const y = elH / 2 + (clientY - rect.top - elH / 2) / ZOOM;
+  return [(x - offsetX) / scale, (y - offsetY) / scale];
+}
+
+function renderFaces({ faces, target, locked, lost }) {
+  const canvas = ui.facesOverlay;
+  const { scale, offsetX, offsetY, elW, elH } = coverMapping();
+  const dpr = window.devicePixelRatio || 1;
+  if (canvas.width !== Math.round(elW * dpr) || canvas.height !== Math.round(elH * dpr)) {
+    canvas.width = Math.round(elW * dpr);
+    canvas.height = Math.round(elH * dpr);
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, elW, elH);
+
+  const several = faces.length > 1 || lost;
+  if (several) {
+    for (const face of faces) {
+      const [x0, y0, x1, y1] = face.box.map((v, i) => (i % 2 ? offsetY : offsetX) + v * scale);
+      const isTarget = face === target;
+      ctx.lineWidth = isTarget ? 3 : 1.5;
+      ctx.strokeStyle = isTarget ? '#ff5a36' : 'rgb(255 255 255 / 0.85)';
+      ctx.setLineDash(isTarget ? [] : [6, 5]);
+      ctx.beginPath();
+      ctx.roundRect(x0, y0, x1 - x0, y1 - y0, 12);
+      ctx.stroke();
+    }
+  }
+  ui.viewport.dataset.people = several ? 'many' : 'one';
+  ui.peopleHint.hidden = !several;
+  ui.peopleHint.textContent = lost
+    ? 'The person you picked left the frame. Click a face to pick again.'
+    : `${faces.length} people in view. ${locked ? 'Reading the outlined person. ' : 'Reading the closest person. '}Click a face to choose.`;
+}
+
+function selectPerson(event) {
+  if (!inBrowser || !state.faceTargetReady || ui.viewport.dataset.camera !== 'on') return;
+  if (event.target.closest('button, a')) return;
+  const [x, y] = viewportToVideo(event.clientX, event.clientY);
+  state.faceTarget.selectAt(x, y);
+}
+
+/* ---------- Model (browser engine) ---------- */
+
+function loadModel() {
+  getEngine()
+    .load()
+    .catch((error) => {
+      console.error(error);
+      ui.modelTag.textContent = 'Model failed to load';
+      ui.modelTag.title = error.message;
+    });
+}
+
+function modelStatusText(p) {
+  switch (p.phase) {
+    case 'init':
+      return 'Model: starting…';
+    case 'download':
+      return `Model: downloading ${Math.round((100 * p.loaded) / p.total)}% of ${Math.round(p.total / 1e6)} MB`;
+    case 'compile':
+      return 'Model: preparing…';
+    case 'ready':
+      return `Model: in browser · ${p.label}`;
+    default:
+      return 'Model: not loaded';
+  }
+}
+
+onModelProgress((p) => {
+  state.model = p;
+  ui.modelTag.textContent = modelStatusText(p);
+  ui.modelTag.title = p.phase === 'ready' ? 'The video never leaves this browser.' : '';
+  if (state.busy) ui.loadingNote.textContent = p.phase === 'ready' ? 'Reading your lips…' : modelStatusText(p).replace('Model: ', 'Loading model: ');
+});
 
 /* ---------- Recording ---------- */
 
@@ -172,9 +294,11 @@ async function sendClip(clip) {
   ui.recordBtn.disabled = true;
   ui.latest.dataset.state = 'loading';
   ui.latestMeta.textContent = '';
+  ui.loadingNote.textContent =
+    inBrowser && state.model.phase !== 'ready' ? modelStatusText(state.model).replace('Model: ', 'Loading model: ') : 'Reading your lips…';
 
   try {
-    const result = await transcribe(clip.blob);
+    const result = await transcribe(clip);
     const entry = {
       id: crypto.randomUUID?.() ?? String(Date.now()),
       text: result.text,
@@ -305,6 +429,11 @@ async function copyText(text, onDone) {
 }
 
 async function showModel() {
+  if (inBrowser) {
+    ui.modelTag.textContent = modelStatusText(state.model);
+    $('privacy-note').textContent = 'Video never leaves this browser.';
+    return;
+  }
   ui.modelTag.title = `Clips go to ${config.transcribeUrl}`;
   $('endpoint-label').textContent = config.transcribeUrl;
   const target = new URL(config.transcribeUrl, location.href);
@@ -323,6 +452,7 @@ async function showModel() {
 /* ---------- Events ---------- */
 
 ui.cameraBtn.addEventListener('click', enableCamera);
+ui.viewport.addEventListener('click', selectPerson);
 ui.recordBtn.addEventListener('click', toggleRecording);
 
 ui.retryBtn.addEventListener('click', () => {
@@ -382,6 +512,7 @@ document.addEventListener('keydown', (event) => {
 /* ---------- Start ---------- */
 
 $('max-secs').textContent = config.maxRecordSeconds;
+if (inBrowser) ui.gateBody.textContent = 'Lipscribe only needs video, and the video never leaves this browser.';
 ui.autospeak.checked = state.prefs.autoSpeak;
 setupVoices();
 renderHistory();

@@ -8,9 +8,10 @@ The Lipscribe website:
 
 ## Run
 
-Requires Node.js 20 or newer. There are no dependencies to install. Run from this `web/` folder:
+Requires Node.js 20 or newer. The demo runs the lip-reading model in the browser, so build the model files once (see `../ml/README.md` for setup):
 
 ```sh
+cd ../ml && uv run python scripts/package_web.py && cd ../web
 npm run dev
 ```
 
@@ -18,16 +19,20 @@ Open http://localhost:3000 in Chrome, Edge or Safari. The demo at http://localho
 
 ## How it works
 
-1. `camera.js` opens the webcam (video only) and records clips with `MediaRecorder`.
-2. `mouth-tracker.js` loads MediaPipe Face Landmarker from a CDN and finds the lips. The highlight is done in CSS: the video is blurred, and a sharp copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
-3. On stop, `transcriber.js` POSTs the clip to `/transcribe` as `multipart/form-data` (field `video`, WebM or MP4).
-4. The result is shown, read aloud with the browser's `speechSynthesis` (`speech.js`), and saved to history in `localStorage` (`storage.js`).
+1. `camera.js` opens the webcam (video only).
+2. `lipread/face-target.js` finds every face (MediaPipe BlazeFace) and follows one person: the largest face until you click a face, then the person you clicked. With several people in view, their faces are outlined.
+3. `mouth-tracker.js` loads MediaPipe Face Landmarker and highlights the chosen person's mouth. The highlight is done in CSS: the video is blurred, and a sharp copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
+4. While recording, `lipread/frame-recorder.js` keeps a small grayscale window around the chosen face and its eye/nose/mouth points for every frame. No video file is made.
+5. On stop, `transcriber.js` resamples to 25 fps, `lipread/align.js` cuts aligned 88x88 mouth crops, and `lipread/engine.js` runs the model with ONNX Runtime Web: WebGPU with the 4-bit/fp16 model (182 MB) when the GPU supports fp16, else the 4-bit model (248 MB) on WebGPU or WASM. `lipread/decode.js` turns the output into text with beam search. The model downloads once (progress in the header) and is kept in the browser's Cache API.
+6. The result is shown, read aloud with the browser's `speechSynthesis` (`speech.js`), and saved to history in `localStorage` (`storage.js`).
 
-`demo.js` connects these pieces. `config.js` holds the settings you can change.
+`demo.js` connects these pieces. `config.js` holds the settings you can change (`engine`, `modelBaseUrl`, `beamSize`, ...). The video never leaves the browser.
 
-## Swapping in the real model
+The `lipread/` code is a port of `../ml/lipscribe_ml/` and is checked against it: `npm install && npm test` (needs fixtures from `../ml/scripts/dump_parity.py`).
 
-The mock is built into `server.mjs`. It returns a random phrase after about a second. There are three ways to replace it, depending on where the model runs:
+## Server mode (optional)
+
+Set `engine: 'server'` in `public/js/config.js` to record a video file with `MediaRecorder` and POST it to `/transcribe` instead of running the model in the browser. The mock is built into `server.mjs`. It returns a random phrase after about a second. To use a real model in server mode:
 
 **Model behind an HTTP endpoint (recommended while it runs in Python).** Start the server with the model's URL. `/transcribe` then forwards each clip to it unchanged, so you need no CORS setup:
 
@@ -38,8 +43,6 @@ TRANSCRIBE_URL=http://localhost:8000/transcribe npm run dev
 The pill in the header changes from "Mock model" to "Live model".
 
 **Endpoint called directly from the browser.** Set `transcribeUrl` in `public/js/config.js` to its full URL. That server must allow CORS from `http://localhost:3000`.
-
-**Model running in the browser (ONNX Runtime Web, the plan in `../ml/`).** Replace the body of `transcribe()` in `public/js/transcriber.js` with local inference. Put model files in `public/models/`. Keep the return shape and nothing else needs to change.
 
 ### Contract the page expects
 
@@ -57,7 +60,7 @@ Response (JSON):
 
 | File | Purpose |
 |---|---|
-| `server.mjs` | Static server, mock `/transcribe`, optional proxy to the real model |
+| `server.mjs` | Static server, `/models/` (from `../ml/exports/web`, or `MODELS_DIR`), mock `/transcribe`, optional proxy |
 | `public/index.html` | Story page (scroll animation) |
 | `public/css/story.css`, `public/js/story.js` | Story styles and scroll choreography (GSAP ScrollTrigger + Lenis from CDN) |
 | `public/js/mouth.js` | The illustrated mouth shared by the story and about pages |
@@ -72,6 +75,12 @@ Response (JSON):
 | `public/js/demo.js` | Demo UI state and event wiring |
 | `public/js/camera.js` | Webcam + recorder |
 | `public/js/mouth-tracker.js` | Face landmarks and the mouth overlay |
-| `public/js/transcriber.js` | The single call to the model |
+| `public/js/transcriber.js` | The single call to the model (browser or server) |
+| `public/js/lipread/engine.js` | ONNX Runtime Web setup, model download + cache, inference |
+| `public/js/lipread/decode.js` | Beam search / greedy decoding (port of `ml/lipscribe_ml/decode.py`) |
+| `public/js/lipread/align.js` | Mouth crops and 25 fps resampling (port of `ml/lipscribe_ml/preprocess.py`) |
+| `public/js/lipread/face-target.js` | Face detection and click-to-choose person tracking |
+| `public/js/lipread/frame-recorder.js` | Records face windows + keypoints instead of a video file |
+| `test/lipread.test.mjs` | Parity tests against the Python pipeline |
 | `public/js/speech.js` | Text-to-speech |
 | `public/js/storage.js` | History and preferences in `localStorage` |

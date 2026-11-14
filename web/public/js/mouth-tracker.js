@@ -23,9 +23,15 @@ const LOST_AFTER_FRAMES = 12;
  *   video: HTMLVideoElement,
  *   viewport: HTMLElement,
  *   onStatus: (status: 'loading' | 'tracking' | 'search' | 'guide') => void,
+ *   getTargetBox?: () => number[] | null | undefined,
  * }} options
+ *
+ * getTargetBox: box [x0, y0, x1, y1] (video pixels) of the person being read,
+ * from lipread/face-target.js. With several people in view, the highlight
+ * follows the face whose mouth is inside that box. `null` = target not visible,
+ * `undefined` = no target info (highlight the first face found).
  */
-export function createMouthTracker({ video, viewport, onStatus }) {
+export function createMouthTracker({ video, viewport, onStatus, getTargetBox = () => undefined }) {
   let landmarker = null;
   let status = '';
   let rafId = 0;
@@ -49,7 +55,7 @@ export function createMouthTracker({ video, viewport, onStatus }) {
       const options = (delegate) => ({
         baseOptions: { modelAssetPath: MODEL_URL, delegate },
         runningMode: 'VIDEO',
-        numFaces: 1,
+        numFaces: 4,
       });
       try {
         landmarker = await FaceLandmarker.createFromOptions(files, options('GPU'));
@@ -68,7 +74,8 @@ export function createMouthTracker({ video, viewport, onStatus }) {
     if (!landmarker || video.readyState < 2 || video.currentTime === lastVideoTime) return;
     lastVideoTime = video.currentTime;
 
-    const face = landmarker.detectForVideo(video, performance.now()).faceLandmarks?.[0];
+    const all = landmarker.detectForVideo(video, performance.now()).faceLandmarks ?? [];
+    const face = pickFace(all, video.videoWidth, video.videoHeight, getTargetBox());
     if (!face) {
       if (++missedFrames > LOST_AFTER_FRAMES) {
         mouth = null;
@@ -127,6 +134,16 @@ export function createMouthTracker({ video, viewport, onStatus }) {
       setFocus(false);
     },
   };
+}
+
+function pickFace(faces, W, H, box) {
+  if (box === undefined) return faces[0];
+  if (!box) return null;
+  return faces.find((face) => {
+    const x = (face[13].x + face[14].x) / 2 * W; // inner lip centre
+    const y = (face[13].y + face[14].y) / 2 * H;
+    return x >= box[0] && x <= box[2] && y >= box[1] && y <= box[3];
+  });
 }
 
 function lerp(a, b, t) {

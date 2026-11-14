@@ -231,6 +231,25 @@ def _stable_reference():
     ]).astype(np.float32)
 
 
+def similarity_transform(src, dst):
+    """Least-squares rotation + uniform scale + translation mapping src -> dst (both (N, 2)).
+
+    Returns a 2x3 matrix [[a, -b, tx], [b, a, ty]]. Same model as
+    cv2.estimateAffinePartial2D, but closed form (no LMEDS sampling), so the
+    browser port in web/public/js/lipread/align.js gives identical results.
+    """
+    src = np.asarray(src, dtype=np.float64)
+    dst = np.asarray(dst, dtype=np.float64)
+    ms, md = src.mean(0), dst.mean(0)
+    s, d = src - ms, dst - md
+    norm = (s ** 2).sum()
+    a = (s[:, 0] * d[:, 0] + s[:, 1] * d[:, 1]).sum() / norm
+    b = (s[:, 0] * d[:, 1] - s[:, 1] * d[:, 0]).sum() / norm
+    tx = md[0] - (a * ms[0] - b * ms[1])
+    ty = md[1] - (b * ms[0] + a * ms[1])
+    return np.array([[a, -b, tx], [b, a, ty]], dtype=np.float64)
+
+
 def crop_mouths(frames, keypoints, window_margin=12, patch=96, target_size=256):
     """frames RGB (T,H,W,3), keypoints list of (4,2)|None -> uint8 (T, 88, 88)."""
     lms = _interpolate(keypoints)
@@ -244,7 +263,7 @@ def crop_mouths(frames, keypoints, window_margin=12, patch=96, target_size=256):
         smooth = np.mean([lms[j] for j in range(i - m, i + m + 1)], axis=0)
         smooth += lms[i].mean(0) - smooth.mean(0)
         gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-        tf = cv2.estimateAffinePartial2D(smooth.astype(np.float32), ref, method=cv2.LMEDS)[0]
+        tf = similarity_transform(smooth, ref)
         warped = cv2.warpAffine(gray, tf, (target_size, target_size), flags=cv2.INTER_LINEAR,
                                 borderMode=cv2.BORDER_CONSTANT, borderValue=0)
         mouth = smooth @ tf[:, :2].T + tf[:, 2]
