@@ -55,14 +55,20 @@ export function mouthGeometry({ w, u, d }) {
     opening:
       `M${X(-184)} ${Y(0)}C${X(-92)} ${Y(-u)} ${X(92)} ${Y(-u)} ${X(184)} ${Y(0)}` +
       `C${X(101)} ${Y(d)} ${X(-101)} ${Y(d)} ${X(-184)} ${Y(0)}Z`,
-    teeth: { cy: top - 2, rx: 118 * k, ry: 4 + 0.75 * (u + d) * 0.4 },
+    teeth: {
+      cy: top - 2,
+      rx: 118 * k,
+      ry: 4 + 0.75 * (u + d) * 0.4,
+      // Hidden while the lips are together, so no white line shows between them.
+      opacity: Math.min(1, Math.max(0, (u + d - 8) / 12)),
+    },
     shine: { cy: cy + B * 0.55, rx: 72 * k },
   };
 }
 
 /**
  * Animates a mouth drawn with these element ids:
- * m-inner, m-clip, m-teeth, m-upper, m-lower, m-shine.
+ * m-inner, m-clip, m-teeth, m-upper, m-lower, and optionally m-shine.
  * Call setTarget(shape) and it eases there on its own.
  */
 export function createMouth({ animate = true } = {}) {
@@ -86,8 +92,9 @@ export function createMouth({ animate = true } = {}) {
     el.teeth.setAttribute('cy', g.teeth.cy.toFixed(1));
     el.teeth.setAttribute('rx', g.teeth.rx.toFixed(1));
     el.teeth.setAttribute('ry', g.teeth.ry.toFixed(1));
-    el.shine.setAttribute('cy', g.shine.cy.toFixed(1));
-    el.shine.setAttribute('rx', g.shine.rx.toFixed(1));
+    el.teeth.setAttribute('opacity', g.teeth.opacity.toFixed(2));
+    el.shine?.setAttribute('cy', g.shine.cy.toFixed(1));
+    el.shine?.setAttribute('rx', g.shine.rx.toFixed(1));
   }
 
   function tick() {

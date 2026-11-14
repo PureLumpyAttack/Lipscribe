@@ -363,6 +363,12 @@ function actFocus() {
       { clipPath: 'circle(75% at 50% 52%)', scale: 1, duration: 0.24, ease: 'power2.inOut' },
       0.05,
     )
+    .fromTo(
+      '.f-brackets',
+      { scale: 1.3, opacity: 0, transformOrigin: '50% 50%' },
+      { scale: 1, opacity: 1, duration: 0.16, ease: 'power3.out' },
+      0.14,
+    )
     .to(noise.state, { converge: 1, duration: 0.24, ease: 'power2.inOut' }, 0.28)
     .fromTo('.f-line', { scaleX: 0.1, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.06 }, 0.49)
     .to('.f-noise', { opacity: 0, duration: 0.05 }, 0.53)

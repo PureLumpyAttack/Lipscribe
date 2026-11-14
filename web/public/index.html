@@ -25,9 +25,9 @@
     <svg class="sprite" aria-hidden="true">
       <symbol id="profile" viewBox="0 0 600 640">
         <path
-          d="M230 640C236 580 214 540 196 500 150 410 160 250 250 190 310 150 400 150 440 200 465 232 470 262 468 290 468 305 474 312 482 322L518 382C524 392 518 400 506 400L494 402C496 410 504 414 504 420 504 428 496 432 492 433 502 436 504 446 498 452 490 458 488 464 492 472 498 490 488 508 464 512 430 516 400 520 386 540 380 570 384 610 390 640Z"
+          d="M236 640C232 590 224 524 216 478 210 452 198 430 184 408 156 364 150 280 176 214 204 146 262 114 330 114 404 116 448 162 456 222 460 248 460 262 464 276 466 286 460 294 462 304L496 362C504 374 500 384 488 386 480 387 472 388 466 390 470 398 474 404 472 410 470 414 466 416 462 418 468 422 472 430 466 438 460 444 456 446 456 452 458 462 466 472 460 482 452 496 428 500 404 504 388 507 376 512 372 526 370 566 374 604 380 640Z"
         />
-        <path d="M60 640C90 590 170 566 236 560L392 556C458 562 520 596 548 640Z" />
+        <path d="M40 640C70 588 150 562 222 556L392 554C466 560 530 594 560 640Z" />
       </symbol>
       <symbol id="quotes" viewBox="0 0 32 32">
         <path class="q1" fill="#17161c" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
@@ -45,12 +45,25 @@
           <svg class="layer n-crowd-back" viewBox="0 0 2400 300" preserveAspectRatio="xMinYMax slice" aria-hidden="true"></svg>
 
           <div class="n-figure">
-            <svg class="n-figure-art in" viewBox="0 0 600 640" aria-hidden="true">
-              <use href="#profile" fill="#17161c" />
-              <ellipse cx="300" cy="352" rx="22" ry="34" fill="#2c2a33" />
-              <rect x="284" y="278" width="62" height="164" rx="15" fill="#f4f3ef" transform="rotate(-14 315 360)" />
-              <path d="M470 640C452 560 384 520 346 474" fill="none" stroke="#2c2a33" stroke-width="66" stroke-linecap="round" />
-              <rect x="294" y="392" width="88" height="96" rx="38" fill="#2c2a33" transform="rotate(-14 338 440)" />
+            <svg class="n-figure-art in" viewBox="0 0 1100 640" aria-hidden="true">
+              <use href="#profile" width="600" height="640" fill="#17161c" />
+              <!-- What the webcam sees: a soft cone from the laptop to the face -->
+              <path class="n-cone" d="M900 306 476 350V476Z" fill="#ffd447" opacity="0.2" />
+              <!-- Upper arm, mostly hidden behind the desk -->
+              <path d="M300 610C334 572 380 544 420 524" fill="none" stroke="#2c2a33" stroke-width="54" stroke-linecap="round" />
+              <!-- Desk -->
+              <rect x="350" y="516" width="790" height="18" rx="4" fill="#8f2814" />
+              <rect x="368" y="534" width="772" height="120" fill="#74200f" />
+              <!-- Laptop: keyboard base, then the lid with its screen facing the person -->
+              <path d="M598 516 612 500H880L868 516Z" fill="#f4f3ef" />
+              <path d="M598 516H868V521H598Z" fill="#d9d5cc" />
+              <path d="M852 512 896 290C897 286 900 284 904 285L956 296C960 297 962 301 961 305L914 512Z" fill="#f4f3ef" />
+              <path d="M852 512 896 290" stroke="#ffd447" stroke-width="5" stroke-linecap="round" />
+              <circle cx="899" cy="304" r="5" fill="#17161c" />
+              <!-- Forearm resting on the desk, hand on the keyboard -->
+              <path d="M420 494H578" fill="none" stroke="#2c2a33" stroke-width="44" stroke-linecap="round" />
+              <path d="M572 474c22-6 52-4 76 6 14 6 24 12 26 18 1 4-2 6-8 6h-70c-14 0-26-6-28-16-1-6 0-12 4-14Z" fill="#2c2a33" />
+              <path d="M600 496c10 1 20 4 26 9" fill="none" stroke="#17161c" stroke-width="3" stroke-linecap="round" opacity="0.6" />
             </svg>
             <div class="n-bubble-pos">
               <div class="n-bubble-pop in">
@@ -79,7 +92,7 @@
           <svg viewBox="0 0 600 640" aria-hidden="true">
             <g transform="translate(600 0) scale(-1 1)">
               <use href="#profile" fill="#26324d" />
-              <path d="M214 548C270 566 340 568 396 548L402 588C344 608 268 606 210 588Z" fill="#c2392e" />
+              <path d="M226 532C276 550 334 552 380 534 386 548 388 564 386 580 338 600 276 598 230 580 226 564 224 548 226 532Z" fill="#c2392e" />
             </g>
           </svg>
           <svg class="s-bubble" data-speed="1.2" viewBox="0 0 200 140" aria-hidden="true">
@@ -89,7 +102,7 @@
             />
           </svg>
         </div>
-        <h2 class="s-text">Some voices make no sound.</h2>
+        <h2 class="s-text">Some voices make no sound</h2>
       </section>
 
       <!-- Act 3: focus (the turn) -->
@@ -98,65 +111,34 @@
           <svg class="layer f-noise" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"></svg>
           <div class="f-col">
             <div class="f-lens">
-          <svg
-            class="scene"
-            viewBox="0 0 960 540"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#dcb197" />
-                <stop offset="1" stop-color="#c4937c" />
-              </linearGradient>
-              <radialGradient id="chin" cx="0.5" cy="1" r="0.6">
-                <stop offset="0" stop-color="#a9765f" stop-opacity="0.5" />
-                <stop offset="1" stop-color="#a9765f" stop-opacity="0" />
-              </radialGradient>
-              <filter id="defocus" x="-10%" y="-10%" width="120%" height="120%">
-                <feGaussianBlur stdDeviation="14" />
-              </filter>
-              <filter id="feather-edge" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="10" />
-              </filter>
-              <mask id="mouth-window" maskUnits="userSpaceOnUse" x="0" y="0" width="960" height="540">
-                <rect x="236" y="138" width="488" height="300" rx="80" fill="#fff" filter="url(#feather-edge)" />
-              </mask>
-              <clipPath id="teeth-clip"><path id="m-clip" d="" /></clipPath>
-
-              <!-- Face detail, mostly outside the sharp window so the blur shows -->
-              <g id="face">
-                <rect width="960" height="540" fill="url(#skin)" />
-                <rect y="300" width="960" height="240" fill="url(#chin)" />
-                <ellipse cx="480" cy="-10" rx="170" ry="80" fill="#e9c3ab" opacity="0.6" />
-                <ellipse cx="420" cy="62" rx="34" ry="16" fill="#7d4f3f" opacity="0.55" />
-                <ellipse cx="540" cy="62" rx="34" ry="16" fill="#7d4f3f" opacity="0.55" />
-                <path d="M455 86c3 16 4 26 5 36M505 86c-3 16-4 26-5 36" stroke="#b07e67" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.35" />
-                <ellipse cx="20" cy="300" rx="200" ry="320" fill="#b47f68" opacity="0.25" />
-                <ellipse cx="940" cy="300" rx="200" ry="320" fill="#b47f68" opacity="0.25" />
-                <ellipse cx="480" cy="478" rx="150" ry="16" fill="#9d6b56" opacity="0.4" />
-              </g>
-
-              <!-- One connected mouth; mouth.js reshapes it -->
-              <g id="mouth">
-                <path id="m-inner" fill="#3b1917" d="" />
-                <g clip-path="url(#teeth-clip)"><ellipse id="m-teeth" cx="480" cy="278" rx="118" ry="4" fill="#e6d9cf" /></g>
-                <path id="m-upper" fill="#9b4c45" d="" />
-                <path id="m-lower" fill="#b4605a" d="" />
-                <ellipse id="m-shine" cx="480" cy="331" rx="72" ry="10" fill="#fff" opacity="0.16" />
-              </g>
-            </defs>
-
-            <g filter="url(#defocus)"><use href="#face" /><use href="#mouth" /></g>
-            <rect width="960" height="540" fill="#1a1b1e" opacity="0.12" />
-            <g mask="url(#mouth-window)"><use href="#face" /><use href="#mouth" /></g>
-          </svg>
+              <svg viewBox="0 0 960 540" aria-hidden="true">
+                <defs>
+                  <clipPath id="teeth-clip"><path id="m-clip" d="" /></clipPath>
+                </defs>
+                <rect width="960" height="540" fill="#e3b195" />
+                <g id="mouth">
+                  <path id="m-inner" fill="#3b1917" d="" />
+                  <g clip-path="url(#teeth-clip)"><ellipse id="m-teeth" cx="480" cy="278" rx="118" ry="4" fill="#f1e7df" /></g>
+                  <path id="m-upper" fill="#a8483f" d="" />
+                  <path id="m-lower" fill="#c25f55" d="" />
+                </g>
+                <path
+                  class="f-brackets"
+                  d="M236 196v-56h56M724 196v-56h-56M236 380v56h56M724 380v56h-56"
+                  fill="none"
+                  stroke="#17161c"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
             <div class="f-caption">
               <p class="f-text" aria-hidden="true"></p>
               <span class="f-line"></span>
             </div>
             <p class="visually-hidden">Lipscribe hears: Can you hear me now?</p>
-            <h2 class="f-claim">Lipscribe reads lips.</h2>
+            <h2 class="f-claim">Lipscribe reads lips</h2>
           </div>
           <div class="f-wipe"></div>
         </div>
@@ -215,7 +197,7 @@
             <path class="q1" fill="#17161c" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
             <path class="q2" fill="#c2392e" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
           </svg>
-          <h2 class="c-title">Say it without sound.</h2>
+          <h2 class="c-title">Say it without sound</h2>
           <div class="c-actions">
             <a class="c-btn c-btn--dark" href="/demo" data-magnet>
               Try the live demo
