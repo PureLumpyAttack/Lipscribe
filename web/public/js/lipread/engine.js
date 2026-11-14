@@ -1,9 +1,12 @@
 // Runs the lip-reading model in the browser with ONNX Runtime Web.
 //
-// Picks the best setup the device supports:
+// Tries the best setup the device supports, then falls back:
 //   WebGPU with shader-f16  -> q4f16 model (182 MB)
-//   WebGPU without f16      -> q4 model (248 MB)
-//   no WebGPU               -> q4 model on WASM (works, but slow)
+//   WebGPU                  -> q4 model (248 MB)
+//   WASM (CPU)              -> q4 model (works everywhere, slower)
+// A setup counts as working once a warm-up run succeeds (that's when WebGPU
+// compiles its shaders; Safari's WebGPU can fail there). If a real clip later
+// fails on WebGPU, the engine switches to WASM and retries once.
 // Model files are fetched once and kept in the Cache API, keyed by the
 // manifest version, so later visits load from disk.
 
@@ -13,20 +16,27 @@ const ORT_VERSION = '1.31.1';
 const ORT_BASE = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`;
 const CACHE_NAME = 'lipscribe-models';
 
-async function pickBackend() {
+const BACKENDS = {
+  webgpuF16: { ep: 'webgpu', variant: 'q4f16', label: 'WebGPU · 4-bit' },
+  webgpu: { ep: 'webgpu', variant: 'q4', label: 'WebGPU · 4-bit (fp32)' },
+  wasm: { ep: 'wasm', variant: 'q4', label: 'CPU (WASM) · 4-bit' },
+};
+
+/** Setups to try, best first. */
+async function backendCandidates() {
   if (navigator.gpu) {
     try {
       const adapter = await navigator.gpu.requestAdapter();
       if (adapter) {
         return adapter.features.has('shader-f16')
-          ? { ep: 'webgpu', variant: 'q4f16', label: 'WebGPU · 4-bit' }
-          : { ep: 'webgpu', variant: 'q4', label: 'WebGPU · 4-bit (fp32)' };
+          ? [BACKENDS.webgpuF16, BACKENDS.webgpu, BACKENDS.wasm]
+          : [BACKENDS.webgpu, BACKENDS.wasm];
       }
     } catch {
       /* fall through to WASM */
     }
   }
-  return { ep: 'wasm', variant: 'q4', label: 'CPU (WASM) · 4-bit' };
+  return [BACKENDS.wasm];
 }
 
 /** fetch with progress, served from the Cache API when present. */
@@ -81,10 +91,11 @@ export function createEngine({ baseUrl, beam = 10, onProgress = () => {} }) {
   let ready = null;
   let info = null;
 
-  async function load() {
+  async function load(only) {
     onProgress({ phase: 'init' });
-    const backend = await pickBackend();
-    const ort = await import(`${ORT_BASE}${backend.ep === 'webgpu' ? 'ort.webgpu.min.mjs' : 'ort.wasm.min.mjs'}`);
+    const candidates = only ? [only] : await backendCandidates();
+    // The WebGPU bundle also contains the WASM backend, so one import covers every fallback.
+    const ort = await import(`${ORT_BASE}${candidates.some((c) => c.ep === 'webgpu') ? 'ort.webgpu.min.mjs' : 'ort.wasm.min.mjs'}`);
     ort.env.wasm.wasmPaths = ORT_BASE;
     ort.env.logLevel = 'error';
 
@@ -94,8 +105,26 @@ export function createEngine({ baseUrl, beam = 10, onProgress = () => {} }) {
         return r.json();
       })),
     );
-    // Use the preferred model if this server has it (the desktop app ships q4f16 only).
-    if (!manifest.variants[backend.variant]) backend.variant = Object.keys(manifest.variants)[0];
+
+    let lastError = null;
+    for (const candidate of candidates) {
+      // Use the preferred model if this server has it (the desktop app ships q4f16 only).
+      const backend = { ...candidate };
+      if (!manifest.variants[backend.variant]) backend.variant = Object.keys(manifest.variants)[0];
+      try {
+        info = await open(ort, backend, manifest, tokens, prep);
+        onProgress({ phase: 'ready', label: backend.label });
+        return info;
+      } catch (error) {
+        lastError = error;
+        info = null;
+        console.warn(`[lipscribe] ${backend.label} didn't work here, trying the next option.`, error);
+      }
+    }
+    throw lastError;
+  }
+
+  async function open(ort, backend, manifest, tokens, prep) {
     const files = manifest.variants[backend.variant];
     const total = files.encoder.bytes + files.decoder.bytes;
     const got = { encoder: 0, decoder: 0 };
@@ -112,13 +141,21 @@ export function createEngine({ baseUrl, beam = 10, onProgress = () => {} }) {
     onProgress({ phase: 'compile' });
     const opts = { executionProviders: [backend.ep], graphOptimizationLevel: 'all' };
     const encoder = await ort.InferenceSession.create(new Uint8Array(encBuf), opts);
-    const decoder = await ort.InferenceSession.create(new Uint8Array(decBuf), opts);
-    info = { ...backend, ort, encoder, decoder, tokens, prep, V: tokens.length };
-
-    // Compile GPU shaders now rather than on the first real clip.
-    await run(new Uint8Array(12 * prep.crop * prep.crop), 12, { warmup: true });
-    onProgress({ phase: 'ready', label: backend.label });
-    return info;
+    const decoder = await ort.InferenceSession.create(new Uint8Array(decBuf), opts).catch(async (error) => {
+      await encoder.release?.();
+      throw error;
+    });
+    const opened = { ...backend, ort, encoder, decoder, tokens, prep, V: tokens.length };
+    try {
+      // Compile GPU shaders now rather than on the first real clip; this is
+      // also where a WebGPU implementation that can't run the model fails.
+      info = opened;
+      await run(new Uint8Array(12 * prep.crop * prep.crop), 12, { warmup: true });
+    } catch (error) {
+      await Promise.all([encoder.release?.(), decoder.release?.()]).catch(() => {});
+      throw error;
+    }
+    return opened;
   }
 
   async function run(mouths, T, { warmup = false } = {}) {
@@ -160,8 +197,22 @@ export function createEngine({ baseUrl, beam = 10, onProgress = () => {} }) {
     async transcribe(mouths, T) {
       await this.load();
       const t0 = performance.now();
-      const text = await run(mouths, T);
-      return { text, ms: performance.now() - t0 };
+      try {
+        return { text: await run(mouths, T), ms: performance.now() - t0 };
+      } catch (error) {
+        if (info?.ep !== 'webgpu') throw error;
+        // WebGPU passed the warm-up but failed on this clip: switch to WASM for good.
+        console.warn('[lipscribe] WebGPU failed on a clip, switching to WASM.', error);
+        await Promise.all([info.encoder.release?.(), info.decoder.release?.()]).catch(() => {});
+        info = null;
+        ready = load(BACKENDS.wasm).catch((e) => {
+          ready = null;
+          throw e;
+        });
+        await ready;
+        const t1 = performance.now();
+        return { text: await run(mouths, T), ms: performance.now() - t1 };
+      }
     },
   };
 }
