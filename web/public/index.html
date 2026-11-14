@@ -3,75 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Lipscribe reads your lips through a webcam, then writes and speaks the words for you." />
+    <meta name="description" content="When noise drowns your words, or your voice is gone, Lipscribe reads your lips and says it for you." />
     <meta name="color-scheme" content="light" />
-    <title>Lipscribe: say it without sound</title>
+    <meta name="theme-color" content="#ff5b3a" />
+    <title>Lipscribe</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet" href="/css/base.css" />
-    <link rel="stylesheet" href="/css/landing.css" />
-    <script type="module" src="/js/nav.js"></script>
-    <script type="module" src="/js/landing.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Geist:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="/css/story.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+    <script type="module" src="/js/story.js"></script>
   </head>
   <body>
-    <header class="nav">
-      <div class="nav-inner">
-        <a class="logo" href="/" aria-label="Lipscribe home">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path class="mark-top" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
-            <path class="mark-bottom" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
-          </svg>
-          lipscribe
-        </a>
-        <nav class="nav-links" aria-label="Main">
-          <div class="menu" data-menu>
-            <button class="nav-link menu-trigger" type="button" aria-expanded="false" aria-controls="product-menu">
-              Product
-              <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
-            </button>
-            <div class="menu-panel" id="product-menu" hidden>
-              <a href="/#who">Who it's for<span>Loud rooms, no voice, quiet places</span></a>
-              <a href="/#how">How it works<span>From lip movement to spoken words</span></a>
-              <a href="/demo">Live demo<span>Try it with your own webcam</span></a>
-            </div>
-          </div>
-          <a class="nav-link" href="/#faq">Q&amp;A</a>
-        </nav>
-        <div class="nav-actions">
-          <a class="nav-link" href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a>
-          <a class="btn btn-dark btn-sm" href="/demo">Try the demo</a>
-        </div>
-      </div>
-    </header>
+    <!-- Shared drawings -->
+    <svg class="sprite" aria-hidden="true">
+      <symbol id="profile" viewBox="0 0 600 640">
+        <path
+          d="M230 640C236 580 214 540 196 500 150 410 160 250 250 190 310 150 400 150 440 200 465 232 470 262 468 290 468 305 474 312 482 322L518 382C524 392 518 400 506 400L494 402C496 410 504 414 504 420 504 428 496 432 492 433 502 436 504 446 498 452 490 458 488 464 492 472 498 490 488 508 464 512 430 516 400 520 386 540 380 570 384 610 390 640Z"
+        />
+        <path d="M60 640C90 590 170 566 236 560L392 556C458 562 520 596 548 640Z" />
+      </symbol>
+      <symbol id="quotes" viewBox="0 0 32 32">
+        <path class="q1" fill="#17161c" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
+        <path class="q2" fill="#c2392e" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
+      </symbol>
+    </svg>
 
     <main>
-      <section class="hero">
-        <svg class="hero-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <path class="mark-top" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
-          <path class="mark-bottom" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
-        </svg>
-        <h1>Say it without sound</h1>
-        <p class="lede">
-          Lipscribe reads your lips through a webcam, then writes and speaks the words for you. Made for loud rooms,
-          silent ones, and anyone who can't use their voice.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-dark btn-lg" href="/demo">
-            Try the live demo
-            <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
-          </a>
-          <a class="btn btn-outline btn-lg" href="#how">See how it works</a>
-        </div>
+      <h1 class="visually-hidden">Lipscribe: say it without sound</h1>
 
-        <figure class="hero-visual">
+      <!-- Act 1: noise -->
+      <section class="act act-noise" id="noise" aria-label="Noise drowns out a phone call">
+        <div class="stage n-stage">
+          <svg class="layer n-skyline" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+          <svg class="layer n-crowd-back" viewBox="0 0 2400 300" preserveAspectRatio="xMinYMax slice" aria-hidden="true"></svg>
+
+          <div class="n-figure">
+            <svg class="n-figure-art in" viewBox="0 0 600 640" aria-hidden="true">
+              <use href="#profile" fill="#17161c" />
+              <ellipse cx="300" cy="352" rx="22" ry="34" fill="#2c2a33" />
+              <rect x="284" y="278" width="62" height="164" rx="15" fill="#f4f3ef" transform="rotate(-14 315 360)" />
+              <path d="M470 640C452 560 384 520 346 474" fill="none" stroke="#2c2a33" stroke-width="66" stroke-linecap="round" />
+              <rect x="294" y="392" width="88" height="96" rx="38" fill="#2c2a33" transform="rotate(-14 338 440)" />
+            </svg>
+            <div class="n-bubble-pos">
+              <div class="n-bubble-pop in">
+                <p class="bubble n-bubble">Can you hear me?</p>
+              </div>
+            </div>
+          </div>
+
+          <svg class="layer n-noise" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <svg class="layer n-crowd-front" viewBox="0 0 2800 300" preserveAspectRatio="xMinYMax slice" aria-hidden="true"></svg>
+
+          <div class="n-chrome">
+            <span class="wordmark in"><svg aria-hidden="true"><use href="#quotes" /></svg>lipscribe</span>
+            <a class="skip in" href="/about">Skip the story</a>
+          </div>
+          <div class="n-fade"></div>
+        </div>
+      </section>
+
+      <!-- Act 2: silence -->
+      <section class="act act-silence" id="silence" aria-label="Some people cannot use their voice">
+        <svg class="s-line" data-speed="0.55" viewBox="0 0 1600 120" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" d="M0 60H700l18-34 22 68 18-34H1600" />
+        </svg>
+        <div class="s-figure" data-speed="0.8">
+          <svg viewBox="0 0 600 640" aria-hidden="true">
+            <g transform="translate(600 0) scale(-1 1)">
+              <use href="#profile" fill="#26324d" />
+              <path d="M214 548C270 566 340 568 396 548L402 588C344 608 268 606 210 588Z" fill="#c2392e" />
+            </g>
+          </svg>
+          <svg class="s-bubble" data-speed="1.2" viewBox="0 0 200 140" aria-hidden="true">
+            <path
+              pathLength="1"
+              d="M24 10h132a16 16 0 0 1 16 16v60a16 16 0 0 1-16 16h-8l18 26-40-26H24a16 16 0 0 1-16-16V26a16 16 0 0 1 16-16Z"
+            />
+          </svg>
+        </div>
+        <h2 class="s-text">Some voices make no sound.</h2>
+      </section>
+
+      <!-- Act 3: focus (the turn) -->
+      <section class="act act-focus" id="focus" aria-label="Lipscribe reads lips and turns them into words">
+        <div class="stage f-stage">
+          <svg class="layer f-noise" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="f-col">
+            <div class="f-lens">
           <svg
             class="scene"
-            id="scene"
             viewBox="0 0 960 540"
-            role="img"
-            aria-label="Close-up of a webcam view: the face is blurred except a sharp window around the mouth."
+            aria-hidden="true"
           >
             <defs>
               <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
@@ -106,7 +136,7 @@
                 <ellipse cx="480" cy="478" rx="150" ry="16" fill="#9d6b56" opacity="0.4" />
               </g>
 
-              <!-- One connected mouth; landing.js reshapes it while text types -->
+              <!-- One connected mouth; mouth.js reshapes it -->
               <g id="mouth">
                 <path id="m-inner" fill="#3b1917" d="" />
                 <g clip-path="url(#teeth-clip)"><ellipse id="m-teeth" cx="480" cy="278" rx="118" ry="4" fill="#e6d9cf" /></g>
@@ -120,183 +150,81 @@
             <rect width="960" height="540" fill="#1a1b1e" opacity="0.12" />
             <g mask="url(#mouth-window)"><use href="#face" /><use href="#mouth" /></g>
           </svg>
-
-          <figcaption class="prompt">
-            <div class="prompt-copy">
-              <span class="prompt-label">Lipscribe heard</span>
-              <span class="prompt-text" id="heard">Can you hear me now?</span>
             </div>
-            <button class="prompt-play" id="play" type="button" aria-label="Play this phrase out loud">
-              <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4Z" fill="currentColor" stroke="none" />
-                <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" />
-              </svg>
-            </button>
-          </figcaption>
-        </figure>
+            <div class="f-caption">
+              <p class="f-text" aria-hidden="true"></p>
+              <span class="f-line"></span>
+            </div>
+            <p class="visually-hidden">Lipscribe hears: Can you hear me now?</p>
+            <h2 class="f-claim">Lipscribe reads lips.</h2>
+          </div>
+          <div class="f-wipe"></div>
+        </div>
       </section>
 
-      <section class="section" id="who" aria-labelledby="who-title">
-        <div class="container">
-          <h2 class="section-title" id="who-title">For the moments when sound fails</h2>
-          <div class="who-grid">
-            <article class="who-item">
-              <p class="who-quote">“I'm on a train, I'll call you back.”</p>
-              <h3>Loud rooms</h3>
-              <p>Cafés, platforms, concerts. Mouth the words and Lipscribe types and says them, no shouting needed.</p>
+      <!-- Act 4: how -->
+      <section class="act act-how" id="how" aria-label="How it works">
+        <div class="stage h-stage">
+          <div class="h-rail">
+            <article class="h-panel">
+              <div class="h-art h-art--fog">
+                <svg viewBox="0 0 520 400" aria-hidden="true">
+                  <rect x="80" y="40" width="360" height="236" rx="18" fill="#f4f3ef" stroke="#17161c" stroke-width="10" />
+                  <circle cx="260" cy="64" r="8" fill="#c2392e" />
+                  <use href="#profile" x="186" y="86" width="150" height="160" fill="#17161c" />
+                  <path d="M36 300h448l-26 42H62Z" fill="#17161c" />
+                </svg>
+              </div>
+              <h3 class="h-word">Watch.</h3>
             </article>
-            <article class="who-item">
-              <p class="who-quote">“Could I get some water, please?”</p>
-              <h3>Without a voice</h3>
-              <p>After throat surgery, with ALS, or on vocal rest. If your lips can move, you can still be understood.</p>
+            <article class="h-panel">
+              <div class="h-art h-art--butter">
+                <svg viewBox="200 110 560 360" aria-hidden="true">
+                  <path id="r-inner" fill="#3b1917" d="" />
+                  <path id="r-upper" fill="#9b4c45" d="" />
+                  <path id="r-lower" fill="#b4605a" d="" />
+                  <path d="M250 190v-50h50M710 190v-50h-50M250 380v50h50M710 380v50h-50" fill="none" stroke="#17161c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <h3 class="h-word">Read.</h3>
             </article>
-            <article class="who-item">
-              <p class="who-quote">“The baby just fell asleep.”</p>
-              <h3>Quiet places</h3>
-              <p>Libraries, hospital wards, late nights. Talk to someone across the room without making a sound.</p>
+            <article class="h-panel">
+              <div class="h-art h-art--vermilion">
+                <svg viewBox="0 0 520 400" aria-hidden="true">
+                  <path d="M70 80h260a30 30 0 0 1 30 30v120a30 30 0 0 1-30 30H200l-62 52 12-52H70a30 30 0 0 1-30-30V110a30 30 0 0 1 30-30Z" fill="#f4f3ef" />
+                  <rect x="82" y="124" width="216" height="18" rx="9" fill="#17161c" />
+                  <rect x="82" y="162" width="168" height="18" rx="9" fill="#17161c" />
+                  <rect x="82" y="200" width="192" height="18" rx="9" fill="#17161c" />
+                  <g class="h-waves" fill="none" stroke="#17161c" stroke-width="12" stroke-linecap="round">
+                    <path d="M398 136a62 62 0 0 1 0 88" />
+                    <path d="M428 108a104 104 0 0 1 0 144" />
+                    <path d="M458 80a146 146 0 0 1 0 200" />
+                  </g>
+                </svg>
+              </div>
+              <h3 class="h-word">Speak.</h3>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="how" aria-labelledby="how-title">
-        <div class="container split">
-          <div>
-            <h2 class="section-title" id="how-title">How it works</h2>
-            <p class="section-sub">No microphone, no app to install. A webcam and a browser are enough.</p>
-          </div>
-          <ol class="steps">
-            <li>
-              <span class="step-n">1</span>
-              <div>
-                <h3>Face the camera</h3>
-                <p>Open the demo and allow your webcam. Lipscribe finds your mouth and blurs everything else.</p>
-              </div>
-            </li>
-            <li>
-              <span class="step-n">2</span>
-              <div>
-                <h3>Mouth the words</h3>
-                <p>Press Record and speak silently. Only the video is used, so noise around you doesn't matter.</p>
-              </div>
-            </li>
-            <li>
-              <span class="step-n">3</span>
-              <div>
-                <h3>Read it, hear it</h3>
-                <p>The words appear as text and are read aloud in the voice you pick. Every line stays in your history.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="section" id="faq" aria-labelledby="faq-title">
-        <div class="container split">
-          <h2 class="section-title" id="faq-title">Q&amp;A</h2>
-          <div class="faq">
-            <details>
-              <summary>
-                What is Lipscribe?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>A web app that turns lip movements into text and speech. It works from video of your mouth, so it needs no sound at all.</p>
-            </details>
-            <details>
-              <summary>
-                Does it use my microphone?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>No. Lipscribe only asks for the camera and only records video. Whether you speak out loud or silently makes no difference.</p>
-            </details>
-            <details>
-              <summary>
-                What do I need to try it?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>A laptop or phone with a camera and a recent Chrome, Edge or Safari. Even light on your face helps the most.</p>
-            </details>
-            <details>
-              <summary>
-                Where does my video go?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>The live camera view stays in your browser. A clip is sent to the Lipscribe model only after you press Stop, and only that clip.</p>
-            </details>
-            <details>
-              <summary>
-                How accurate is it?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>The model we build on, Auto-AVSR, gets about four out of five words right on the LRS3 benchmark. Short, clear phrases facing the camera work best.</p>
-            </details>
-            <details>
-              <summary>
-                Who made it?
-                <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
-              </summary>
-              <p>A small team at a hackathon in November 2026. The code is open on <a href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a>.</p>
-            </details>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta" aria-labelledby="cta-title">
-        <div class="cta-panel">
-          <span class="cta-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <path class="mark-top" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
-              <path class="mark-bottom" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
-            </svg>
-          </span>
-          <h2 id="cta-title">Your lips already know the words</h2>
-          <div class="hero-actions">
-            <a class="btn btn-dark btn-lg" href="/demo">
-              Open the live demo
-              <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+      <!-- Act 5: close -->
+      <section class="act act-close" id="start" aria-label="Try Lipscribe">
+        <div class="c-inner">
+          <svg class="c-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <path class="q1" fill="#17161c" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
+            <path class="q2" fill="#c2392e" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
+          </svg>
+          <h2 class="c-title">Say it without sound.</h2>
+          <div class="c-actions">
+            <a class="c-btn c-btn--dark" href="/demo" data-magnet>
+              Try the live demo
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
             </a>
-            <a class="btn btn-outline btn-lg" href="https://github.com/PureLumpyAttack/Lipscribe">View the code</a>
+            <a class="c-btn c-btn--line" href="/about">Meet Lipscribe</a>
           </div>
         </div>
       </section>
     </main>
-
-    <footer class="footer">
-      <div class="footer-top">
-        <a class="logo" href="/" aria-label="Lipscribe home">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            <path class="mark-top" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h8A1.5 1.5 0 0 1 14 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4H4.5A1.5 1.5 0 0 1 3 16.5Z" />
-            <path class="mark-bottom" d="M18 7.5A1.5 1.5 0 0 1 19.5 6h8A1.5 1.5 0 0 1 29 7.5V16c0 5.2-2.9 8.6-8 10l-1.3-2.6c2.7-1 4.2-2.8 4.5-5.4h-4.7A1.5 1.5 0 0 1 18 16.5Z" />
-          </svg>
-          lipscribe
-        </a>
-        <div class="footer-cols">
-          <div>
-            <h3>Product</h3>
-            <ul>
-              <li><a href="/demo">Live demo</a></li>
-              <li><a href="/#how">How it works</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Learn</h3>
-            <ul>
-              <li><a href="/#who">Who it's for</a></li>
-              <li><a href="/#faq">Q&amp;A</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>Project</h3>
-            <ul>
-              <li><a href="https://github.com/PureLumpyAttack/Lipscribe">GitHub</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Lipscribe</span>
-        <span>Built at a hackathon</span>
-      </div>
-    </footer>
   </body>
 </html>

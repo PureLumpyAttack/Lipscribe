@@ -1,0 +1,555 @@
+/* Story page: full-bleed scroll film. Six colours, two fonts. */
+
+:root {
+  --ink: #17161c;
+  --paper: #f4f3ef;
+  --vermilion: #ff5b3a;
+  --fog: #cfdbe8;
+  --butter: #ffd447;
+  --lip: #c2392e;
+
+  --display: 'Archivo', ui-sans-serif, sans-serif;
+  --text: 'Geist', ui-sans-serif, sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  color-scheme: light;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Immersive: no visible scrollbar */
+html {
+  scrollbar-width: none;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--vermilion);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Shared ---------- */
+.act {
+  position: relative;
+}
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bubble {
+  position: relative;
+  display: inline-block;
+  padding: 0.42em 0.7em 0.5em;
+  border-radius: 0.55em;
+  background: var(--paper);
+  color: var(--ink);
+  font: 800 clamp(20px, 0.8rem + 2.2vmin, 50px) / 1 var(--display);
+  font-stretch: 118%;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 0.18em 0 rgb(23 22 28 / 0.18);
+}
+.bubble::before {
+  content: '';
+  position: absolute;
+  left: -0.32em;
+  top: 50%;
+  width: 0.8em;
+  height: 0.8em;
+  background: inherit;
+  border-radius: 0.12em;
+  transform: translateY(-50%) rotate(45deg);
+}
+.bubble .ch {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ---------- Act 1: noise ---------- */
+.act-noise {
+  height: 360vh;
+  background: var(--vermilion);
+}
+.n-stage {
+  background: var(--vermilion);
+}
+.n-skyline {
+  top: auto;
+  bottom: 0;
+  height: 64%;
+}
+.n-crowd-back {
+  top: auto;
+  bottom: 0;
+  width: 150%;
+  height: 30%;
+}
+.n-crowd-front {
+  top: auto;
+  bottom: -9%;
+  width: 190%;
+  height: 34%;
+  filter: blur(5px);
+}
+
+.n-figure {
+  position: absolute;
+  left: 50%;
+  bottom: -1%;
+  width: min(82vmin, 780px);
+  aspect-ratio: 600 / 640;
+  translate: -74% 0;
+  transform-origin: 50% 100%;
+}
+.n-figure-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.n-bubble-pos {
+  position: absolute;
+  left: 91%;
+  top: 60%;
+  translate: 0 -50%;
+}
+
+.n-noise path {
+  vector-effect: non-scaling-stroke;
+}
+
+.n-chrome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 22px clamp(18px, 3vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font: 800 1.25rem/1 var(--display);
+  font-stretch: 120%;
+  letter-spacing: -0.02em;
+}
+.wordmark svg {
+  width: 26px;
+  height: 26px;
+}
+.skip {
+  min-height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--ink);
+  font: 500 0.9375rem/1 var(--text);
+  text-decoration: none;
+  box-shadow: inset 0 0 0 1.5px rgb(23 22 28 / 0.7);
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+.skip:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.n-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: var(--fog);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Act 2: silence ---------- */
+.act-silence {
+  height: 170vh;
+  overflow: hidden;
+  background: var(--fog);
+}
+.s-line {
+  position: absolute;
+  left: 0;
+  top: 104vh;
+  width: 100%;
+  height: 120px;
+}
+.s-line path {
+  fill: none;
+  stroke: rgb(23 22 28 / 0.35);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+}
+.s-figure {
+  position: absolute;
+  right: 5vw;
+  bottom: 0;
+  width: min(74vmin, 720px);
+  aspect-ratio: 600 / 640;
+}
+.s-figure > svg:first-child {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.s-bubble {
+  position: absolute;
+  right: 92%;
+  top: 44%;
+  width: clamp(110px, 17vmin, 200px);
+  overflow: visible;
+}
+.s-bubble path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}
+.s-text {
+  position: absolute;
+  left: 7vw;
+  top: 62vh;
+  max-width: 11ch;
+  color: var(--ink);
+  font: 800 clamp(2.6rem, 1rem + 5.4vw, 6.4rem) / 0.96 var(--display);
+  font-stretch: 112%;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.s-text .w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+}
+.s-text .w > span {
+  display: inline-block;
+}
+
+/* ---------- Act 3: focus ---------- */
+.act-focus {
+  height: 440vh;
+  background: var(--ink);
+}
+.f-stage {
+  background: var(--ink);
+}
+.f-noise {
+  opacity: 0.55;
+}
+.f-noise path {
+  vector-effect: non-scaling-stroke;
+}
+.f-col {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3.4vh, 36px);
+  padding: 0 6vw;
+}
+.f-lens {
+  width: min(84vw, 960px, 112svh);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: clamp(16px, 2.2vw, 30px);
+  background: #c9997f;
+  clip-path: circle(0% at 50% 52%);
+}
+.f-lens svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.f-caption {
+  position: relative;
+  width: min(84vw, 960px);
+  padding-bottom: 16px;
+  text-align: center;
+}
+.f-text {
+  min-height: 1.2em;
+  color: var(--paper);
+  font: 700 clamp(1.6rem, 0.7rem + 3vw, 3.6rem) / 1.15 var(--display);
+  font-stretch: 112%;
+  letter-spacing: -0.015em;
+}
+.f-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--butter);
+  transform: scaleX(0);
+  opacity: 0;
+}
+.f-claim {
+  color: var(--butter);
+  font: 500 clamp(1rem, 0.9rem + 0.5vw, 1.3rem) / 1.4 var(--text);
+  letter-spacing: 0.01em;
+  opacity: 0;
+}
+.f-wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--paper);
+  clip-path: inset(100% 0% 0% 0%);
+}
+
+/* ---------- Act 4: how ---------- */
+.act-how {
+  height: 340vh; /* replaced by story.js to match the rail length */
+  background: var(--paper);
+}
+.h-stage {
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+}
+.h-rail {
+  display: flex;
+  gap: 6vw;
+  padding: 0 10vw;
+  will-change: transform;
+}
+.h-panel {
+  flex: none;
+  width: min(76vw, 1060px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 4vw;
+}
+.h-art {
+  aspect-ratio: 5 / 4;
+  border-radius: clamp(20px, 2.4vw, 32px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.h-art svg {
+  width: 78%;
+  overflow: visible;
+}
+.h-art--fog {
+  background: var(--fog);
+}
+.h-art--butter {
+  background: var(--butter);
+}
+.h-art--vermilion {
+  background: var(--vermilion);
+}
+.h-word {
+  color: var(--ink);
+  font: 800 clamp(3.4rem, 1rem + 8vw, 10rem) / 0.9 var(--display);
+  font-stretch: 125%;
+  letter-spacing: -0.035em;
+}
+
+/* ---------- Act 5: close ---------- */
+.act-close {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 14vh 6vw;
+  background: var(--paper);
+}
+.c-inner {
+  display: grid;
+  justify-items: center;
+  gap: clamp(22px, 3.6vh, 36px);
+  text-align: center;
+}
+.c-mark {
+  width: clamp(76px, 11vmin, 128px);
+  height: auto;
+  overflow: visible;
+}
+.c-title {
+  max-width: 12ch;
+  color: var(--ink);
+  font: 800 clamp(2.8rem, 1rem + 6.4vw, 7.4rem) / 0.94 var(--display);
+  font-stretch: 118%;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.c-actions {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.c-btn {
+  min-height: 56px;
+  padding: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  font: 500 1.0625rem/1 var(--text);
+  text-decoration: none;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+.c-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.c-btn--dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+.c-btn--dark:hover {
+  background: #2e2c36;
+}
+.c-btn--line {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+.c-btn--line:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 700px) {
+  .n-figure {
+    width: min(108vw, 520px);
+    translate: -58% 0;
+  }
+  .n-bubble-pos {
+    left: 34%;
+    top: 4%;
+    translate: 0 0;
+  }
+  .bubble::before {
+    left: 24%;
+    top: auto;
+    bottom: -0.3em;
+    transform: rotate(45deg);
+  }
+  .skip {
+    padding: 0 14px;
+    font-size: 0.875rem;
+  }
+  .s-figure {
+    right: -14vw;
+    width: 92vw;
+  }
+  .s-bubble {
+    right: 78%;
+    width: 96px;
+  }
+  .act-silence {
+    height: 125vh;
+  }
+  .s-text {
+    left: 6vw;
+    top: 26vh;
+  }
+  .s-line {
+    top: 62vh;
+  }
+  .h-rail {
+    gap: 8vw;
+    padding: 0 8vw;
+  }
+  .h-panel {
+    width: 84vw;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .c-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .c-actions {
+    width: min(100%, 360px);
+  }
+}

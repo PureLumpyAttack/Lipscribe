@@ -2,7 +2,8 @@
 
 The Lipscribe website:
 
-- `/`: the landing page explaining the project, with buttons into the demo.
+- `/`: the story, a full-screen scroll animation that introduces the problem and the idea, ending in buttons to the demo and the about page. The plan behind it is in `STORY-BRIEF.md`.
+- `/about`: the product page explaining the project, with buttons into the demo.
 - `/demo`: the live demo. It shows a webcam view with everything except the mouth blurred, plus start/stop recording, transcription, text-to-speech playback and transcript history.
 
 ## Run
@@ -57,13 +58,16 @@ Response (JSON):
 | File | Purpose |
 |---|---|
 | `server.mjs` | Static server, mock `/transcribe`, optional proxy to the real model |
-| `public/index.html` | Landing page |
+| `public/index.html` | Story page (scroll animation) |
+| `public/css/story.css`, `public/js/story.js` | Story styles and scroll choreography (GSAP ScrollTrigger + Lenis from CDN) |
+| `public/js/mouth.js` | The illustrated mouth shared by the story and about pages |
+| `public/about.html` | Product page |
 | `public/demo.html` | Live demo page |
 | `public/css/base.css` | Shared tokens (colors, fonts), top bar, buttons, footer |
-| `public/css/landing.css` | Landing page styles |
+| `public/css/about.css` | Product page styles |
 | `public/css/demo.css` | Demo page styles, including the mouth highlight |
 | `public/js/nav.js` | Top bar dropdown |
-| `public/js/landing.js` | Hero animation and "play phrase" button |
+| `public/js/about.js` | Product page hero animation and "play phrase" button |
 | `public/js/config.js` | Endpoint URL, field name, clip length limits |
 | `public/js/demo.js` | Demo UI state and event wiring |
 | `public/js/camera.js` | Webcam + recorder |
