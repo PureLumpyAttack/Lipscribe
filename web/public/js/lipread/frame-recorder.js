@@ -4,17 +4,22 @@
 //
 // Same start/stop shape as createRecorder() in camera.js, so demo.js can use
 // either. stop() resolves with { frames: { regions, keypoints, timestamps }, durationMs }.
+//
+// Hands-free mode: listen() keeps capturing into a short rolling buffer while
+// not recording, so start({ from }) can include the frames from just before
+// talking was detected.
 
 const REGION_SIZE = 256; // px; the window is at most this big (about 64 KB per frame)
 const REGION_SCALE = 2.2; // window side = 2.2 x face box size
+const KEEP_WHILE_LISTENING_MS = 1000;
 
 export function createFrameRecorder({ video, faceTarget }) {
   const canvas = new OffscreenCanvas(REGION_SIZE, REGION_SIZE);
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   let unsubscribe = null;
-  let regions = [];
-  let keypoints = [];
-  let timestamps = [];
+  let listening = false;
+  let recording = false;
+  let frames = []; // { region, keypoints, timestamp }
   let lastBox = null;
   let startedAt = 0;
 
@@ -36,29 +41,61 @@ export function createFrameRecorder({ video, faceTarget }) {
     for (let i = 0, j = 0; i < gray.length; i++, j += 4) {
       gray[i] = Math.round(0.299 * rgba[j] + 0.587 * rgba[j + 1] + 0.114 * rgba[j + 2]);
     }
-    regions.push({ data: gray, width: size, height: size, scale: size / side, ox: sx, oy: sy });
-    keypoints.push(target ? target.keypoints.map((p) => [...p]) : null);
-    timestamps.push(timestamp);
+    frames.push({
+      region: { data: gray, width: size, height: size, scale: size / side, ox: sx, oy: sy },
+      keypoints: target ? target.keypoints.map((p) => [...p]) : null,
+      timestamp,
+    });
+    if (!recording) {
+      while (frames.length && frames[0].timestamp < timestamp - KEEP_WHILE_LISTENING_MS) frames.shift();
+    }
+  }
+
+  function subscribe() {
+    if (!unsubscribe) unsubscribe = faceTarget.subscribe(capture);
+  }
+
+  function unsubscribeIfIdle() {
+    if (!listening && !recording && unsubscribe) {
+      unsubscribe();
+      unsubscribe = null;
+      frames = [];
+    }
   }
 
   return {
     get recording() {
-      return Boolean(unsubscribe);
+      return recording;
     },
-    start() {
-      regions = [];
-      keypoints = [];
-      timestamps = [];
-      lastBox = faceTarget.target?.box ?? null;
-      startedAt = performance.now();
-      unsubscribe = faceTarget.subscribe(capture);
+    /** Keep a rolling buffer of the last second (hands-free mode). */
+    listen() {
+      listening = true;
+      subscribe();
+    },
+    unlisten() {
+      listening = false;
+      unsubscribeIfIdle();
+    },
+    /** from: keep already-buffered frames from this time on (performance.now() clock). */
+    start({ from } = {}) {
+      frames = from == null ? [] : frames.filter((f) => f.timestamp >= from);
+      if (!frames.length) lastBox = faceTarget.target?.box ?? null;
+      startedAt = frames[0]?.timestamp ?? performance.now();
+      recording = true;
+      subscribe();
     },
     stop() {
-      if (!unsubscribe) return Promise.reject(new Error('Not recording.'));
-      unsubscribe();
-      unsubscribe = null;
+      if (!recording) return Promise.reject(new Error('Not recording.'));
+      recording = false;
+      const taken = frames;
+      frames = [];
+      unsubscribeIfIdle();
       return Promise.resolve({
-        frames: { regions, keypoints, timestamps },
+        frames: {
+          regions: taken.map((f) => f.region),
+          keypoints: taken.map((f) => f.keypoints),
+          timestamps: taken.map((f) => f.timestamp),
+        },
         durationMs: performance.now() - startedAt,
       });
     },

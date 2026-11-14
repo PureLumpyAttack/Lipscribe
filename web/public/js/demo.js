@@ -6,6 +6,7 @@ import { startCamera, createRecorder } from './camera.js';
 import { createMouthTracker } from './mouth-tracker.js';
 import { createFaceTarget } from './lipread/face-target.js';
 import { createFrameRecorder } from './lipread/frame-recorder.js';
+import { createSpeechDetector } from './lipread/speech-detector.js';
 import * as speech from './speech.js';
 import * as voiceClone from './voice-clone.js';
 import { loadHistory, saveHistory, loadPrefs, savePrefs, MAX_HISTORY } from './storage.js';
@@ -58,6 +59,16 @@ const ui = {
   cloneRecord: $('clone-record'),
   cloneTest: $('clone-test'),
   cloneDelete: $('clone-delete'),
+  controlsHint: $('controls-hint'),
+  handsFreeField: $('handsfree-field'),
+  handsFree: $('handsfree'),
+  boostField: $('boost-field'),
+  boost: $('boost'),
+  boostValue: $('boost-value'),
+  micSetup: $('mic-setup'),
+  micSetupText: $('mic-setup-text'),
+  micInstall: $('mic-install'),
+  micHelp: $('mic-help'),
 };
 
 const inBrowser = config.engine === 'browser';
@@ -79,6 +90,11 @@ const state = {
   serverVoices: { enabled: false, presets: [], clone: false },
   systemVoices: [],
   cloneRec: null, // active voice-sample recording
+  detector: null, // hands-free: lipread/speech-detector.js
+  autoRecording: false, // the current recording was started by the detector
+  clips: [], // recorded clips waiting for the model
+  speakQueue: [], // hands-free: transcripts waiting to be read aloud
+  mic: null, // desktop app (macOS): Lipscribe Microphone status
 };
 
 // Older prefs stored a bare speechSynthesis voice name.
@@ -143,7 +159,7 @@ async function enableCamera() {
       state.recorder = createRecorder(stream);
     }
     ui.viewport.dataset.camera = 'on';
-    ui.recordBtn.disabled = state.busy;
+    ui.recordBtn.disabled = false;
     renderOutputOptions(); // device names are only visible after a media permission
     state.tracker ??= createMouthTracker({
       video: ui.video,
@@ -151,8 +167,10 @@ async function enableCamera() {
       onStatus: setTrackStatus,
       // Keep the highlight on the person being read.
       getTargetBox: () => (state.faceTargetReady ? (state.faceTarget.target?.box ?? null) : undefined),
+      onMouth: (open, t) => state.detector?.push(open, t),
     });
     state.tracker.start();
+    setHandsFree(ui.handsFree.checked);
   } catch (error) {
     const [title, body] = cameraErrorCopy(error);
     showGate('error', title, body);
@@ -260,15 +278,33 @@ onModelProgress((p) => {
 function setRecordingUI(on) {
   ui.viewport.dataset.recording = String(on);
   ui.recordBtn.setAttribute('aria-pressed', String(on));
-  ui.recordLabel.textContent = on ? 'Stop and transcribe' : 'Start recording';
   ui.recChip.hidden = !on;
   if (!on) ui.progress.style.transform = 'scaleX(0)';
+  updateRecordLabel();
 }
 
-function startRecording() {
-  speech.stop();
-  setSpeaking(null);
-  state.recorder.start();
+function updateRecordLabel() {
+  const recording = Boolean(state.recorder?.recording);
+  const listening = Boolean(state.detector) && !recording;
+  ui.recordBtn.dataset.listening = String(listening);
+  ui.recordLabel.textContent = recording
+    ? state.autoRecording
+      ? 'Listening… stop now'
+      : 'Stop and transcribe'
+    : listening
+      ? 'Waiting for you to talk'
+      : 'Start recording';
+}
+
+/** auto: started by the hands-free detector; from: include frames since then. */
+function startRecording({ auto = false, from } = {}) {
+  if (!auto) {
+    speech.stop();
+    setSpeaking(null);
+    state.speakQueue = [];
+  }
+  state.autoRecording = auto;
+  state.recorder.start({ from });
   state.startedAt = performance.now();
   setRecordingUI(true);
   updateTimer();
@@ -286,6 +322,8 @@ function updateTimer() {
 async function stopRecording() {
   if (!state.recorder?.recording) return;
   clearInterval(state.timer);
+  const auto = state.autoRecording;
+  state.autoRecording = false;
   setRecordingUI(false);
 
   let clip;
@@ -295,25 +333,62 @@ async function stopRecording() {
     showError(`Recording failed: ${error.message}`, false);
     return;
   }
-  if (clip.durationMs < config.minRecordMs) {
-    showError('That clip was too short. Record for at least a second.', false);
+  // Hit the length limit while still talking: carry on in a new clip.
+  if (auto && state.detector?.speaking) startRecording({ auto: true });
+
+  if (clip.durationMs < (auto ? config.handsFree.minSpeechMs : config.minRecordMs)) {
+    if (!auto) showError('That clip was too short. Record for at least a second.', false);
     return;
   }
-  sendClip(clip);
+  clip.auto = auto;
+  state.clips.push(clip);
+  processClips();
 }
 
 function toggleRecording() {
-  if (!state.recorder || state.busy) return;
+  if (!state.recorder) return;
   if (state.recorder.recording) stopRecording();
   else startRecording();
 }
 
+/* ---------- Hands-free (browser engine) ---------- */
+
+function setHandsFree(on) {
+  const available = inBrowser && Boolean(state.recorder);
+  if (on && available && !state.detector) {
+    state.detector = createSpeechDetector({
+      ...config.handsFree,
+      onStart: (from) => {
+        if (!state.recorder.recording) startRecording({ auto: true, from });
+      },
+      onStop: () => {
+        if (state.autoRecording) stopRecording();
+      },
+    });
+    state.recorder.listen();
+  } else if (!on && state.detector) {
+    const detector = state.detector;
+    state.detector = null;
+    detector.reset();
+    state.recorder.unlisten();
+  }
+  ui.controlsHint.innerHTML = state.detector
+    ? 'Just start talking. Lipscribe records while your lips move and sends each sentence when you pause.'
+    : `<span class="hint-key"><kbd>Space</kbd> starts and stops. </span>Clips stop on their own after ${config.maxRecordSeconds} seconds.`;
+  updateRecordLabel();
+}
+
 /* ---------- Transcription ---------- */
+
+/** Run queued clips through the model one at a time (hands-free can record the next one meanwhile). */
+async function processClips() {
+  if (state.busy) return;
+  while (state.clips.length) await sendClip(state.clips.shift());
+}
 
 async function sendClip(clip) {
   state.busy = true;
   state.failedClip = null;
-  ui.recordBtn.disabled = true;
   ui.latest.dataset.state = 'loading';
   ui.latestMeta.textContent = '';
   ui.loadingNote.textContent =
@@ -321,6 +396,12 @@ async function sendClip(clip) {
 
   try {
     const result = await transcribe(clip);
+    if (clip.auto && !result.text.trim()) {
+      // Lips moved but no words came out (a smile, chewing): skip quietly.
+      if (state.current) showEntry(state.current);
+      else ui.latest.dataset.state = 'empty';
+      return;
+    }
     const entry = {
       id: crypto.randomUUID?.() ?? String(Date.now()),
       text: result.text,
@@ -332,13 +413,16 @@ async function sendClip(clip) {
     saveHistory(state.history);
     renderHistory();
     showEntry(entry);
-    if (ui.autospeak.checked) speakEntry(entry);
+    if (ui.autospeak.checked) {
+      // Hands-free: let the previous sentence finish instead of cutting it off.
+      if (clip.auto && state.speakingId) state.speakQueue.push(entry);
+      else speakEntry(entry);
+    }
   } catch (error) {
     state.failedClip = clip;
     showError(error.message, true);
   } finally {
     state.busy = false;
-    ui.recordBtn.disabled = !state.recorder;
   }
 }
 
@@ -370,13 +454,19 @@ function speakEntry(entry) {
     voice: state.prefs.voice,
     sinkId: state.prefs.outputDevice || '',
     alsoLocal: state.prefs.alsoLocal !== false,
+    gain: state.prefs.outputDevice ? Number(state.prefs.boost) || 1 : 1,
     onStart: () => setSpeaking(entry.id),
-    onEnd: () => setSpeaking(null),
+    onEnd: () => {
+      setSpeaking(null);
+      const next = state.speakQueue.shift();
+      if (next) speakEntry(next);
+    },
     onError: (error) => showVoiceNote(error.message, 'error'),
   });
 }
 
 function toggleSpeak(entry) {
+  state.speakQueue = [];
   if (state.speakingId === entry.id) {
     speech.stop();
     setSpeaking(null);
@@ -450,6 +540,9 @@ async function renderOutputOptions() {
   });
   if (!options.some((o) => o.value === '')) options.unshift(new Option('System default', ''));
   ui.outputSelect.replaceChildren(...options);
+  // Desktop app: send speech to the Lipscribe Microphone unless the user picked something else.
+  const lipscribeMic = devices.find((d) => speech.isLipscribeMic(d.label));
+  if (lipscribeMic && !state.prefs.outputChosen) state.prefs.outputDevice = lipscribeMic.deviceId;
   if (![...ui.outputSelect.options].some((o) => o.value === state.prefs.outputDevice)) state.prefs.outputDevice = '';
   ui.outputSelect.value = state.prefs.outputDevice || '';
   updateOutputUI();
@@ -460,6 +553,48 @@ function updateOutputUI() {
   ui.outputField.hidden = !speech.canPickOutput || !serverVoice || ui.outputSelect.options.length < 2;
   ui.alsoLocalField.hidden = ui.outputField.hidden || !state.prefs.outputDevice;
   ui.alsoLocal.checked = state.prefs.alsoLocal !== false;
+  ui.boostField.hidden = ui.alsoLocalField.hidden;
+  ui.boost.value = String(state.prefs.boost ?? 1);
+  ui.boostValue.textContent = `${Math.round(Number(ui.boost.value) * 100)}%`;
+}
+
+/* ---------- Lipscribe Microphone (desktop app, macOS) ---------- */
+
+async function refreshMicSetup() {
+  const api = window.lipscribeApp?.mic;
+  state.mic = api ? await api.status().catch(() => null) : null;
+  const supported = Boolean(state.mic?.supported);
+  ui.micSetup.hidden = !supported;
+  ui.micHelp.hidden = supported; // the BlackHole/VB-CABLE steps aren't needed then
+  if (!supported) return;
+  const { installed, outdated } = state.mic;
+  ui.micInstall.hidden = installed && !outdated;
+  ui.micInstall.textContent = outdated ? 'Update Lipscribe Microphone' : 'Add Lipscribe Microphone';
+  ui.micSetupText.textContent = !installed
+    ? 'Add the Lipscribe Microphone so Zoom, Meet and Discord can hear Lipscribe. macOS asks for your password once.'
+    : outdated
+      ? 'A newer Lipscribe Microphone comes with this version of the app.'
+      : 'In Zoom, Meet or Discord, pick "Lipscribe Microphone" as your microphone. Speech plays into it with a natural voice or your own.';
+}
+
+async function installMic() {
+  ui.micInstall.disabled = true;
+  ui.micSetupText.textContent = 'Waiting for your password…';
+  const result = await window.lipscribeApp.mic.install().catch((error) => ({ ok: false, error: error.message }));
+  ui.micInstall.disabled = false;
+  await refreshMicSetup();
+  if (result?.ok) {
+    // Core Audio restarts; the new device shows up a moment later.
+    state.prefs.outputChosen = false;
+    if (!/^(clone|preset:)/.test(state.prefs.voice) && state.serverVoices.presets.length) {
+      state.prefs.voice = `preset:${state.serverVoices.presets[0]}`;
+      ui.voiceSelect.value = state.prefs.voice;
+    }
+    savePrefs(state.prefs);
+    for (const delay of [800, 2000, 4000]) setTimeout(renderOutputOptions, delay);
+  } else if (result && !result.cancelled) {
+    ui.micSetupText.textContent = `Couldn't add the Lipscribe Microphone: ${result.error || 'unknown error'}`;
+  }
 }
 
 async function setupVoices() {
@@ -622,11 +757,26 @@ ui.voiceSelect.addEventListener('change', () => {
 
 ui.outputSelect.addEventListener('change', () => {
   state.prefs.outputDevice = ui.outputSelect.value;
+  state.prefs.outputChosen = true;
   savePrefs(state.prefs);
   updateOutputUI();
   const label = ui.outputSelect.selectedOptions[0]?.textContent ?? '';
   showVoiceNote(speech.isVirtualDevice(label) ? 'Now choose the same cable as the microphone in your call app.' : '');
 });
+
+ui.boost.addEventListener('input', () => {
+  state.prefs.boost = Number(ui.boost.value);
+  ui.boostValue.textContent = `${Math.round(state.prefs.boost * 100)}%`;
+  savePrefs(state.prefs);
+});
+
+ui.handsFree.addEventListener('change', () => {
+  state.prefs.handsFree = ui.handsFree.checked;
+  savePrefs(state.prefs);
+  setHandsFree(ui.handsFree.checked);
+});
+
+ui.micInstall.addEventListener('click', installMic);
 
 ui.alsoLocal.addEventListener('change', () => {
   state.prefs.alsoLocal = ui.alsoLocal.checked;
@@ -705,6 +855,9 @@ document.addEventListener('keydown', (event) => {
 $('max-secs').textContent = config.maxRecordSeconds;
 if (inBrowser) ui.gateBody.textContent = 'Lipscribe only needs video, and the video never leaves this browser.';
 ui.autospeak.checked = state.prefs.autoSpeak;
+ui.handsFree.checked = state.prefs.handsFree !== false;
+ui.handsFreeField.hidden = !inBrowser; // needs the in-browser model and face tracking
+refreshMicSetup();
 setupVoices();
 renderHistory();
 if (state.history[0]) showEntry(state.history[0]);

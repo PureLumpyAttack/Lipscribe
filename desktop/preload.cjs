@@ -5,4 +5,9 @@ contextBridge.exposeInMainWorld('lipscribeApp', {
   isDesktop: true,
   shortcut: process.platform === 'darwin' ? '⌘⇧L' : 'Ctrl+Shift+L',
   onToggleRecording: (fn) => ipcRenderer.on('lipscribe:toggle-recording', () => fn()),
+  // macOS: the built-in "Lipscribe Microphone" virtual audio device.
+  mic: {
+    status: () => ipcRenderer.invoke('mic:status'),
+    install: () => ipcRenderer.invoke('mic:install'),
+  },
 });

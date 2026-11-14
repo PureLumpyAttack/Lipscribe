@@ -10,7 +10,8 @@
 // set "ttsServer" in config.json (e.g. the production site) before building,
 // or run with OPENROUTER_API_KEY / TTS_PROXY_URL in the environment.
 
-import { app, BrowserWindow, globalShortcut, Menu, session, shell, systemPreferences } from 'electron';
+import { app, BrowserWindow, globalShortcut, ipcMain, Menu, nativeImage, session, shell, systemPreferences } from 'electron';
+import { execFile } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -26,6 +27,84 @@ if (!process.env.OPENROUTER_API_KEY && !process.env.TTS_PROXY_URL && settings.tt
 }
 
 let win = null;
+let origin = '';
+
+/* ---------- Lipscribe Microphone (macOS virtual audio device) ----------
+ * A renamed BlackHole driver (scripts/build-mic-driver.sh) shipped inside the
+ * app. Installing it copies it into /Library/Audio/Plug-Ins/HAL (asks for the
+ * admin password once) and restarts Core Audio so the device appears. Lipscribe
+ * plays the voice into it; call apps pick it as their microphone. */
+
+const MIC_BUNDLE = 'LipscribeMicrophone.driver';
+const MIC_DEST = `/Library/Audio/Plug-Ins/HAL/${MIC_BUNDLE}`;
+const micSource = () => join(resources, 'drivers', MIC_BUNDLE);
+
+function bundleVersion(dir) {
+  try {
+    const plist = readFileSync(join(dir, 'Contents', 'Info.plist'), 'utf8');
+    return /<key>CFBundleShortVersionString<\/key>\s*<string>([^<]+)<\/string>/.exec(plist)?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function micStatus() {
+  if (process.platform !== 'darwin') return { supported: false };
+  const bundled = bundleVersion(micSource());
+  const installed = bundleVersion(MIC_DEST);
+  return { supported: Boolean(bundled), installed: Boolean(installed), outdated: Boolean(installed && bundled && installed !== bundled) };
+}
+
+const shQuote = (s) => `'${s.replaceAll("'", `'\\''`)}'`;
+const appleScriptString = (s) => `"${s.replaceAll('\\', '\\\\').replaceAll('"', '\\"')}"`;
+
+/** Run a shell command as root via the standard macOS password prompt. */
+function runAsAdmin(command, prompt) {
+  const script = `do shell script ${appleScriptString(command)} with prompt ${appleScriptString(prompt)} with administrator privileges`;
+  return new Promise((resolve) => {
+    execFile('osascript', ['-e', script], (error, _stdout, stderr) => {
+      if (!error) return resolve({ ok: true });
+      const cancelled = /-128|User canceled/i.test(stderr);
+      resolve({ ok: false, cancelled, error: cancelled ? '' : stderr.trim() || error.message });
+    });
+  });
+}
+
+// Core Audio restarts on its own after the kill; the device shows up a second later.
+const RESTART_AUDIO = '(killall coreaudiod 2>/dev/null || launchctl kickstart -k system/com.apple.audio.coreaudiod || true)';
+
+async function installMic() {
+  const status = micStatus();
+  if (!status.supported) return { ok: false, error: 'The Lipscribe Microphone is only available in the macOS app.' };
+  const src = micSource();
+  const result = await runAsAdmin(
+    [
+      'mkdir -p /Library/Audio/Plug-Ins/HAL',
+      `rm -rf ${shQuote(MIC_DEST)}`,
+      `cp -R ${shQuote(src)} ${shQuote(MIC_DEST)}`,
+      `xattr -cr ${shQuote(MIC_DEST)}`, // drop the download quarantine flag inherited from the app
+      `chown -R root:wheel ${shQuote(MIC_DEST)}`,
+      RESTART_AUDIO,
+    ].join(' && '),
+    'Lipscribe wants to add the Lipscribe Microphone, so call apps can hear its voice.',
+  );
+  return { ...result, ...micStatus() };
+}
+
+async function uninstallMic() {
+  const result = await runAsAdmin(`rm -rf ${shQuote(MIC_DEST)} && ${RESTART_AUDIO}`, 'Lipscribe wants to remove the Lipscribe Microphone.');
+  buildMenu();
+  return { ...result, ...micStatus() };
+}
+
+const fromOurPage = (event) => Boolean(origin) && event.senderFrame?.url.startsWith(origin);
+ipcMain.handle('mic:status', (event) => (fromOurPage(event) ? micStatus() : null));
+ipcMain.handle('mic:install', async (event) => {
+  if (!fromOurPage(event)) return null;
+  const result = await installMic();
+  buildMenu();
+  return result;
+});
 
 async function createWindow() {
   const { startServer } = await import(pathToFileURL(join(resources, 'web', 'server.mjs')).href);
@@ -36,7 +115,7 @@ async function createWindow() {
     models: join(resources, 'models'),
     quiet: app.isPackaged,
   });
-  const origin = `http://127.0.0.1:${port}`;
+  origin = `http://127.0.0.1:${port}`;
 
   // Camera for lip reading, microphone for recording a voice sample,
   // speaker-selection for sending speech to a virtual microphone.
@@ -57,6 +136,7 @@ async function createWindow() {
     minWidth: 760,
     minHeight: 560,
     title: 'Lipscribe',
+    icon: join(here, 'build', 'icon.png'), // Windows/Linux taskbar (ignored on macOS)
     show: !SMOKE,
     backgroundColor: '#fbfbfa',
     webPreferences: {
@@ -98,6 +178,7 @@ async function smokeTest() {
       encoderBytes: Number(head.headers.get('content-length')),
       status,
       voices: { enabled: voices.enabled, presets: voices.presets?.length ?? 0 },
+      mic: await window.lipscribeApp?.mic?.status(),
     };
   })()`);
   console.log('SMOKE ' + JSON.stringify(result));
@@ -151,6 +232,7 @@ function buildMenu() {
         { label: 'BlackHole (virtual mic for macOS)', click: () => shell.openExternal('https://existential.audio/blackhole/') },
         { label: 'VB-CABLE (virtual mic for Windows)', click: () => shell.openExternal('https://vb-audio.com/Cable/') },
         { label: 'Lipscribe on GitHub', click: () => shell.openExternal('https://github.com/PureLumpyAttack/Lipscribe') },
+        ...(micStatus().installed ? [{ type: 'separator' }, { label: 'Remove Lipscribe Microphone…', click: () => uninstallMic() }] : []),
       ],
     },
   ];
@@ -158,6 +240,9 @@ function buildMenu() {
 }
 
 app.whenReady().then(async () => {
+  // The packaged app gets its icon from the bundle; set it for `npm start` too.
+  const icon = nativeImage.createFromPath(join(here, 'build', 'icon.png'));
+  if (!app.isPackaged && !icon.isEmpty()) app.dock?.setIcon(icon);
   buildMenu();
   await createWindow();
   // Start/stop recording from anywhere, e.g. while the call app is in front.

@@ -9,8 +9,9 @@
   "scripts": {
     "sync": "node scripts/sync.mjs",
     "start": "npm run sync && electron .",
-    "dist:mac": "npm run sync && electron-builder --mac --publish never",
-    "dist:win": "npm run sync && electron-builder --win --publish never"
+    "dist:mac": "bash scripts/build-mic-driver.sh && npm run sync && electron-builder --mac --publish never",
+    "dist:win": "npm run sync && electron-builder --win --publish never",
+    "mic": "bash scripts/build-mic-driver.sh"
   },
   "devDependencies": {
     "electron": "45.2.1",
@@ -23,7 +24,8 @@
       "main.mjs",
       "preload.cjs",
       "config.json",
-      "package.json"
+      "package.json",
+      "build/icon.png"
     ],
     "extraResources": [
       {
@@ -54,7 +56,13 @@
       "extendInfo": {
         "NSCameraUsageDescription": "Lipscribe watches your lips to work out what you are saying. Video stays on this computer.",
         "NSMicrophoneUsageDescription": "Lipscribe records a short sample of your voice when you set up your own voice."
-      }
+      },
+      "extraResources": [
+        {
+          "from": "app/drivers",
+          "to": "drivers"
+        }
+      ]
     },
     "win": {
       "target": [

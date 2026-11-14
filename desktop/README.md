@@ -2,7 +2,10 @@
 
 An Electron app that runs the Lipscribe demo page on your computer with the lip-reading model built in, so it works offline and needs no 182 MB download per browser. It adds what a browser tab can't do well:
 
-- **Virtual microphone output.** Send the spoken words to a virtual audio cable ([BlackHole](https://existential.audio/blackhole/) on macOS, [VB-CABLE](https://vb-audio.com/Cable/) on Windows) and pick that cable as the microphone in Zoom, Meet, Teams or Discord. The cable driver has to be installed separately; an app can't add an audio device on its own.
+- **Lipscribe Microphone (macOS).** A virtual audio device built into the app. Click "Add Lipscribe Microphone" (asks for the admin password once): it is copied to `/Library/Audio/Plug-Ins/HAL` and Core Audio restarts. Lipscribe then plays speech into it automatically, and Zoom, Meet, Teams or Discord pick "Lipscribe Microphone" as their mic. It never becomes the system default device. Remove it from Help → Remove Lipscribe Microphone. It is [BlackHole](https://github.com/ExistentialAudio/BlackHole) v0.7.1 (GPL-3.0) compiled under our name by `scripts/build-mic-driver.sh` (needs only `xcode-select --install`); the license and source link ship inside the driver bundle.
+- **Windows virtual microphone.** Windows needs a Microsoft-signed kernel driver for a new audio device, so the app uses [VB-CABLE](https://vb-audio.com/Cable/): install it, set Play through to CABLE Input, and pick CABLE Output in the call app.
+- **Volume boost.** The copy sent to the virtual microphone can be up to 4x louder, through a limiter so it doesn't clip.
+- **Hands-free.** Records while your lips move and sends each sentence when you pause (`web/public/js/lipread/speech-detector.js`).
 - **Global shortcut** <kbd>⌘⇧L</kbd> / <kbd>Ctrl+Shift+L</kbd> starts and stops recording while the call app is in front.
 - **Keep on top** (View menu) and no background throttling, so lip reading keeps running behind other windows.
 

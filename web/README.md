@@ -25,6 +25,7 @@ Open http://localhost:3000 in Chrome, Edge or Safari. The demo at http://localho
 2. `lipread/face-target.js` finds every face (MediaPipe BlazeFace) and follows one person: the largest face until you click a face, then the person you clicked. With several people in view, their faces are outlined.
 3. `mouth-tracker.js` loads MediaPipe Face Landmarker and highlights the chosen person's mouth. The highlight is done in CSS: the video is blurred, and a sharp copy is masked to a soft ellipse around the mouth. If the model can't load, a fixed outline shows where to put your mouth.
 4. While recording, `lipread/frame-recorder.js` keeps a small grayscale window around the chosen face and its eye/nose/mouth points for every frame. No video file is made.
+   **Hands-free** (on by default): `lipread/speech-detector.js` watches how fast the chosen person's mouth opening changes (from the Face Landmarker) and starts a recording when the lips start moving, including the second before, and stops after about a second of stillness. Each sentence is transcribed while the next is recorded. Thresholds are in `config.js` (`handsFree`).
 5. On stop, `transcriber.js` resamples to 25 fps, `lipread/align.js` cuts aligned 88x88 mouth crops, and `lipread/engine.js` runs the model with ONNX Runtime Web: WebGPU with the 4-bit/fp16 model (182 MB) when the GPU supports fp16, else the 4-bit model (248 MB) on WebGPU or WASM. `lipread/decode.js` turns the output into text with beam search. The model downloads once (progress in the header) and is kept in the browser's Cache API.
 6. The result is shown, read aloud (`speech.js`, see Voices below), and saved to history in `localStorage` (`storage.js`).
 
@@ -49,7 +50,7 @@ Natural and cloned voices go through `POST /api/tts` on this server (`lib/tts.mj
 
 Override with `TTS_MODEL_CLONE`, `TTS_MODEL_PRESET`, `TTS_PRESET_VOICES`. Abuse limits for a public site: 600 characters per request, `TTS_PER_IP_PER_10MIN` (default 40) requests per IP, `TTS_PER_IP_DAILY_CHARS` (default 20,000) characters per IP per day, and `TTS_DAILY_CHAR_LIMIT` (default 200,000 characters, about $3 a day) for everyone together. The counters live in Upstash Redis (`KV_REST_API_URL` + `KV_REST_API_TOKEN`, or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`) so they hold across Vercel's instances; without Redis, or if it can't be reached, they are kept in memory (`lib/ratelimit.mjs`). `TTS_PROXY_URL` forwards `/api/tts` to another Lipscribe server instead (used by the desktop app).
 
-**Play through** picks the audio output for natural and cloned voices (Chrome and Edge, via `setSinkId`). Choose a virtual audio cable ([BlackHole](https://existential.audio/blackhole/) on macOS, [VB-CABLE](https://vb-audio.com/Cable/) on Windows) and select the same cable as the microphone in Zoom, Meet or Discord, so call participants hear Lipscribe. Browser voices can't be routed this way. The [desktop app](../desktop/) does the same with the model built in and a global shortcut.
+**Play through** picks the audio output for natural and cloned voices (Chrome and Edge, via `setSinkId`), and **Volume** boosts that copy up to 4x (Web Audio with a limiter). Choose a virtual audio cable ([BlackHole](https://existential.audio/blackhole/) on macOS, [VB-CABLE](https://vb-audio.com/Cable/) on Windows) and select the same cable as the microphone in Zoom, Meet or Discord, so call participants hear Lipscribe. Browser voices can't be routed this way. The [desktop app](../desktop/) does the same with the model built in and a global shortcut.
 
 ## Server mode (optional)
 
@@ -98,6 +99,7 @@ Response (JSON):
 | `public/js/lipread/align.js` | Mouth crops and 25 fps resampling (port of `ml/lipscribe_ml/preprocess.py`) |
 | `public/js/lipread/face-target.js` | Face detection and click-to-choose person tracking |
 | `public/js/lipread/frame-recorder.js` | Records face windows + keypoints instead of a video file |
+| `public/js/lipread/speech-detector.js` | Hands-free mode: detects talking from lip motion |
 | `test/lipread.test.mjs` | Parity tests against the Python pipeline |
 | `public/js/speech.js` | Speaking: browser, natural and cloned voices; output device |
 | `public/js/voice-clone.js` | Recording and storing the user's own voice sample |

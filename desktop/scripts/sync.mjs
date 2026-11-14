@@ -1,8 +1,11 @@
 // Copy the website and the browser model into desktop/app/ for the app to serve.
 //   ../web/{server.mjs,lib,public}         -> app/web/
 //   ../ml/exports/web (q4f16 model only)   -> app/models/
+//   .cache/drivers (macOS only)            -> app/drivers/  (Lipscribe Microphone,
+//                                             built by scripts/build-mic-driver.sh)
 // Build the model first: cd ../ml && uv run python scripts/package_web.py
 
+import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
@@ -29,4 +32,18 @@ for (const f of ['tokens.json', 'preprocess.json']) cpSync(`${models}${f}`, `${o
 const manifest = JSON.parse(readFileSync(`${models}manifest.json`, 'utf8'));
 manifest.variants = { [VARIANT]: manifest.variants[VARIANT] };
 writeFileSync(`${out}models/manifest.json`, JSON.stringify(manifest, null, 1));
-console.log(`synced web + ${VARIANT} model into ${out}`);
+
+// macOS: the virtual microphone driver. Built on first use (needs clang from
+// the Xcode command line tools); the app works without it.
+if (process.platform === 'darwin') {
+  const driver = here('../.cache/drivers/LipscribeMicrophone.driver');
+  if (!existsSync(driver)) {
+    try {
+      execFileSync('bash', [here('build-mic-driver.sh')], { stdio: 'inherit' });
+    } catch {
+      console.warn('Could not build the Lipscribe Microphone driver (needs: xcode-select --install). Continuing without it.');
+    }
+  }
+  if (existsSync(driver)) cpSync(driver, `${out}drivers/LipscribeMicrophone.driver`, { recursive: true, verbatimSymlinks: true });
+}
+console.log(`synced web + ${VARIANT} model${existsSync(`${out}drivers`) ? ' + Lipscribe Microphone' : ''} into ${out}`);

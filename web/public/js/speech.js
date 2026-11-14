@@ -5,14 +5,15 @@
 //   'preset:<name>'  natural voice from the server (/api/tts, OpenRouter)
 //   'clone'          the user's own cloned voice (sample from voice-clone.js)
 //
-// Server voices play through an <audio> element, so they can be sent to any
-// output device, e.g. a virtual microphone (BlackHole, VB-CABLE) that a call
-// app (Zoom, Meet, Discord) listens to.
+// Server voices can be sent to any output device, e.g. a virtual microphone
+// (the desktop app's Lipscribe Microphone, BlackHole, VB-CABLE) that a call app
+// (Zoom, Meet, Discord) listens to. That copy can be made louder (`gain`): it
+// plays through Web Audio with a limiter so the boost doesn't clip.
 
 import { loadSample } from './voice-clone.js';
 
 const synth = window.speechSynthesis;
-let active = null; // current utterance or { audios, token }
+let active = null; // current utterance or { token, players }
 let token = 0;
 
 // Speaking is always possible: browser voices, or server voices through <audio>.
@@ -44,7 +45,42 @@ export async function outputDevices() {
   return all.filter((d) => d.kind === 'audiooutput' && d.deviceId !== 'communications');
 }
 
-export const isVirtualDevice = (label) => /blackhole|vb-?audio|cable|loopback|virtual|soundflower|voicemeeter/i.test(label);
+export const isVirtualDevice = (label) => /lipscribe|blackhole|vb-?audio|cable|loopback|virtual|soundflower|voicemeeter/i.test(label);
+export const isLipscribeMic = (label) => /lipscribe microphone/i.test(label);
+
+const canRouteWebAudio = typeof AudioContext !== 'undefined' && 'setSinkId' in AudioContext.prototype;
+
+/** Play `bytes` on one output. Returns { stop, done } where done resolves when playback ends. */
+async function playOn(bytes, blobUrl, sinkId, gain) {
+  if (gain !== 1 && canRouteWebAudio) {
+    const ctx = new AudioContext(sinkId ? { sinkId } : {});
+    const buffer = await ctx.decodeAudioData(bytes.slice(0));
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    const amp = ctx.createGain();
+    amp.gain.value = gain;
+    // Hard-ish limiter: the boosted peaks are squashed instead of clipping.
+    const limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -3;
+    limiter.knee.value = 0;
+    limiter.ratio.value = 20;
+    limiter.attack.value = 0.002;
+    limiter.release.value = 0.08;
+    source.connect(amp).connect(limiter).connect(ctx.destination);
+    const done = new Promise((resolve) => (source.onended = resolve)).finally(() => ctx.close().catch(() => {}));
+    await ctx.resume().catch(() => {});
+    source.start();
+    return { stop: () => source.stop(), done };
+  }
+  const audio = new Audio(blobUrl);
+  if (sinkId) await audio.setSinkId(sinkId).catch(() => {});
+  const done = new Promise((resolve) => {
+    audio.onended = resolve;
+    audio.onerror = resolve;
+  });
+  await audio.play().catch(() => {});
+  return { stop: () => audio.pause(), done: Promise.race([done, new Promise((r) => audio.paused && r())]) };
+}
 
 function speakSystem(text, voiceName, { onStart, onEnd }) {
   if (!systemSupported) return onEnd?.();
@@ -69,7 +105,7 @@ function speakSystem(text, voiceName, { onStart, onEnd }) {
   synth.speak(utterance);
 }
 
-async function speakServer(text, voice, { sinkId, alsoLocal, onStart, onEnd, onError }) {
+async function speakServer(text, voice, { sinkId, alsoLocal, gain = 1, onStart, onEnd, onError }) {
   const mine = ++token;
   const body = { text };
   if (voice === 'clone') {
@@ -79,7 +115,7 @@ async function speakServer(text, voice, { sinkId, alsoLocal, onStart, onEnd, onE
   } else {
     body.voice = voice.slice('preset:'.length);
   }
-  active = { token: mine, audios: [] };
+  active = { token: mine, players: [] };
   onStart?.(); // show "speaking" right away; the request takes a second or two
 
   let blob;
@@ -103,32 +139,27 @@ async function speakServer(text, voice, { sinkId, alsoLocal, onStart, onEnd, onE
   if (active?.token !== mine) return; // stopped or replaced while waiting
 
   const url = URL.createObjectURL(blob);
-  const targets = sinkId && canPickOutput ? [sinkId, ...(alsoLocal ? [''] : [])] : [''];
-  const audios = await Promise.all(
-    targets.map(async (id) => {
-      const audio = new Audio(url);
-      if (id) await audio.setSinkId(id).catch(() => {});
-      return audio;
-    }),
-  );
-  active.audios = audios;
-  let pending = audios.length;
-  const finish = () => {
-    if (--pending > 0 || active?.token !== mine) return;
-    active = null;
+  const bytes = await blob.arrayBuffer();
+  // The chosen device (louder if `gain` > 1), plus this computer's speakers at normal volume.
+  const outputs = sinkId && canPickOutput ? [[sinkId, gain], ...(alsoLocal ? [['', 1]] : [])] : [['', 1]];
+  const players = await Promise.all(outputs.map(([id, g]) => playOn(bytes, url, id, g).catch(() => null)));
+  if (active?.token !== mine) {
+    for (const p of players) p?.stop();
     URL.revokeObjectURL(url);
-    onEnd?.();
-  };
-  for (const a of audios) {
-    a.onended = finish;
-    a.onerror = finish;
+    return;
   }
-  await Promise.all(audios.map((a) => a.play().catch(finish)));
+  active.players = players.filter(Boolean);
+  await Promise.all(active.players.map((p) => p.done));
+  URL.revokeObjectURL(url);
+  if (active?.token !== mine) return;
+  active = null;
+  onEnd?.();
 }
 
 /**
  * @param {string} text
- * @param {{ voice?: string, sinkId?: string, alsoLocal?: boolean, onStart?: Function, onEnd?: Function, onError?: (e: Error) => void }} options
+ * @param {{ voice?: string, sinkId?: string, alsoLocal?: boolean, gain?: number, onStart?: Function, onEnd?: Function, onError?: (e: Error) => void }} options
+ *   gain: volume of the copy sent to `sinkId` (1 = as is, 2 = twice as loud)
  */
 export function speak(text, { voice = '', ...options } = {}) {
   stop();
@@ -144,7 +175,7 @@ export function speak(text, { voice = '', ...options } = {}) {
 
 export function stop() {
   token++;
-  if (active?.audios) for (const a of active.audios) a.pause();
+  if (active?.players) for (const p of active.players) p.stop();
   active = null;
   if (systemSupported) synth.cancel();
 }

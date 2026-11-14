@@ -28,5 +28,5 @@ export const loadHistory = () => {
 };
 export const saveHistory = (items) => write(HISTORY_KEY, items.slice(0, MAX_HISTORY));
 
-export const loadPrefs = () => ({ voice: '', autoSpeak: true, ...read(PREFS_KEY, {}) });
+export const loadPrefs = () => ({ voice: '', autoSpeak: true, handsFree: true, boost: 1, ...read(PREFS_KEY, {}) });
 export const savePrefs = (prefs) => write(PREFS_KEY, prefs);

@@ -25,6 +25,15 @@ export const config = {
   // Multipart field name the backend reads the video from.
   videoField: 'video',
 
+  // Hands-free mode: record automatically while your lips move
+  // (lipread/speech-detector.js). Lower startLevel = more sensitive.
+  handsFree: {
+    startLevel: 0.007, // lip motion that counts as talking
+    stopLevel: 0.004, // below this counts as still
+    stopMs: 900, // still this long = done talking (pauses between words are shorter)
+    minSpeechMs: 500, // shorter movements (a smile, a cough) are ignored
+  },
+
   maxRecordSeconds: 15,
   minRecordMs: 600,
   requestTimeoutMs: 30_000,

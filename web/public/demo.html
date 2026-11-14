@@ -73,13 +73,17 @@
             <button class="record-btn" id="record-btn" type="button" disabled aria-pressed="false">
               <span id="record-label">Start recording</span>
             </button>
-            <div class="controls-text">
-              <p class="controls-hint">
+<div class="controls-text">
+              <p class="controls-hint" id="controls-hint">
                 <span class="hint-key"><kbd>Space</kbd> starts and stops. </span>Clips stop on their own after
                 <span id="max-secs">15</span> seconds.
               </p>
               <p class="model-tag" id="model-tag" title="">Checking model…</p>
             </div>
+            <label class="toggle handsfree-toggle" id="handsfree-field">
+              <input type="checkbox" id="handsfree" />
+              <span>Hands-free: record whenever my lips move</span>
+            </label>
           </div>
         </section>
 
@@ -130,6 +134,11 @@
                 <span class="field-label">Play through</span>
                 <select id="output-select"></select>
               </label>
+              <label class="field range-field" id="boost-field" hidden>
+                <span class="field-label">Volume</span>
+                <input type="range" id="boost" min="0.5" max="4" step="0.25" value="1" />
+                <output id="boost-value">100%</output>
+              </label>
               <label class="toggle" id="also-local-field" hidden>
                 <input type="checkbox" id="also-local" checked />
                 <span>Also play on this computer</span>
@@ -139,7 +148,11 @@
                 <span>Read new transcripts aloud</span>
               </label>
               <p class="voice-note" id="voice-note" hidden></p>
-              <details class="mic-help">
+              <div class="mic-setup" id="mic-setup" hidden>
+                <p id="mic-setup-text"></p>
+                <button class="btn btn-dark btn-sm" id="mic-install" type="button" hidden>Add Lipscribe Microphone</button>
+              </div>
+              <details class="mic-help" id="mic-help">
                 <summary>Speak into Zoom, Meet or Discord</summary>
                 <ol>
                   <li>Install a free virtual audio cable: <a href="https://existential.audio/blackhole/" target="_blank" rel="noopener">BlackHole 2ch</a> on macOS, <a href="https://vb-audio.com/Cable/" target="_blank" rel="noopener">VB-CABLE</a> on Windows.</li>

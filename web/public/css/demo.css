@@ -230,8 +230,9 @@
 .controls {
   margin-top: 14px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 18px;
+  gap: 12px 18px;
 }
 .controls-text {
   min-width: 0;
@@ -242,6 +243,18 @@
   color: var(--ink-3);
   font: 400 0.75rem/1.5 var(--mono);
   overflow-wrap: anywhere;
+}
+.handsfree-toggle {
+  flex-basis: 100%;
+  min-height: 32px;
+}
+.record-btn[data-listening='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.record-btn[data-listening='true']:hover:not(:disabled) {
+  background: var(--line);
 }
 .record-btn {
   min-width: 210px;
@@ -456,6 +469,35 @@ kbd {
 }
 .voice-note[data-tone='error'] {
   color: var(--error);
+}
+.range-field input[type='range'] {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+.range-field output {
+  min-width: 3.5em;
+  color: var(--ink-2);
+  font: 500 0.8125rem var(--mono);
+  text-align: right;
+}
+.mic-setup {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.mic-setup p {
+  flex: 1 1 220px;
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.8125rem;
 }
 .mic-help {
   flex-basis: 100%;

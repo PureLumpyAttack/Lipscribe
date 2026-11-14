@@ -24,14 +24,19 @@ const LOST_AFTER_FRAMES = 12;
  *   viewport: HTMLElement,
  *   onStatus: (status: 'loading' | 'tracking' | 'search' | 'guide') => void,
  *   getTargetBox?: () => number[] | null | undefined,
+ *   onMouth?: (open: number | null, timestamp: number) => void,
  * }} options
  *
  * getTargetBox: box [x0, y0, x1, y1] (video pixels) of the person being read,
  * from lipread/face-target.js. With several people in view, the highlight
  * follows the face whose mouth is inside that box. `null` = target not visible,
  * `undefined` = no target info (highlight the first face found).
+ *
+ * onMouth: called on every new video frame with how open the mouth is
+ * (inner-lip gap / mouth width), or null when the face isn't found. Used by
+ * lipread/speech-detector.js for hands-free recording.
  */
-export function createMouthTracker({ video, viewport, onStatus, getTargetBox = () => undefined }) {
+export function createMouthTracker({ video, viewport, onStatus, getTargetBox = () => undefined, onMouth = () => {} }) {
   let landmarker = null;
   let status = '';
   let rafId = 0;
@@ -74,8 +79,10 @@ export function createMouthTracker({ video, viewport, onStatus, getTargetBox = (
     if (!landmarker || video.readyState < 2 || video.currentTime === lastVideoTime) return;
     lastVideoTime = video.currentTime;
 
-    const all = landmarker.detectForVideo(video, performance.now()).faceLandmarks ?? [];
+    const now = performance.now();
+    const all = landmarker.detectForVideo(video, now).faceLandmarks ?? [];
     const face = pickFace(all, video.videoWidth, video.videoHeight, getTargetBox());
+    onMouth(face ? mouthOpening(face, video.videoWidth, video.videoHeight) : null, now);
     if (!face) {
       if (++missedFrames > LOST_AFTER_FRAMES) {
         mouth = null;
@@ -133,7 +140,17 @@ export function createMouthTracker({ video, viewport, onStatus, getTargetBox = (
       cancelAnimationFrame(rafId);
       setFocus(false);
     },
+    /** True once face landmarks are running (hands-free mode needs them). */
+    get ready() {
+      return Boolean(landmarker);
+    },
   };
+}
+
+function mouthOpening(face, W, H) {
+  const dist = (a, b) => Math.hypot((face[a].x - face[b].x) * W, (face[a].y - face[b].y) * H);
+  const width = dist(61, 291); // mouth corners
+  return width > 0 ? dist(13, 14) / width : null; // inner lips, upper and lower
 }
 
 function pickFace(faces, W, H, box) {
